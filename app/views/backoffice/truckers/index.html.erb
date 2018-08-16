@@ -1,0 +1,36 @@
+<br/>
+
+<div class="col-lg-6">
+  <div class="panel panel-default">
+
+    <div class="panel-heading">
+      <h1>Caminhoneiros</h1>
+    </div>
+    <br/>
+
+    <div class="panel-body">
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>E-mail</th>
+              <th colspan="2"></th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @truckers.each do |trucker| %>
+              <tr>
+                <td><%= trucker.name %></td>
+                <td><%= trucker.email %></td>
+                <td><%= link_to 'Editar', edit_backoffice_trucker_path(trucker) %></td>
+                <td><%# link_to 'Deletar', trucker, method: :delete, data: { confirm: 'Tem certeza que deseja deletar este caminhoneiro?' } %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
