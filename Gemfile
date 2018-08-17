@@ -20,6 +20,7 @@ gem 'uglifier', '>= 1.3.0'
 
 # Integrations Gems ############################################################
 gem 'devise'
+gem 'devise-i18n'
 gem 'rack-attack'
 gem 'rack-cors'
 
