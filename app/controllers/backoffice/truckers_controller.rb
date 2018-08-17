@@ -1,4 +1,4 @@
-class Backoffice::TruckersController < ApplicationController
+class Backoffice::TruckersController < BackofficeController
   def index
     @truckers = Trucker.all
   end

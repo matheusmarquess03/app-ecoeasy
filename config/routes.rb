@@ -5,8 +5,7 @@ Rails.application.routes.draw do
     resources :truckers
   end
 
+  devise_for :admins, controllers: { sessions: 'devise/admins/sessions' }
   devise_for :users
-
-
 
 end
