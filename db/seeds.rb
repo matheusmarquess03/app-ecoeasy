@@ -10,3 +10,9 @@ Admin.create!(
   email: 'admin@email.com',
   password: '12345678'
 )
+
+User.create!(
+  email: 'user@email.com',
+  password: '12345678',
+  access_profile: 'truckers'
+)
