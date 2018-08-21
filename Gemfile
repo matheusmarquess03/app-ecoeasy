@@ -25,6 +25,10 @@ gem 'devise_token_auth'
 gem 'rack-attack'
 gem 'rack-cors'
 
+# Utils Gems ###################################################################
+gem 'cpf_utils'
+gem 'faker'
+
 
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'mini_racer', platforms: :ruby
