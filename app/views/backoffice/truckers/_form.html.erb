@@ -1,34 +1,48 @@
-<%= form_for([:backoffice, @trucker], html: { class: "basic-grey" }) do |f| %>
-  <div class="col-lg-6">
-    <div class="panel panel-default">
+<br/>
 
-      <div class="panel-heading">
-        <h1>Caminhoneiros</h1>
-      </div>
-      <br/>
+<div class="col-lg-6">
+  <div class="panel panel-default">
 
-      <div class="panel-body">
-        <div class="table-responsive">
-          <table class="table table-hover">
-            <thead>
-              <tr>
-                <th><%= f.label :name %></th>
-                <th><%= f.label :email %></th>
-              </tr>
-            </thead>
+    <div class="panel-heading">
+      <h1>Caminhoneiros</h1>
+    </div>
+    <br/>
 
-            <tbody>
-              <tr>
-                <td><%= f.text_field :name %></td>
-                <td><%= f.text_field :email %></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+    <div class="panel-body">
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th><%= f.label :name %></th>
+              <th><%= f.label :email %></th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td><%= f.text_field :name %></td>
+              <td><%= f.text_field :email %></td>
+            </tr>
+          </tbody>
+
+          <thead>
+            <tr>
+              <th><%= f.label :password %></th>
+              <th><%= f.label :password_confirmation %></th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td><%= f.text_field :password %></td>
+              <td><%= f.text_field :password_confirmation %></td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
-    <br />
-
-    <button type="submit" class="btn btn-default">Salvar</button>
   </div>
-<% end %>
+  <br />
+
+  <button type="submit" class="btn btn-default">Salvar</button>
+</div>
