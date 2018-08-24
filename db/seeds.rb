@@ -7,28 +7,31 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 # Create a default admin user ==================================================
+puts 'CRIANDO USUARIO ADMINISTRADOR'
 Admin.find_or_create_by!(email: 'admin@email.com') do |u|
-  u.name = 'Super Admin'
   u.password = '12345678'
   u.password_confirmation = '12345678'
 end
+puts 'USUARIO ADMINISTRADOR CRIADO COM SUCESSO'
 
 # Create a default trucker user ================================================
-User.find_or_create_by!(email: 'trucker@email.com') do |u|
+puts 'CRIANDO USUARIO TRUCKER'
+Trucker.find_or_create_by!(email: 'trucker@email.com') do |u|
   u.password = '12345678'
   u.password_confirmation = '12345678'
-  u.access_profile = 'trucker'
   u.name = Faker::Name.name
   u.cpf = CpfUtils.cpf
   u.phone_number = Faker::PhoneNumber.phone_number
 end
+puts 'USUARIO TRUCKER CRIADO COM SUCESSO'
 
 # Create a default customer user ===============================================
-User.find_or_create_by!(email: 'customer@email.com') do |u|
+puts 'CRIANDO USUARIO CLIENT'
+Client.find_or_create_by!(email: 'client@email.com') do |u|
   u.password = '12345678'
   u.password_confirmation = '12345678'
-  u.access_profile = 'customer'
   u.name = Faker::Name.name
   u.cpf = CpfUtils.cpf
   u.phone_number = Faker::PhoneNumber.phone_number
 end
+puts 'USUARIO CLIENT CRIADO COM SUCESSO'

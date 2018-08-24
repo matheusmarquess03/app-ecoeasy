@@ -1,0 +1,2 @@
+class Trucker < User
+end

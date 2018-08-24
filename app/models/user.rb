@@ -7,5 +7,4 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   include DeviseTokenAuth::Concerns::User
 
-  enum access_profile: [:customer, :trucker, :supervisor]
 end
