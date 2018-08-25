@@ -9,7 +9,7 @@ module Api::V1::Devise
       devise_parameter_sanitizer.permit(
           :sign_up,
           keys:[
-            :email, :password, :password_confirmation, :access_profile, :name, :cpf, :phone_number
+            :email, :password, :password_confirmation, :name, :cpf, :phone_number
           ]
       )
     end
