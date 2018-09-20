@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
 
   # Associations
   has_many :collect
-  
+  has_many :schedule, dependent: :destroy
 
   # Validates
 
