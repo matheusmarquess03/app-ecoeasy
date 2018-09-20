@@ -7,4 +7,14 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   include DeviseTokenAuth::Concerns::User
 
+  # Associations
+  has_many :collect
+  
+
+  # Validates
+
+  # Scopes
+
+  # Methods
+
 end

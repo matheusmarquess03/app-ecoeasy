@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     get '', to: 'dashboard#index'
 
     resources :truckers
+    resources :schedules
   end
 
 end

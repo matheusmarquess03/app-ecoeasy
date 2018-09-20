@@ -21,12 +21,17 @@
         <ul class="nav nav-second-level">
           <li>
             <%= link_to backoffice_truckers_path do %>
-              <i class="fa fa-th-list fa-fw"></i> Listar
+              <i class="fa fa-th-list fa-fw"></i> Dados do Caminhoneiro
             <% end %>
           </li>
-          <li>
+          <!-- <li>
             <%= link_to new_backoffice_trucker_path do %>
               <i class="fa fa-plus-square fa-fw"></i> Criar
+            <% end %>
+          </li> -->
+          <li>
+            <%= link_to backoffice_schedules_path do %>
+              <i class="fa fa-calendar fa-fw"></i> Agenda do Caminhoneiro
             <% end %>
           </li>
         </ul>

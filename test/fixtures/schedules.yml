@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  work_day: 2018-08-28
+  work_shift: MyString
+  start_time: 2018-08-28 22:13:28
+  stop_time: 2018-08-28 22:13:28
+
+two:
+  work_day: 2018-08-28
+  work_shift: MyString
+  start_time: 2018-08-28 22:13:28
+  stop_time: 2018-08-28 22:13:28

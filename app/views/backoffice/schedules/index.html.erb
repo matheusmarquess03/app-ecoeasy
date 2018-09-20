@@ -1,0 +1,63 @@
+<% unless notice.nil? %>
+  <div class="alert alert-success">
+    <a href="#" class="alert-link"><%= notice %></a>
+  </div>
+<% end %>
+<br/>
+
+<div class="col-lg-12">
+  <h1 class="page-header">MODULO CAMINHONEIRO</h1>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4>
+        Agenda do Caminhoneiro
+        <%= link_to new_backoffice_schedule_path, class: 'btn btn-outline btn-success pull-right', style:"margin-top: -5px" do %>
+          <i class="fa fa-plus-square fa-fw"></i> Cadastrar
+        <% end %>
+      </h4>
+    </div>
+    <br/>
+
+    <div class="panel-body">
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Caminhoneiro</th>
+              <th>Data</th>
+              <th>Estado da agenda</th
+              <th colspan="2"></th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @schedules.each do |schedule| %>
+              <tr>
+                <td><%= schedule.user.name %></td>
+                <td><%= schedule.work_day.strftime("%d/%m/%Y") %></td>
+
+                <% if schedule.full_schedule %>
+                  <td>Indisponível</td>
+                <% else %>
+                  <td>Disponível</td>
+                <% end %>
+
+                <td >
+                  <%= link_to edit_backoffice_schedule_path(schedule), class: 'btn btn-outline btn-warning' do %>
+                    <i class="fa fa-edit"></i> Editar
+                  <% end %>
+
+                  <%= link_to backoffice_schedule_path(schedule), class: 'btn btn-outline btn-danger', method: :delete, data: { confirm: 'Tem certeza que deseja deletar a agenda deste caminhoneiro?' } do %>
+                      <i class="fa fa-times"></i> Deletar
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</div>

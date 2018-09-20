@@ -11,6 +11,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # Assets Gems ##################################################################
 gem 'bootstrap', '~> 4.1.3'
 gem 'bootstrap_sb_admin_base_v2'
+gem 'cocoon'
 gem 'coffee-rails', '~> 4.2'
 gem 'jbuilder', '~> 2.5'
 gem 'jquery-rails'

@@ -1,8 +1,9 @@
 class Backoffice::TruckersController < BackofficeController
   before_action :set_trucker_default_data, only: [:create]
+  before_action :set_trucker, only: [:edit, :update, :destroy]
 
   def index
-    @truckers = Trucker.all
+    @truckers = Trucker.all.order(:name)
   end
 
   def new
@@ -10,29 +11,35 @@ class Backoffice::TruckersController < BackofficeController
   end
 
   def create
-    if @trucker.save!
+    if @trucker.save
       flash[:success] = 'Caminhoneiro cadastrado com sucesso'
+      redirect_to backoffice_truckers_path
     else
-      flash[:alert] = 'Falha para cadastrar o Caminhoneiro. Tente novamente mais tarde'
+      flash[:alert] = 'Falha para cadastrar o Caminhoneiro'
+      render :new
     end
-    redirect_to backoffice_truckers_path
   end
 
   def edit
-    @trucker = Trucker.find(params[:id])
   end
 
   def update
-    @trucker = Trucker.find(params[:id])
     if @trucker.update!(trucker_params)
       flash[:success] = 'Caminhoneiro cadastrado com sucesso'
+      redirect_to backoffice_truckers_path
     else
-      flash[:alert] = 'Falha para cadastrar o Caminhoneiro. Tente novamente mais tarde'
+      flash[:alert] = 'Falha para cadastrar o Caminhoneiro'
+      render :edit
     end
-    redirect_to backoffice_truckers_path
   end
 
   def destroy
+    if @trucker.destroy
+      flash[:success] = 'Caminhoneiro deletado com sucesso'
+    else
+      flash[:alert] = 'Falha para deletar caminhoneiro'
+    end
+    redirect_to backoffice_truckers_path
   end
 
   private
@@ -45,6 +52,10 @@ class Backoffice::TruckersController < BackofficeController
   def password_blank?
     params[:trucker][:password].blank? &&
     params[:trucker][:password_confirmation].blank?
+  end
+
+  def set_trucker
+    @trucker = Trucker.find(params[:id])
   end
 
   def set_trucker_default_data
