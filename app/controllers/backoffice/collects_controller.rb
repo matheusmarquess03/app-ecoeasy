@@ -16,7 +16,7 @@ class Backoffice::CollectsController < BackofficeController
   def update
     begin
       @collect.transaction do
-        @collect.update(collect_date: update_params[:free_schedule], status: proposed_date)
+        @collect.update(collect_date: update_params[:free_schedule], status: 'proposed_date')
         @collect.user << User.find(update_params[:trucker_id])
         flash[:success] = 'Sugestão de data enviada para o cidadão'
         redirect_to backoffice_collects_path
@@ -26,7 +26,6 @@ class Backoffice::CollectsController < BackofficeController
       redirect_to backoffice_collects_path
     end
     flash[:alert] = 'Falha para selecionar sugestão de data para a coleta'
-    render :index
   end
 
   private

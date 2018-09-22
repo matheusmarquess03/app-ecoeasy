@@ -1,0 +1,47 @@
+<br/>
+<div class="col-lg-12">
+  <h1 class="page-header">MODULO CAMINHONEIRO</h1>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4>Agenda do Caminhoneiro</h4>
+    </div>
+
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-lg-6">
+          <form role="form">
+            <div class="form-group">
+              <p class="form-control-static">
+                <label>Nome: </label> <span> <%= @schedule.user.name %> </span>
+              </p>
+
+              <p class="form-control-static">
+                <label>Dia de trabalho: </label> <span> <%= I18n.l @schedule.work_day, :format => :long, :locale => 'pt-BR' %> </span>
+              </p>
+
+              <p class="form-control-static">
+                <label>Status da agenda: </label> <span> <%= @schedule.full_schedule ? 'Indisponível' : 'Disponível' %></span>
+              </p>
+            </div>
+
+            <div class="form_group">
+              <p class="form-control-static">
+                <label>Coletas</label>
+              </p>
+              <% @collects.each do |collect| %>
+                <p class="form-control-static">
+                  <label>Nome do solicitante: </label> <span> <%=  collect.user.where(type: 'Client').first.name %></span>
+                </p>
+
+                <p class="form-control-static">
+                  <label>Endereço da coleta: </label>
+                </p>
+              <% end %>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

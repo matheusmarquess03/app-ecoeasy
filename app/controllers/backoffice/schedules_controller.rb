@@ -1,9 +1,13 @@
 class Backoffice::SchedulesController < BackofficeController
   before_action :set_users_collections_for_select, only: [:new, :edit]
-  before_action :set_schedule, only: [:edit, :update, :destroy]
+  before_action :set_schedule, only: [:show, :edit, :update, :destroy]
 
   def index
     @schedules = Schedule.all.order(:user_id, :work_day)
+  end
+
+  def show
+    @collects = @schedule.user.collect.confirmed.where(collect_date: @schedule.work_day)
   end
 
   def new
