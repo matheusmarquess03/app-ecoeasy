@@ -27,7 +27,7 @@
               <th>Caminhoneiro</th>
               <th>Data</th>
               <th>Estado da agenda</th>
-
+              <th>Quantidade de coletas agendadas</th>
             </tr>
           </thead>
 
@@ -42,6 +42,8 @@
                 <% else %>
                   <td>Disponível</td>
                 <% end %>
+
+                <td><%= schedule.user.collect.confirmed.where(collect_date: schedule.work_day).count %> coletas agendadas até o momento</td>
 
                 <td>
                   <%= link_to backoffice_schedule_path(schedule), class: 'btn btn-outline btn-info' do %>
