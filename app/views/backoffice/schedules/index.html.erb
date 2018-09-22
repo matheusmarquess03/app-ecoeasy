@@ -44,7 +44,6 @@
                 <% end %>
 
                 <td><%= schedule.user.collect.confirmed.where(collect_date: schedule.work_day).count %> coletas agendadas até o momento</td>
-
                 <td>
                   <%= link_to backoffice_schedule_path(schedule), class: 'btn btn-outline btn-info' do %>
                     <i class="fa fa-search-plus"></i> Detalhes
