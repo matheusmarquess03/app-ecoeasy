@@ -20,4 +20,6 @@
 //= require popper
 //= require bootstrap-sprockets
 //= require turbolinks
+//= require bootstrap-modal
+//= require bootstrap-modalmanager
 //= require_tree .

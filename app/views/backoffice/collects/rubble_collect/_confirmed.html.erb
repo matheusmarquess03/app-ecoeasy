@@ -1,0 +1,26 @@
+<div class="panel-body">
+  <div class="table-responsive">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Solicitante</th>
+          <th>Data da solicitação</th>
+          <th>Data da coleta</th>
+          <th>Status</th>
+          <th colspan="2"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @collects.confirmed.each do |collect| %>
+          <tr>
+            <td><%= collect.user.where("users.type = 'Client'").first.name %></td>
+            <td><%= I18n.l collect.created_at.localtime, :format => :with_day_of_week, :locale => 'pt-BR' %></td>
+            <td><%= I18n.l collect.collect_date.localtime, :format => :with_day_of_week, :locale => 'pt-BR' if collect.collect_date.present? %></td>
+            <td><%= collect.status.capitalize %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

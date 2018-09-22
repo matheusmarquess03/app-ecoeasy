@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   include DeviseTokenAuth::Concerns::User
 
   # Associations
-  has_many :collect
+  has_and_belongs_to_many :collect
   has_many :schedule, dependent: :destroy
 
   # Validates
