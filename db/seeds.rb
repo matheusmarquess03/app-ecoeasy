@@ -26,18 +26,30 @@ end
 puts 'USUARIO TRUCKER CRIADO COM SUCESSO'
 
 # Create a default customer user ===============================================
-puts 'CRIANDO USUARIO CLIENT'
-Client.find_or_create_by!(email: 'client@email.com') do |u|
-  u.password = '12345678'
-  u.password_confirmation = '12345678'
-  u.name = Faker::Name.name
-  u.cpf = CpfUtils.cpf
-  u.phone_number = Faker::PhoneNumber.phone_number
+puts 'CRIANDO USUARIO CLIENT WITH ADDRESS'
+if Address.where(user: Client.find_by(email: 'client@email.com')).count == 0
+  Address.create(
+    street: 'Rua Emílio Wolf',
+    number: '320',
+    complement: 'Bloco 2, Apartamento: 405',
+    district: 'Barra da Tijuca',
+    city: 'Rio de Janeiro',
+    state: 'RJ',
+    country: 'Brasil',
+    user: Client.find_or_create_by!(email: 'client@email.com') do |u|
+      u.password = '12345678'
+      u.password_confirmation = '12345678'
+      u.name = Faker::Name.name
+      u.cpf = CpfUtils.cpf
+      u.phone_number = Faker::PhoneNumber.phone_number
+    end
+  )
 end
 puts 'USUARIO CLIENT CRIADO COM SUCESSO'
 
 # Create a collect status requested ============================================
 puts 'CRIANDO COLETA'
+Collect.all.destroy_all
 if Collect.all.count == 0
   Collect.create(
     collect_date: Date.today,
