@@ -38,7 +38,7 @@ puts 'USUARIO CLIENT CRIADO COM SUCESSO'
 
 # Create a collect status requested ============================================
 puts 'CRIANDO COLETA'
-if Collect.all.count = 0
+if Collect.all.count == 0
   Collect.create(
     collect_date: Date.today,
     status: 'requested',
