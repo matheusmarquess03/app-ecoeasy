@@ -7,16 +7,19 @@ pt-BR:
           has_one: Não é possível excluir o registro pois existe um %{record} dependente
           has_many: Não é possível excluir o registro pois existem %{record} dependentes
     models:
-      users:
+      user:
         name: 'Nome'
         email: 'Email'
         password: 'Senha'
-      admins:
+      admin:
         name: 'Nome'
         email: 'Email'
         password: 'Senha'
       schedules:
-        work_day: 'Dia de trabalho'
         full_schedule:
           'true': 'Indisponível'
           'false': 'Disponível'
+    attributes:
+      schedule:
+        work_day: 'Dia de trabalho'
+        full_schedule: Agenda cheia?

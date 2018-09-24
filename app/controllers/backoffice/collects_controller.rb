@@ -20,13 +20,13 @@ class Backoffice::CollectsController < BackofficeController
         @collect.proposed_date!
         @collect.user << User.find(update_params[:trucker_id])
         current_trucker_schedule = @collect.trucker.schedule.where(work_day: update_params[:free_schedule]).first
+        flash[:notice] = 'Agenda selecionada com sucesso'
         redirect_to backoffice_schedule_path(current_trucker_schedule)
       end
     rescue
       flash[:alert] = 'Falha para selecionar a agenda'
       redirect_to backoffice_collects_path
     end
-    flash[:alert] = 'Falha para selecionar a agenda'
   end
 
   private
