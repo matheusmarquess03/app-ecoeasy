@@ -35,3 +35,14 @@ Client.find_or_create_by!(email: 'client@email.com') do |u|
   u.phone_number = Faker::PhoneNumber.phone_number
 end
 puts 'USUARIO CLIENT CRIADO COM SUCESSO'
+
+# Create a collect status requested ============================================
+puts 'CRIANDO COLETA'
+if Collect.all.count = 0
+  Collect.create(
+    collect_date: Date.today,
+    status: 'requested',
+    type_collect: 'rubble_collect'
+  ).user << Client.last
+end
+puts 'COLETA CRIADA COM SUCESSO'
