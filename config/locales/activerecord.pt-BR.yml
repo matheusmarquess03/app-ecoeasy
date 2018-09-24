@@ -15,3 +15,8 @@ pt-BR:
         name: 'Nome'
         email: 'Email'
         password: 'Senha'
+      schedules:
+        work_day: 'Dia de trabalho'
+        full_schedule:
+          'true': 'Indisponível'
+          'false': 'Disponível'

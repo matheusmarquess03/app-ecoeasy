@@ -1,0 +1,9 @@
+'pt-BR':
+  enums:
+    collects:
+      status:
+        requested: 'Coleta solicitada'
+        proposed_date: 'Aguadando confirmação'
+        confirmed: 'Coleta confirmada'
+        cancelled: 'Coleta cancelada'
+        collected: 'Coletado'

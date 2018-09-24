@@ -4,7 +4,7 @@
 
   <div class="panel panel-default">
     <div class="panel-heading">
-      <h4>Agenda do Caminhoneiro</h4>
+      <h4>Agenda de <%= @schedule.user.name %> - <b><%= I18n.l @schedule.work_day, :format => :long, :locale => 'pt-BR' %></b></h4>
     </div>
 
     <div class="panel-body">
@@ -13,31 +13,42 @@
           <form role="form">
             <div class="form-group">
               <p class="form-control-static">
-                <label>Nome: </label> <span> <%= @schedule.user.name %> </span>
+                <label>Status da agenda: </label> <span> <%= t("activerecord.models.schedules.full_schedule.#{@schedule.full_schedule}")%> </span>
               </p>
-
-              <p class="form-control-static">
-                <label>Dia de trabalho: </label> <span> <%= I18n.l @schedule.work_day, :format => :long, :locale => 'pt-BR' %> </span>
-              </p>
-
-              <p class="form-control-static">
-                <label>Status da agenda: </label> <span> <%= @schedule.full_schedule ? 'Indisponível' : 'Disponível' %></span>
-              </p>
+              <p><b><%= @schedule.collects_scheduled_to_trucker %></b> coletas agendadas até o momento</p>
             </div>
 
+            <br />
             <div class="form_group">
-              <p class="form-control-static">
-                <label>Coletas</label>
-              </p>
-              <% @collects.each do |collect| %>
-                <p class="form-control-static">
-                  <label>Nome do solicitante: </label> <span> <%=  collect.user.where(type: 'Client').first.name %></span>
-                </p>
+              <h4>Coletas pendetens de confirmação</h4>
+              <ul>
+                <% @collects.proposed_date.each do |collect| %>
+                  <li>
+                    <p class="form-control-static">
+                      <label>Nome do solicitante: </label> <span> <%=  collect.user.where(type: 'Client').first.name %></span>
+                    </p>
 
-                <p class="form-control-static">
-                  <label>Endereço da coleta: </label>
-                </p>
-              <% end %>
+                    <p class="form-control-static">
+                      <label>Endereço da coleta: </label>
+                    </p>
+                  </li>
+                <% end %>
+              </ul>
+
+              <h4>Coletas aprovadas</h4>
+              <ul>
+                <% @collects.confirmed.each do |collect| %>
+                  <li>
+                    <p class="form-control-static">
+                      <label>Nome do solicitante: </label> <span> <%=  collect.user.where(type: 'Client').first.name %></span>
+                    </p>
+
+                    <p class="form-control-static">
+                      <label>Endereço da coleta: </label>
+                    </p>
+                  </li>
+                <% end %>
+              </ul>
             </div>
           </form>
         </div>

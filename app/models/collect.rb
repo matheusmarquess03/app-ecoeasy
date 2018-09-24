@@ -12,4 +12,11 @@ class Collect < ApplicationRecord
   # Scopes
 
   # Methods
+  def trucker
+    self.user.where(type: 'Trucker').first
+  end
+
+  def client
+    self.user.where(type: 'Client').first
+  end
 end

@@ -14,6 +14,7 @@
               <tr>
                 <th>Caminhoneiro</th>
                 <th>Agenda disponível</th>
+                <th>Quantidade de coletas agendadas</th>
                 <th colspan="2"></th>
               </tr>
             </thead>
@@ -23,6 +24,7 @@
                 <tr>
                   <td><%= schedule.user.name %></td>
                   <td><%= I18n.l schedule.work_day, :format => :long, :locale => 'pt-BR' %></td>
+                  <td><%= schedule.collects_scheduled_to_trucker %> coletas agendadas até o momento</td>
                   <td><%= f.radio_button :user, [ schedule.work_day, schedule.user.id ] %></td>
                 <tr>
               <% end %>

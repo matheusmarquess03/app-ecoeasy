@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_21_005655) do
+ActiveRecord::Schema.define(version: 2018_09_23_211408) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,8 +43,8 @@ ActiveRecord::Schema.define(version: 2018_09_21_005655) do
   create_table "collects_users", id: false, force: :cascade do |t|
     t.bigint "collect_id", null: false
     t.bigint "user_id", null: false
-    t.index ["collect_id", "user_id"], name: "index_collects_users_on_collect_id_and_user_id"
-    t.index ["user_id", "collect_id"], name: "index_collects_users_on_user_id_and_collect_id"
+    t.index ["collect_id", "user_id"], name: "index_collects_users_on_collect_id_and_user_id", unique: true
+    t.index ["user_id", "collect_id"], name: "index_collects_users_on_user_id_and_collect_id", unique: true
   end
 
   create_table "schedules", force: :cascade do |t|
