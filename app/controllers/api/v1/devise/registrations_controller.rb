@@ -78,6 +78,10 @@ module Api::V1::Devise
 
     protected
 
+    def render_create_success
+      render json: resource_data
+    end
+
     def configure_permitted_parameters
       devise_parameter_sanitizer.permit(
         :sign_up,
