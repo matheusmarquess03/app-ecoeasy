@@ -4,7 +4,8 @@ class Collect < ApplicationRecord
   enum type_collect: [:rubble_collect, :daily_garbage_collection, :road_cleaning]
 
   # Associations
-  has_and_belongs_to_many :user
+  belongs_to :user
+  belongs_to :schedule, optional: true
 
 
   # Validates
@@ -12,11 +13,7 @@ class Collect < ApplicationRecord
   # Scopes
 
   # Methods
-  def trucker
-    self.user.where(type: 'Trucker').first
-  end
-
   def client
-    self.user.where(type: 'Client').first
+    self.user
   end
 end

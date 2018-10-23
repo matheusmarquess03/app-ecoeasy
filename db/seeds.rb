@@ -25,7 +25,7 @@ Trucker.find_or_create_by!(email: 'trucker@email.com') do |u|
 end
 puts 'USUARIO TRUCKER CRIADO COM SUCESSO'
 
-# Create a default trucker user ================================================
+# Create a default supervisor user =============================================
 puts 'CRIANDO USUARIO SUPERVISOR'
 Supervisor.find_or_create_by!(email: 'supervisor@email.com') do |u|
   u.password = '12345678'
@@ -65,7 +65,8 @@ if Collect.all.count == 0
   Collect.create(
     collect_date: Date.today,
     status: 'requested',
-    type_collect: 'rubble_collect'
-  ).user << Client.last
+    type_collect: 'rubble_collect',
+    user: Client.last
+  )
 end
 puts 'COLETA CRIADA COM SUCESSO'
