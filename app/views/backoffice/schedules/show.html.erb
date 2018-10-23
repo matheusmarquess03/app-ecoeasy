@@ -35,7 +35,7 @@
                     </p>
 
                     <p class="form-control-static">
-                      <label>Endereço da coleta: </label> <span> <%= address_formatted(collect.client.address.first) %></span>
+                      <label>Endereço da coleta: </label> <span> <%= address_formatted(collect.client.addresses.first) %></span>
                     </p>
                   </li>
                 <% end %>
@@ -50,7 +50,7 @@
                     </p>
 
                     <p class="form-control-static">
-                      <label>Endereço da coleta: </label> <span> <%= address_formatted(collect.client.address.first) %></span>
+                      <label>Endereço da coleta: </label> <span> <%= address_formatted(collect.client.addresses.first) %></span>
                     </p>
                   </li>
                 <% end %>
