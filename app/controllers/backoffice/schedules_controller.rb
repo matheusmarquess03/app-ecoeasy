@@ -7,7 +7,7 @@ class Backoffice::SchedulesController < BackofficeController
   end
 
   def show
-    @collects = @schedule.user.collect.where(collect_date: @schedule.work_day, status: ['proposed_date', 'confirmed'])
+    @collects = @schedule.collects
   end
 
   def new

@@ -1,6 +1,7 @@
 class Schedule < ApplicationRecord
   # Associations
   belongs_to :user
+  has_many :collects
 
   # Validations
   validates :work_day, uniqueness: {
@@ -15,9 +16,9 @@ class Schedule < ApplicationRecord
     order('users.name, work_day ASC')
   }
 
-  # Methods
+  scope :collect_confirmed_to_trucker, ->(trucker_id) {
 
-  def collects_scheduled_to_trucker
-    self.user.collect.where(collect_date: self.work_day).where(status: ['proposed_date', 'confirmed']).count
-  end
+  }
+
+  # Methods
 end

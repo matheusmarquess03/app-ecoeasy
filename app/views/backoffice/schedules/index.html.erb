@@ -32,7 +32,7 @@
 
                 <td><%= t("activerecord.models.schedules.full_schedule.#{schedule.full_schedule}") %></td>
 
-                <td><%= schedule.collects_scheduled_to_trucker %> coletas agendadas até o momento</td>
+                <td><%= schedule.collects.count %> coletas agendadas até o momento</td>
                 <td>
                   <%= link_to backoffice_schedule_path(schedule), class: 'btn btn-outline btn-info' do %>
                     <i class="fa fa-search-plus"></i> Detalhes

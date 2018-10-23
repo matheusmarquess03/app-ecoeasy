@@ -24,8 +24,8 @@
                 <tr>
                   <td><%= schedule.user.name %></td>
                   <td><%= I18n.l schedule.work_day, :format => :long, :locale => 'pt-BR' %></td>
-                  <td><%= schedule.collects_scheduled_to_trucker %> coletas agendadas até o momento</td>
-                  <td><%= f.radio_button :user, [ schedule.work_day, schedule.user.id ] %></td>
+                  <td><%= schedule.collects.count %> coletas agendadas até o momento</td>
+                  <td><%= f.radio_button :schedule_id, schedule.id %></td>
                 <tr>
               <% end %>
             </tbody>

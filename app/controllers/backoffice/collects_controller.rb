@@ -12,22 +12,20 @@ class Backoffice::CollectsController < BackofficeController
     end
   end
 
-  # Propor data de atendimento: OK
   def update
     begin
       @collect.transaction do
-        @collect.update(collect_date: update_params[:free_schedule])
+        @collect.update(collect_params)
         @collect.proposed_date!
-        @collect.user << User.find(update_params[:trucker_id])
-        current_trucker_schedule = @collect.trucker.schedule.where(work_day: update_params[:free_schedule]).first
+        schedule = Schedule.find(collect_params[:schedule_id])
         flash[:notice] = 'Agenda selecionada com sucesso'
-        redirect_to backoffice_schedule_path(current_trucker_schedule)
+        redirect_to backoffice_schedule_path(schedule)
       end
     rescue
       flash[:alert] = 'Falha para selecionar a agenda'
       redirect_to backoffice_collects_path
     end
-  end
+  end 
 
   private
 
@@ -37,7 +35,7 @@ class Backoffice::CollectsController < BackofficeController
   end
 
   def collect_params
-    params.fetch(:collect, {}).permit(:collect_date, :user)
+    params.fetch(:collect, {}).permit(:collect_date, :schedule_id)
   end
 
   def set_free_schedules_to_options
