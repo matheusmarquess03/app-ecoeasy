@@ -6,7 +6,7 @@ class Collect < ApplicationRecord
   # Associations
   belongs_to :user
   belongs_to :schedule, optional: true
-
+  has_one :address
 
   # Validates
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_23_032956) do
+ActiveRecord::Schema.define(version: 2018_10_24_031615) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,8 @@ ActiveRecord::Schema.define(version: 2018_10_23_032956) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "zip_code"
+    t.bigint "collect_id"
+    t.index ["collect_id"], name: "index_addresses_on_collect_id"
     t.index ["user_id"], name: "index_addresses_on_user_id"
   end
 
@@ -108,6 +110,7 @@ ActiveRecord::Schema.define(version: 2018_10_23_032956) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "addresses", "collects"
   add_foreign_key "collects", "schedules"
   add_foreign_key "collects", "users"
   add_foreign_key "schedules", "users"
