@@ -16,9 +16,5 @@ class Schedule < ApplicationRecord
     order('users.name, work_day ASC')
   }
 
-  scope :collect_confirmed_to_trucker, ->(trucker_id) {
-
-  }
-
   # Methods
 end
