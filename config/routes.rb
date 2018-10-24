@@ -7,6 +7,10 @@ Rails.application.routes.draw do
           registrations: 'api/v1/devise/registrations',
           sessions:      'api/v1/devise/sessions'
         }
+
+      devise_scope :user do
+        resource :schedules
+      end
     end
   end
 
@@ -22,5 +26,4 @@ Rails.application.routes.draw do
     resources :schedules
     resources :collects
   end
-
 end
