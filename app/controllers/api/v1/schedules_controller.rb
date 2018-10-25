@@ -6,8 +6,10 @@ module Api::V1
       unless @schedule.present?
         render json: { message: 'Não há coletas agendadas para hoje para este caminhoneiro' }
       end
+    rescue ActiveRecord::RecordInvalid => e
+      render json: { message: e.message }, status: 422
     rescue StandardError => e
-      render_error(500, e.message)
+      render json: { message: e.message }, status: 500
     end
 
     private
