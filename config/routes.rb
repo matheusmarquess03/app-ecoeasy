@@ -9,7 +9,8 @@ Rails.application.routes.draw do
         }
 
       devise_scope :user do
-        resource :schedules
+        resource  :schedules, only: [:show]
+        resources :collects, only: [:update]
       end
     end
   end
