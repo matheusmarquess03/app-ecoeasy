@@ -5,8 +5,8 @@ json.collects do
   json.array! @schedule.collects.confirmed do |collect|
     if collect.present?
       json.id               collect.id
-      json.status           collect.status
-      json.type_collect     collect.type_collect
+      json.status           collect.read_attribute_before_type_cast(:status)
+      json.type_collect     collect.read_attribute_before_type_cast(:type_collect)
       json.address do
         json.id                 collect.address.id
         json.zip_code           collect.address.zip_code
