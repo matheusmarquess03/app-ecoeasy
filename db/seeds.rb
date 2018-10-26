@@ -68,6 +68,6 @@ if Collect.all.count == 0
     type_collect: 'rubble_collect',
     user: Client.last
   )
-  Address.first.update(collect: Collect.first)
+  Address.first.update(collect_id: Collect.first.id)
 end
 puts 'COLETA CRIADA COM SUCESSO'
