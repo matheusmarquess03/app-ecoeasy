@@ -3,7 +3,7 @@ module Api::V1
     before_action :set_collect, only: [:update]
 
     def update
-      @collect.update!(collects_params[:status].to_i)
+      @collect.update!(status: collects_params[:status].to_i)
       render json: { message: 'status da coleta alterado com sucesso' }, status: 200
     rescue ActiveRecord::RecordInvalid => e
       render json: { message: e.message }, status: 422
