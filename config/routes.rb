@@ -8,6 +8,7 @@ Rails.application.routes.draw do
           sessions:      'api/v1/devise/sessions'
         }
 
+      get 'client/already_registred', to: 'clients#already_registered?'
       devise_scope :user do
         resource  :schedules, only: [:show]
         resources :collects, only: [:update]
