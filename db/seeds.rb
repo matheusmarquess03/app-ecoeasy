@@ -66,7 +66,7 @@ if Collect.all.count == 0
     collect_date: Date.today,
     status: 'requested',
     type_collect: 'rubble_collect',
-    user: Client.last
+    user: Client.last,
     address_id: Client.last.address.id
   )
 end
