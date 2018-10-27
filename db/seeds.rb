@@ -67,7 +67,7 @@ if Collect.all.count == 0
     status: 'requested',
     type_collect: 'rubble_collect',
     user: Client.last,
-    address_id: Client.last.address.id
+    address_id: Client.last.addresses.first.id
   )
 end
 puts 'COLETA CRIADA COM SUCESSO'
