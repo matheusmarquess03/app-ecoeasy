@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_27_194225) do
+ActiveRecord::Schema.define(version: 2018_10_27_213949) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,11 +27,9 @@ ActiveRecord::Schema.define(version: 2018_10_27_194225) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "zip_code"
-    t.bigint "collect_id"
     t.boolean "default"
     t.string "latitude"
     t.string "longitude"
-    t.index ["collect_id"], name: "index_addresses_on_collect_id"
     t.index ["user_id"], name: "index_addresses_on_user_id"
   end
 
@@ -53,13 +51,15 @@ ActiveRecord::Schema.define(version: 2018_10_27_194225) do
   end
 
   create_table "collects", force: :cascade do |t|
-    t.integer "status"
+    t.integer "status", default: 0
     t.integer "type_collect"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "collect_date"
     t.bigint "schedule_id"
     t.bigint "user_id"
+    t.bigint "address_id"
+    t.index ["address_id"], name: "index_collects_on_address_id"
     t.index ["schedule_id"], name: "index_collects_on_schedule_id"
     t.index ["user_id"], name: "index_collects_on_user_id"
   end
@@ -113,7 +113,7 @@ ActiveRecord::Schema.define(version: 2018_10_27_194225) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
-  add_foreign_key "addresses", "collects"
+  add_foreign_key "collects", "addresses"
   add_foreign_key "collects", "schedules"
   add_foreign_key "collects", "users"
   add_foreign_key "schedules", "users"
