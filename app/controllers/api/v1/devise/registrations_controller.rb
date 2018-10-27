@@ -73,13 +73,14 @@ module Api::V1::Devise
     end
 
     def address_params
-      params.fetch(:address, {}).permit(:street, :number, :complement, :district, :city, :state, :country, :zip_code)
+      params.fetch(:address, {}).permit(:street, :number, :complement, :district, :city, :state, :country, :zip_code, :latitude, :longitude, :default)
     end
 
     protected
 
     def render_create_success
-      render json: resource_data
+      resource_json_response = resource_data.merge(address: @resource.addresses.as_json)
+      render json: resource_json_response
     end
 
     def configure_permitted_parameters
