@@ -9,3 +9,4 @@ json.state              @address.state
 json.country            @address.country
 json.latitude           @address.latitude
 json.longitude          @address.longitude
+json.default            @address.default
