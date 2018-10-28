@@ -10,8 +10,9 @@ Rails.application.routes.draw do
 
       get 'client/already_registred', to: 'clients#already_registered?'
       devise_scope :user do
+        resources :address,   only: [:create]
         resource  :schedules, only: [:show]
-        resources :collects, only: [:create, :update]
+        resources :collects,  only: [:create, :update]
       end
     end
   end
