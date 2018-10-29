@@ -16,7 +16,6 @@ module Api::V1
 
     def update
       @collect.update!(status: collects_params[:status].to_i)
-      render json: { message: 'status da coleta alterado com sucesso' }, status: 200
     rescue ActiveRecord::RecordInvalid => e
       render json: { message: e.message }, status: 422
     rescue StandardError => e
