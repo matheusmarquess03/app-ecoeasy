@@ -15,6 +15,7 @@ Rails.application.routes.draw do
         resources :address,   only: [:create, :update, :index]
         resource  :schedules, only: [:show]
         resources :collects,  only: [:create, :update]
+        resource  :evidences, only: [:create]
       end
     end
   end
