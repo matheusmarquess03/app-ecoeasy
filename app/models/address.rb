@@ -5,6 +5,7 @@ class Address < ApplicationRecord
   # Associations
   belongs_to :user
   has_many :collects
+  has_many :evidences
 
   # Validations
   validates :default, uniqueness: {
