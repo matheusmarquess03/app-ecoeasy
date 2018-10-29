@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_27_213949) do
+ActiveRecord::Schema.define(version: 2018_10_29_153855) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,6 +71,16 @@ ActiveRecord::Schema.define(version: 2018_10_27_213949) do
     t.index ["user_id", "collect_id"], name: "index_collects_users_on_user_id_and_collect_id", unique: true
   end
 
+  create_table "evidences", force: :cascade do |t|
+    t.string "description"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "address_id"
+    t.index ["address_id"], name: "index_evidences_on_address_id"
+    t.index ["user_id"], name: "index_evidences_on_user_id"
+  end
+
   create_table "schedules", force: :cascade do |t|
     t.date "work_day"
     t.datetime "created_at", null: false
@@ -116,5 +126,7 @@ ActiveRecord::Schema.define(version: 2018_10_27_213949) do
   add_foreign_key "collects", "addresses"
   add_foreign_key "collects", "schedules"
   add_foreign_key "collects", "users"
+  add_foreign_key "evidences", "addresses"
+  add_foreign_key "evidences", "users"
   add_foreign_key "schedules", "users"
 end
