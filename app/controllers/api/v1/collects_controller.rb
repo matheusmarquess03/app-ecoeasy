@@ -2,6 +2,14 @@ module Api::V1
   class CollectsController < ApiController
     before_action :set_collect, only: [:update]
 
+    def index
+      @collects = current_api_v1_user.collects
+    rescue ActiveRecord::RecordInvalid => e
+      render json: { message: e.message }, status: 422
+    rescue StandardError => e
+      render json: { message: e.message }, status: 500
+    end
+
     def create
       @collect = Collect.new
       @collect.user_id = current_api_v1_user.id
