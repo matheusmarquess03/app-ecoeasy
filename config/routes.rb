@@ -31,5 +31,6 @@ Rails.application.routes.draw do
     resources :truckers
     resources :schedules
     resources :collects
+    resources :evidences
   end
 end
