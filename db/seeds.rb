@@ -47,6 +47,7 @@ if Address.where(user: Client.find_by(email: 'client@email.com')).count == 0
     city: 'Rio de Janeiro',
     state: 'RJ',
     country: 'Brasil',
+    zip_code: '22783-225',
     user: Client.find_or_create_by!(email: 'client@email.com') do |u|
       u.password = '12345678'
       u.password_confirmation = '12345678'
@@ -63,7 +64,6 @@ puts 'CRIANDO COLETA'
 Collect.all.destroy_all
 if Collect.all.count == 0
   Collect.create(
-    collect_date: Date.today,
     status: 'requested',
     type_collect: 'rubble_collect',
     user: Client.last,
