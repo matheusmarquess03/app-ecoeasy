@@ -23,8 +23,9 @@
               <% @free_schedules.each do |schedule| %>
                 <tr>
                   <td><%= schedule.user.name %></td>
-                  <td><%= I18n.l schedule.work_day, :format => :long, :locale => 'pt-BR' %></td>
-                  <td><%= schedule.collects.count %> coletas agendadas até o momento</td>
+                  <td><%= hidden_field_tag 'collect[collect_date]', schedule.work_day %>
+                      <%= I18n.l schedule.work_day, :format => :long, :locale => 'pt-BR' %></td>
+                  <td><%= schedule.collects.scheduled.count %> coletas agendadas até o momento</td>
                   <td><%= f.radio_button :schedule_id, schedule.id %></td>
                 <tr>
               <% end %>

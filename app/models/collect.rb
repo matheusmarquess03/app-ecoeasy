@@ -12,6 +12,9 @@ class Collect < ApplicationRecord
   validates :address_id, presence: true
 
   # Scopes
+  scope :scheduled, -> {
+    where(status: [ Collect.statuses[:proposed_date], Collect.statuses[:confirmed] ])
+  }
 
   # Methods
   def client

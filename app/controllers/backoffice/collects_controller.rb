@@ -25,14 +25,9 @@ class Backoffice::CollectsController < BackofficeController
       flash[:alert] = 'Falha para selecionar a agenda'
       redirect_to backoffice_collects_path
     end
-  end 
+  end
 
   private
-
-  def update_params
-    free_schedule_params = collect_params.fetch(:user, {}).split(" ")
-    { free_schedule: free_schedule_params[0], trucker_id: free_schedule_params[1] }
-  end
 
   def collect_params
     params.fetch(:collect, {}).permit(:collect_date, :schedule_id)
