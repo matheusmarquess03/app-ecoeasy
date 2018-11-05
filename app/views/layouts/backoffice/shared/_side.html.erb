@@ -35,22 +35,48 @@
       </li>
 
       <li class>
-        <a href="#"><i class="fa fa-trash-o fa-fw"></i> Coleta<span class="fa arrow"></span></a>
+        <a href="#"><i class="fa fa-trash-o fa-fw"></i> Coleta de entulho<span class="fa arrow"></span></a>
         <ul class="nav nav-second-level">
           <li>
             <%= link_to backoffice_collects_path do %>
-              <i class="fa fa-circle fa-fw"></i> Coleta de entulho
+              <i class="fa fa-th-list fa-fw"></i> Gerenciar solicitações
             <% end %>
           </li>
           <li>
-            <%= link_to backoffice_evidences_path do %>
-              <i class="fa fa-road fa-fw"></i> Limpeza de vias
-            <% end %>
+            <a href="#"><i class="fa fa-globe fa-fw"></i> Acompanhe em tempo real</a>
           </li>
           <li>
-            <a href="#"><i class="fa fa-recycle fa-fw"></i> Coleta de lixo diário</a>
+            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Relatório</a>
           </li>
         </ul>
+      </li>
+
+      <li>
+        <a href="#"><i class="fa fa-recycle fa-fw"></i> Coleta de lixo diária<span class="fa arrow"></span></a>
+        <ul class="nav nav-second-level">
+          <li>
+            <a href="#"><i class="fa fa-map-marker fa-fw"></i> Definir rota</a>
+          </li>
+          <li>
+            <a href="#"><i class="fa fa-globe fa-fw"></i> Acompanhe em tempo real</a>
+          </li>
+          <li>
+            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Relatório</a>
+          </li>
+        </ul>
+      </li>
+
+      <li>
+        <a href="#"><i class="fa fa-road fa-fw"></i> Limpeza de vias<span class="fa arrow"></span></a>
+        <ul class="nav nav-second-level">
+          <li>
+            <%= link_to backoffice_evidences_path do %>
+              <i class="fa fa-photo fa-fw"></i> Evidências
+            <% end %>
+          </li>
+          <li>
+            <a href="#"><i class="fa fa-exclamation-circle fa-fw"></i> Ocorrências</a>
+          </li>
       </li>
     </ul>
   </div>
