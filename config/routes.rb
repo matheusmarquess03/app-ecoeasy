@@ -30,7 +30,9 @@ Rails.application.routes.draw do
 
     resources :truckers
     resources :schedules
-    resources :collects
+    namespace :collects do
+      resources :rubble_collects
+    end
     resources :evidences
   end
 end
