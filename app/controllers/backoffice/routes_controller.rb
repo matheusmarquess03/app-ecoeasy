@@ -15,6 +15,7 @@ module Backoffice
     end
 
     def create
+      @route = Route.new(route_params)
       if @route.save!
         flash[:success] = 'Rota definanda com sucesso'
         redirect_to backoffice_routes_path
