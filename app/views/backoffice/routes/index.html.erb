@@ -51,16 +51,3 @@
     </div>
   </div>
 </div>
-
-<% provide :head_tags do %>
-  <meta name='turbolinks-visit-control' content='reload'>
-  <script>
-    // Build Stablishments Array
-    var locations = []
-    <% @routes.first.address.pluck(:latitude, :longitude).each do |location| %>
-      locations.push(<%= raw location %>);
-    <% end %>
-
-    document.addEventListener("DOMContentLoaded", showDailyCollectInMap(locations));
-  </script>
-<% end %>
