@@ -1,6 +1,6 @@
 module Backoffice
   class RoutesController < BackofficeController
-    before_action :set_users_schedule_options_for_select, only: [:new, :index, :edit]
+    before_action :set_users_schedule_options_for_select, only: [:new, :index, :edit, :trucker_tracking]
     before_action :set_route, only: [:show, :edit, :update, :destroy]
 
     def index
@@ -41,12 +41,16 @@ module Backoffice
     def destroy
       @route = Route.find(params[:id])
       if @route.destroy
-        flash[:success] = 'Agenda deletada com sucesso'
+        flash[:success] = 'Rota deletada com sucesso'
         redirect_to backoffice_schedules_path
       else
-        flash[:alert] = 'Falha para deletar agenda. Tente novamente mais tarde'
+        flash[:alert] = 'Falha para deletar rota. Tente novamente mais tarde'
         render :edit
       end
+    end
+
+    def trucker_tracking
+      # binding.pry
     end
 
     private
@@ -56,7 +60,7 @@ module Backoffice
     end
 
     def set_users_schedule_options_for_select
-      @schedules = Schedule.where('work_day > ?', Date.today)
+      @schedules = Schedule.where('work_day >= ?', Date.today)
     end
 
     def set_route

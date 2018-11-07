@@ -21,4 +21,8 @@ class Schedule < ApplicationRecord
   def trucker_schedule_label
     "#{self.user.name} - #{I18n.l self.work_day, :format => :long, :locale => 'pt-BR'}"
   end
+
+  def firebase_reference_access
+    "#{self.work_day.strftime('%Y-%m-%d')}/#{self.user_id}"
+  end
 end

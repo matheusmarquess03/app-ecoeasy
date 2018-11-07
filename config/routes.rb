@@ -36,6 +36,8 @@ Rails.application.routes.draw do
       resources :daily_garbage_collects
     end
     resources :routes
+    get 'trucker_tracking', to: 'routes#trucker_tracking'
+
     resources :evidences
   end
 end
