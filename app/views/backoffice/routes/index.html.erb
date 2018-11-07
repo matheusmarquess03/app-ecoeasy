@@ -10,7 +10,57 @@
         <% end %>
       </h4>
     </div>
-    <br/>
 
+    <div class="panel-body">
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Caminhoneiro</th>
+              <th>Data</th>
+              <th>Rota</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @routes.each do |route| %>
+              <tr>
+                <td><%= route.schedule.user.name %></td>
+                <td><%= route.schedule.work_day.strftime("%d/%m/%Y") %></td>
+                <td><%= route.address.count %> bairros programados para a coleta de lixo</td>
+                <td>
+                  <%= link_to backoffice_route_path(route), class: 'btn btn-outline btn-info' do %>
+                    <i class="fa fa-search-plus"></i> Detalhes
+                  <% end %>
+                </td>
+                <td>
+                  <%= link_to edit_backoffice_route_path(route), class: 'btn btn-outline btn-warning' do %>
+                    <i class="fa fa-edit"></i> Editar
+                  <% end %>
+                </td>
+                <td>
+                  <%= link_to backoffice_route_path(route), class: 'btn btn-outline btn-danger', method: :delete, data: { confirm: 'Tem certeza que deseja deletar a agenda deste caminhoneiro?' } do %>
+                      <i class="fa fa-times"></i> Deletar
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 </div>
+
+<% provide :head_tags do %>
+  <meta name='turbolinks-visit-control' content='reload'>
+  <script>
+    // Build Stablishments Array
+    var locations = []
+    <% @routes.first.address.pluck(:latitude, :longitude).each do |location| %>
+      locations.push(<%= raw location %>);
+    <% end %>
+
+    document.addEventListener("DOMContentLoaded", showDailyCollectInMap(locations));
+  </script>
+<% end %>

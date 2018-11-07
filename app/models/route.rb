@@ -10,4 +10,7 @@ class Route < ApplicationRecord
   # Scopes
 
   # Methods
+  def trucker_schedule_label
+    "#{self.schedule.user.name} - #{I18n.l self.schedule.work_day, :format => :long, :locale => 'pt-BR'}"
+  end
 end

@@ -28,12 +28,12 @@
 
         <br><h5>Bairros: </h5>
         <div id="address">
-          <%= link_to_add_association f, :address, class: 'btn btn-outline btn-success' do %>
-            <i class="fa fa-plus-square fa-fw"></i> Adicionar Bairro
-          <% end %>
-
           <%= f.fields_for :address do |address_fields| %>
             <%= render partial: 'address_fields', locals: {f: address_fields} %>
+          <% end %>
+
+          <%= link_to_add_association f, :address, class: 'btn btn-outline btn-success' do %>
+            <i class="fa fa-plus-square fa-fw"></i> Adicionar Bairro
           <% end %>
         </div>
         <%# <div id="map_to_routes"></div> %>
