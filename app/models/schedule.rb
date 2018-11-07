@@ -2,6 +2,7 @@ class Schedule < ApplicationRecord
   # Associations
   belongs_to :user
   has_many :collects
+  has_many :routes
 
   # Validations
   validates :work_day, uniqueness: {
@@ -17,4 +18,7 @@ class Schedule < ApplicationRecord
   }
 
   # Methods
+  def trucker_schedule_label
+    "#{self.user.name} - #{I18n.l self.work_day, :format => :long, :locale => 'pt-BR'}"
+  end
 end

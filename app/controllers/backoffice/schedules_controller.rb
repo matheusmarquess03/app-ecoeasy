@@ -60,5 +60,4 @@ class Backoffice::SchedulesController < BackofficeController
   def set_users_collections_for_select
     @users = Trucker.all
   end
-
 end

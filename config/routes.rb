@@ -32,7 +32,9 @@ Rails.application.routes.draw do
     resources :schedules
     namespace :collects do
       resources :rubble_collects
+      resources :daily_garbage_collects
     end
+    resources :routes
     resources :evidences
   end
 end

@@ -1,0 +1,45 @@
+<%= form_for [:backoffice, @route] do |f| %>
+  <div class="col-lg-12">
+    <h1 class="page-header"><i class="fa fa-recycle fa-fw"></i> MODULO COLETA DE LIXO DIÁRIA</h1>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4><i class="fa fa-map-marker fa-fw"></i> Gerenciar rotas</h4>
+      </div>
+
+
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-lg-8">
+            <h5>Seleciona a agenda do camminhoneiro: </h5>
+            <%= f.select(
+                :schedule_id,
+                options_from_collection_for_select(
+                  @schedules,
+                  :id,
+                  'trucker_schedule_label',
+                  f.object.schedule_id
+                ),
+                { include_blank: 'Seleciona a agenda do camminhoneiro' },
+                { class: 'form-control' })
+            %>
+          </div>
+        </div>
+
+        <br><h5>Bairros: </h5>
+        <div id="address">
+          <%= link_to_add_association f, :address, class: 'btn btn-outline btn-success' do %>
+            <i class="fa fa-plus-square fa-fw"></i> Adicionar Bairro
+          <% end %>
+
+          <%= f.fields_for :address do |address_fields| %>
+            <%= render partial: 'address_fields', locals: {f: address_fields} %>
+          <% end %>
+        </div>
+        <%# <div id="map_to_routes"></div> %>
+
+      </div>
+    </div>
+  </div>
+  <button type="submit" class="btn btn-success">Salvar</button>
+<% end %>

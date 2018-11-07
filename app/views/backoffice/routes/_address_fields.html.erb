@@ -1,0 +1,16 @@
+<div class="nested-fields">
+  <div class="form-group input-group col-lg-8">
+    <%= f.text_field :district, class: 'form-control district-field', placeholder: 'Digite o bairro para a coleta', onfocus: 'autocompleteAddressGoogle();' %>
+    <%= f.hidden_field :city, class: 'city-field' %>
+    <%= f.hidden_field :state, class: 'state-field' %>
+    <%= f.hidden_field :country, class: 'country-field' %>
+    <%= f.hidden_field :latitude, class: 'latitude-field' %>
+    <%= f.hidden_field :longitude, class: 'longitude-field' %>
+
+    <span class="input-group-btn">
+      <%= link_to_remove_association f, class: 'btn btn-outline btn-danger' do %>
+        <i class="fa fa-times"></i> Remover Bairro
+      <% end %>
+    </span>
+  </div>
+</div>

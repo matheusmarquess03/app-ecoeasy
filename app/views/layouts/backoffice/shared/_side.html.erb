@@ -55,7 +55,9 @@
         <a href="#"><i class="fa fa-recycle fa-fw"></i> Coleta de lixo diária<span class="fa arrow"></span></a>
         <ul class="nav nav-second-level">
           <li>
-            <a href="#"><i class="fa fa-map-marker fa-fw"></i> Definir rota</a>
+            <%= link_to backoffice_routes_path do %>
+              <i class="fa fa-map-marker fa-fw"></i> Gerenciar rotas
+            <% end %>
           </li>
           <li>
             <a href="#"><i class="fa fa-globe fa-fw"></i> Acompanhe em tempo real</a>

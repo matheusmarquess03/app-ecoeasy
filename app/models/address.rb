@@ -3,7 +3,8 @@ class Address < ApplicationRecord
   before_validation :prepare_user_addresses_before_update, on: :update
 
   # Associations
-  belongs_to :user
+  belongs_to :user, optional: true
+  belongs_to :route, optional: true
   has_many :collects
   has_many :evidences
 
