@@ -16,6 +16,7 @@ Rails.application.routes.draw do
         resource  :schedules, only: [:show]
         resources :collects,  only: [:index, :create, :update]
         resource  :evidences, only: [:create]
+        resource  :routes,    only: [:show]
       end
     end
   end
