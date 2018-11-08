@@ -34,12 +34,12 @@
                   <% end %>
                 </td>
                 <td>
-                  <%= link_to edit_backoffice_route_path(route), class: 'btn btn-outline btn-warning' do %>
+                  <%= link_to '#', class: 'btn btn-outline btn-warning', disabled: true do %>
                     <i class="fa fa-edit"></i> Editar
                   <% end %>
                 </td>
                 <td>
-                  <%= link_to backoffice_route_path(route), class: 'btn btn-outline btn-danger', method: :delete, data: { confirm: 'Tem certeza que deseja deletar a agenda deste caminhoneiro?' } do %>
+                  <%= link_to backoffice_route_path(route), class: 'btn btn-outline btn-danger', method: :delete, data: { confirm: 'Tem certeza que deseja deletar esta rota?' } do %>
                       <i class="fa fa-times"></i> Deletar
                   <% end %>
                 </td>
