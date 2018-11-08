@@ -18,7 +18,6 @@ module Backoffice
       begin
         schedule = Schedule.find(route_params[:schedule_id])
         @route = Route.new(route_params)
-        binding.pry
         @route.transaction do
           @route.save!
           Collect.create!(
@@ -26,6 +25,7 @@ module Backoffice
             type_collect: 'daily_garbage_collection',
             schedule_id: schedule.id,
             user_id: schedule.user.id,
+            collect_date: schedule.work_day
           )
           schedule.update!(full_schedule: true)
         end
