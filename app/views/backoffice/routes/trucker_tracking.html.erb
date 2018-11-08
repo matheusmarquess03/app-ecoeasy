@@ -1,5 +1,5 @@
 <div class="col-lg-12">
-  <h1 class="page-header"><i class="fa fa-recycle fa-fw"></i> MODULO COLETA DE LIXO DIÁRIA</h1>
+  <h1 class="page-header"><i class="fa fa-globe fa-fw"></i>ACOMPANHAMENTO EM TEMPO REAL </h1>
 
   <div class="panel panel-default">
     <div class="panel-heading">
@@ -12,7 +12,7 @@
         <div class="col-lg-8">
           <h5>Seleciona a agenda do camminhoneiro: </h5>
           <%= select_tag 'schedules',
-              options_from_collection_for_select(@schedules, 'firebase_reference_access', 'trucker_schedule_label'),
+              options_from_collection_for_select(@schedules_trackable, 'firebase_reference_access', 'trucker_schedule_label'),
               include_blank: 'Selecione uma opção', class: "form-control", onchange: "truckerTracking(this.value);"
           %>
         </div>

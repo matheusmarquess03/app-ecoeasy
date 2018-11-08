@@ -6,10 +6,10 @@ class Collect < ApplicationRecord
   # Associations
   belongs_to :user
   belongs_to :schedule, optional: true
-  belongs_to :address
+  belongs_to :address, optional: true
 
   # Validates
-  validates :address_id, presence: true
+  validates :address_id, presence: true, if: :not_daily_garbage_collection?
 
   # Scopes
   scope :scheduled, -> {
@@ -19,5 +19,11 @@ class Collect < ApplicationRecord
   # Methods
   def client
     self.user
+  end
+
+  private
+
+  def not_daily_garbage_collection?
+    type_collect != 'daily_garbage_collection'
   end
 end

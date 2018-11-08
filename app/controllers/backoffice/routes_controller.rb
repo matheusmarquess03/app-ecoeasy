@@ -1,6 +1,6 @@
 module Backoffice
   class RoutesController < BackofficeController
-    before_action :set_users_schedule_options_for_select, only: [:new, :index, :edit, :trucker_tracking]
+    before_action :set_users_schedule_options_for_select, only: [:new, :index, :edit]
     before_action :set_route, only: [:show, :edit, :update, :destroy]
 
     def index
@@ -15,12 +15,24 @@ module Backoffice
     end
 
     def create
-      @route = Route.new(route_params)
-      if @route.save!
+      begin
+        schedule = Schedule.find(route_params[:schedule_id])
+        @route = Route.new(route_params)
+        binding.pry
+        @route.transaction do
+          @route.save!
+          Collect.create!(
+            status: 'confirmed',
+            type_collect: 'daily_garbage_collection',
+            schedule_id: schedule.id,
+            user_id: schedule.user.id,
+          )
+          schedule.update!(full_schedule: true)
+        end
         flash[:success] = 'Rota definanda com sucesso'
         redirect_to backoffice_routes_path
-      else
-        flash[:alert] = 'Falha para definir a rota. Tente novamente mais tarde'
+      rescue StandardError => e
+        flash[:alert] = "Falha para definir a rota. Tente novamente mais tarde - #{e}"
         redirect_to new_backoffice_route_path
       end
     end
@@ -50,13 +62,13 @@ module Backoffice
     end
 
     def trucker_tracking
-      # binding.pry
+      @schedules_trackable = Schedule.trackable
     end
 
     private
 
     def route_params
-      params.fetch(:route, {}).permit(:schedule_id, address_attributes: [:id, :district, :city, :state, :country, :latitude, :longitude, :_destroy])
+      params.fetch(:route, {}).permit(:schedule_id, address_attributes: [:id, :district, :city, :state, :country, :latitude, :longitude, :default, :_destroy])
     end
 
     def set_users_schedule_options_for_select

@@ -17,6 +17,12 @@ class Schedule < ApplicationRecord
     order('users.name, work_day ASC')
   }
 
+  scope :trackable, -> {
+    joins(:routes).
+    where(work_day: Date.today).
+    distinct
+  }
+
   # Methods
   def trucker_schedule_label
     "#{self.user.name} - #{I18n.l self.work_day, :format => :long, :locale => 'pt-BR'}"
