@@ -21,6 +21,7 @@
               <th>Data</th>
               <th>Estado da agenda</th>
               <th>Quantidade de coletas agendadas</th>
+              <th></th>
             </tr>
           </thead>
 
@@ -34,19 +35,19 @@
 
                 <td><%= schedule.collects.count %> coletas agendadas até o momento</td>
                 <td>
-                  <%= link_to backoffice_schedule_path(schedule), class: 'btn btn-outline btn-info' do %>
-                    <i class="fa fa-search-plus"></i> Detalhes
-                  <% end %>
-                </td>
-                <td>
-                  <%= link_to edit_backoffice_schedule_path(schedule), class: 'btn btn-outline btn-warning' do %>
-                    <i class="fa fa-edit"></i> Editar
-                  <% end %>
-                </td>
-                <td>
-                  <%= link_to backoffice_schedule_path(schedule), class: 'btn btn-outline btn-danger', method: :delete, data: { confirm: 'Tem certeza que deseja deletar a agenda deste caminhoneiro?' } do %>
-                      <i class="fa fa-times"></i> Deletar
-                  <% end %>
+                  <div class="pull-right">
+                    <%= link_to backoffice_schedule_path(schedule), class: 'btn btn-outline btn-info' do %>
+                      <i class="fa fa-search-plus"></i> Detalhes
+                    <% end %>
+
+                    <%= link_to edit_backoffice_schedule_path(schedule), class: 'btn btn-outline btn-warning' do %>
+                      <i class="fa fa-edit"></i> Editar
+                    <% end %>
+
+                    <%= link_to backoffice_schedule_path(schedule), class: 'btn btn-outline btn-danger', method: :delete, data: { confirm: 'Tem certeza que deseja deletar a agenda deste caminhoneiro?' } do %>
+                        <i class="fa fa-times"></i> Deletar
+                    <% end %>
+                  </div>
                 </td>
               </tr>
             <% end %>
