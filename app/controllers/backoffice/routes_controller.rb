@@ -55,7 +55,7 @@ module Backoffice
         @route = Route.find(params[:id])
         schedule = @route.schedule
         @route.transaction do
-          schedule.collects.daily_garbage_collection.first.destroy
+          schedule.collects.daily_garbage_collection&.first&.destroy
           schedule.update!(full_schedule: false)
           @route.destroy
         end
