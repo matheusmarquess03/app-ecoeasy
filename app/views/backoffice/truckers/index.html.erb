@@ -5,7 +5,7 @@
 <% end %>
 <br/>
 
-<div class="col-lg-6">
+<div class="col-lg-12">
   <h1 class="page-header">MODULO CAMINHONEIRO</h1>
 
   <div class="panel panel-default">
@@ -34,14 +34,16 @@
               <tr>
                 <td><%= trucker.name %></td>
                 <td><%= trucker.email %></td>
-                <td class="pull-right">
-                  <%= link_to edit_backoffice_trucker_path(trucker), class: 'btn btn-outline btn-warning' do %>
-                    <i class="fa fa-edit"></i> Editar
-                  <% end %>
+                <td>
+                  <div class="pull-right">
+                    <%= link_to edit_backoffice_trucker_path(trucker), class: 'btn btn-outline btn-warning' do %>
+                      <i class="fa fa-edit"></i> Editar
+                    <% end %>
 
-                  <%= link_to backoffice_trucker_path(trucker), class: 'btn btn-outline btn-danger', method: :delete, data: { confirm: 'Ao confirmar esta operação será perdido definitivamente a agenda e os dados deste caminhoneiro. Tem certeza que deseja fazer isto?' } do %>
-                      <i class="fa fa-times"></i> Deletar
-                  <% end %>
+                    <%= link_to backoffice_trucker_path(trucker), class: 'btn btn-outline btn-danger', method: :delete, data: { confirm: 'Ao confirmar esta operação será perdido definitivamente a agenda e os dados deste caminhoneiro. Tem certeza que deseja fazer isto?' } do %>
+                        <i class="fa fa-times"></i> Deletar
+                    <% end %>
+                  </div>
                 </td>
               </tr>
             <% end %>

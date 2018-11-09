@@ -9,40 +9,30 @@
     <br/>
 
     <div class="panel-body">
-      <div class="table-responsive">
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th><%= f.label :name %></th>
-              <th><%= f.label :email %></th>
-            </tr>
-          </thead>
+      <div class="form-group">
+        <div class="col-lg-6">
+          <%= f.label :name %>
+          <%= f.text_field :name, class: 'form-control' %>
+        </div>
+        <div class="col-lg-6">
+          <%= f.label :email %>
+          <%= f.text_field :email, class: 'form-control' %><br>
+        </div>
+      </div>
 
-          <tbody>
-            <tr>
-              <td><%= f.text_field :name %></td>
-              <td><%= f.text_field :email %></td>
-            </tr>
-          </tbody>
-
-          <thead>
-            <tr>
-              <th><%= f.label :password %></th>
-              <th><%= f.label :password_confirmation %></th>
-            </tr>
-          </thead>
-
-          <tbody>
-            <tr>
-              <td><%= f.text_field :password %></td>
-              <td><%= f.text_field :password_confirmation %></td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="form-group">
+        <div class="col-lg-6">
+          <%= f.label :password %>
+          <%= f.text_field :password, class: 'form-control', placeholder: password_placeholder(@trucker) %>
+        </div>
+        <div class="col-lg-6">
+          <%= f.label :password_confirmation %>
+          <%= f.text_field :password_confirmation, class: 'form-control', placeholder: password_placeholder(@trucker) %>
+        </div>
       </div>
     </div>
   </div>
   <br />
 
-  <button type="submit" class="btn btn-success">Salvar</button>
+  <%= button_tag 'Salvar', class: 'btn btn-success btn-lg' %>
 </div>
