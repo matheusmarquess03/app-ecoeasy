@@ -9,10 +9,10 @@ class Address < ApplicationRecord
   has_many :evidences
 
   # Validations
-  validates :default, uniqueness: {
-    scope: :user_id,
-    message: "address should there is one per user"
-  }
+  # validates :default, uniqueness: {
+  #   scope: :user_id,
+  #   message: "address should there is one per user"
+  # }
 
   # Scopes
 
