@@ -15,7 +15,7 @@ module Api::V1
     private
 
     def set_day_schedule
-      @schedule = Schedule.where(user_id: current_api_v1_user.id).first
+      @schedule = Schedule.where(user_id: current_api_v1_user.id).last
     end
   end
 end
