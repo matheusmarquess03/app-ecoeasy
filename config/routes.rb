@@ -5,7 +5,8 @@ Rails.application.routes.draw do
       mount_devise_token_auth_for 'User', at: 'auth',
         controllers: {
           registrations: 'api/v1/devise/registrations',
-          sessions:      'api/v1/devise/sessions'
+          sessions:      'api/v1/devise/sessions',
+          passwords:     'api/v1/devise/passwords'
         }
 
       get 'client/already_registred', to: 'clients#already_registered?'
