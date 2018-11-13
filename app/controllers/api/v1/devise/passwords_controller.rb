@@ -8,7 +8,7 @@ module Api::V1::Devise
 
       if user&.update!(password: generated_password, password_confirmation: generated_password)
         UserMailer.with(user: user, password: generated_password).send_temporary_password.deliver
-        return render_create_success
+        render json: { message: 'Você receberá um e-mail com instruções sobre como redefinir sua senha.' }, status: 200
       else
         render json: { message: 'Email não encontrado.' }, status: 422
       end
