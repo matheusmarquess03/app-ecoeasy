@@ -76,6 +76,10 @@ module Api::V1::Devise
       params.fetch(:address, {}).permit(:street, :number, :complement, :district, :city, :state, :country, :zip_code, :latitude, :longitude, :default)
     end
 
+    def account_update_params
+      params.require(:registration).permit(:name, :nickname, :cpf, :phone_number, :email, :password, :password_confirmation, :current_password)
+    end
+
     protected
 
     def render_create_success
@@ -83,11 +87,14 @@ module Api::V1::Devise
       render json: resource_json_response
     end
 
+    def render_update_success
+      resource_json_response = @resource.type == 'Client' ? resource_data.merge(address: @resource.addresses.as_json) : resource_data
+      render json: resource_json_response
+    end
+
     def configure_permitted_parameters
-      devise_parameter_sanitizer.permit(
-        :sign_up,
-        keys: [ :email, :password, :name, :cpf, :phone_number ]
-      )
+      devise_parameter_sanitizer.permit(:sign_up,
+        keys: [ :email, :password, :name, :cpf, :phone_number ])
     end
   end
 end
