@@ -24,7 +24,6 @@ module Backoffice
             status: 'confirmed',
             type_collect: 'daily_garbage_collection',
             schedule_id: schedule.id,
-            user_id: schedule.user.id,
             collect_date: schedule.work_day
           )
           schedule.update!(full_schedule: true)

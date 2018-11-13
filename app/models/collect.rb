@@ -4,12 +4,13 @@ class Collect < ApplicationRecord
   enum type_collect: [:rubble_collect, :daily_garbage_collection, :road_cleaning]
 
   # Associations
-  belongs_to :user
+  belongs_to :user, optional: true
   belongs_to :schedule, optional: true
   belongs_to :address, optional: true
 
   # Validates
   validates :address_id, presence: true, if: :not_daily_garbage_collection?
+  validates :user_id,    presence: true, if: :not_daily_garbage_collection?
 
   # Scopes
   scope :scheduled, -> {
