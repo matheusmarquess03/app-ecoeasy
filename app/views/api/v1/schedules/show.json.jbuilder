@@ -19,7 +19,7 @@ json.collects do
             json.longitude          address.longitude
           end
         end
-      else
+      elsif collect.rubble_collect?
         json.address do
           json.id                 collect.address&.id
           json.zip_code           collect.address&.zip_code
