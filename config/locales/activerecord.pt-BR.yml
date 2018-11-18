@@ -8,18 +8,51 @@ pt-BR:
           has_many: Não é possível excluir o registro pois existem %{record} dependentes
     models:
       user:
-        name: 'Nome'
-        email: 'Email'
-        password: 'Senha'
+        one: Usuário
+        other: Usuários
       admin:
-        name: 'Nome'
-        email: 'Email'
-        password: 'Senha'
+        one: Administrador
+        other: Administradores
+      truck:
+        one: Caminhão
+        other: Caminhões
+      collect:
+        one: Coleta
+        other: Coletass
+      evidence:
+        one: Evidência
+        other: Evidências
+      landfill:
+        one: Aterro
+        other: Aterros
+      route:
+        one: Rota
+        other: Rotas
       schedules:
         full_schedule:
-          'true': 'Indisponível'
-          'false': 'Disponível'
+          true: Indisponível
+          false: Disponível
     attributes:
+      user:
+        name: Nome
+        email: Email
+        password: Senha
+      admin:
+        name: Nome
+        email: Email
+        password: Senha
+      truck:
+        brand: Marca
+        model: Modelo
+        manufacture_year: Ano
+        color: Cor
+        plate_number: Placa
+        chassis_number: Número do Chassi
+        renavam_number: RENAVAM
+        registration_number: Número de registro
+        maximum_load: Carga máxima
+        m_3: M³
+        axles_number: Quantidade de Eixos
       schedule:
-        work_day: 'Dia de trabalho'
+        work_day: Dia de trabalho
         full_schedule: Agenda cheia?
