@@ -71,3 +71,19 @@ if Collect.all.count == 0
   )
 end
 puts 'COLETA CRIADA COM SUCESSO'
+
+# Create a Landfill ============================================================
+Landfill.find_or_create_by!(name: 'Aterro de Gericinó') do |l|
+  l.address = Address.create(
+    street: 'Estrada do Gericinó',
+    number: '',
+    complement: '',
+    district: 'Gericinó',
+    city: 'Rio de Janeiro',
+    state: 'Rio de Janeiro',
+    country: 'Brasil',
+    zip_code: '',
+    latitude: '-22.8429971',
+    longitude: '-43.4745312'
+  )
+end
