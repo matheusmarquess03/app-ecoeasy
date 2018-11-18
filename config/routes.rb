@@ -41,5 +41,6 @@ Rails.application.routes.draw do
     get 'trucker_tracking', to: 'routes#trucker_tracking'
 
     resources :evidences
+    resources :trucks
   end
 end
