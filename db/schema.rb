@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_07_013023) do
+ActiveRecord::Schema.define(version: 2018_11_18_172836) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,8 @@ ActiveRecord::Schema.define(version: 2018_11_07_013023) do
     t.string "latitude"
     t.string "longitude"
     t.bigint "route_id"
+    t.bigint "landfill_id"
+    t.index ["landfill_id"], name: "index_addresses_on_landfill_id"
     t.index ["route_id"], name: "index_addresses_on_route_id"
     t.index ["user_id"], name: "index_addresses_on_user_id"
   end
@@ -83,6 +85,12 @@ ActiveRecord::Schema.define(version: 2018_11_07_013023) do
     t.index ["user_id"], name: "index_evidences_on_user_id"
   end
 
+  create_table "landfills", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "routes", force: :cascade do |t|
     t.bigint "schedule_id"
     t.datetime "created_at", null: false
@@ -132,6 +140,7 @@ ActiveRecord::Schema.define(version: 2018_11_07_013023) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "addresses", "landfills"
   add_foreign_key "addresses", "routes"
   add_foreign_key "collects", "addresses"
   add_foreign_key "collects", "schedules"

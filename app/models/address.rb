@@ -5,6 +5,7 @@ class Address < ApplicationRecord
   # Associations
   belongs_to :user, optional: true
   belongs_to :route, optional: true
+  belongs_to :landfill, optional: true
   has_many :collects
   has_many :evidences
 
