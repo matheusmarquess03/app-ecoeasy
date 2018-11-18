@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_18_172836) do
+ActiveRecord::Schema.define(version: 2018_11_18_190241) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -105,6 +105,23 @@ ActiveRecord::Schema.define(version: 2018_11_18_172836) do
     t.bigint "user_id"
     t.boolean "full_schedule", default: false
     t.index ["user_id"], name: "index_schedules_on_user_id"
+  end
+
+  create_table "trucks", force: :cascade do |t|
+    t.string "brand"
+    t.string "model"
+    t.string "manufacture_year"
+    t.string "color"
+    t.string "plate_number"
+    t.string "chassis_number"
+    t.string "renavam_number"
+    t.string "registration_number"
+    t.string "maximum_load"
+    t.string "m_3"
+    t.string "axles_number"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "truck_type"
   end
 
   create_table "users", force: :cascade do |t|
