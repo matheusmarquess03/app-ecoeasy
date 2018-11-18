@@ -7,11 +7,5 @@ module Api::V1
     rescue StandardError => e
       render json: { message: e.message }, status: 500
     end
-
-    private
-
-    def landifill_params
-      params.fetch(:landfill, {}).permit(:name, address_attributes: [:street, :number, :complement, :district, :city, :state, :coutry])
-    end
   end
 end
