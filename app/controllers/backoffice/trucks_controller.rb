@@ -1,4 +1,5 @@
 class Backoffice::TrucksController < BackofficeController
+  before_action :set_truck, only: [:edit, :update, :destroy]
   def index
     @trucks = Truck.all
   end
@@ -9,7 +10,6 @@ class Backoffice::TrucksController < BackofficeController
 
   def create
     @truck = Truck.new(trucks_params)
-    binding.pry
     if @truck.save
       flash[:success] = 'Caminhão cadastrado com sucesso'
       redirect_to backoffice_trucks_path
@@ -19,7 +19,34 @@ class Backoffice::TrucksController < BackofficeController
     end
   end
 
+  def edit
+  end
+
+  def update
+    if @truck.update(trucks_params)
+      flash[:success] = 'Caminhão cadastrado com sucesso'
+      redirect_to backoffice_trucks_path
+    else
+      flash[:alert] = 'Falha para atualizar o caminhão. Tente novamente mais tarde'
+      render :edit
+    end
+  end
+
+  def destroy
+    if @truck.destroy
+      flash[:success] = 'Caminhão deletado com sucesso'
+      redirect_to backoffice_schedules_path
+    else
+      flash[:alert] = 'Falha para deletar o caminhão. Tente novamente mais tarde'
+      render :edit
+    end
+  end
+
   private
+
+  def set_truck
+    @truck = Truck.find(params[:id])
+  end
 
   def trucks_params
     params.fetch(:truck, {}).permit(:brand, :model, :manufacture_year, :color, :plate_number, :chassis_number, :renavam_number, :registration_number, :maximum_load, :m_3, :axles_number)
