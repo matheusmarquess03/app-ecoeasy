@@ -19,7 +19,23 @@
       </li>
 
       <li class>
-        <a href="#"><i class="fa fa-truck fa-fw"></i> Caminhoneiro<span class="fa arrow"></span></a>
+        <a href="#"><i class="fa fa-folder-open fa-fw"></i> Inventário<span class="fa arrow"></span></a>
+        <ul class="nav nav-second-level">
+          <li>
+            <%= link_to backoffice_path do %>
+              <i class="fa fa-truck fa-fw"></i> Caminhões
+            <% end %>
+          </li>
+          <li>
+            <%= link_to backoffice_path do %>
+              <i class="fa fa-recycle fa-fw"></i> Aterros
+            <% end %>
+          </li>
+        </ul>
+      </li>
+
+      <li class>
+        <a href="#"><i class="fa fa-user fa-fw"></i> Caminhoneiro<span class="fa arrow"></span></a>
         <ul class="nav nav-second-level">
           <li>
             <%= link_to backoffice_truckers_path do %>
