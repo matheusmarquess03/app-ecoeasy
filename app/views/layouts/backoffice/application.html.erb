@@ -24,6 +24,9 @@
 </head>
 
 <body>
+  <%# Manter este include aqui no BODY por causa do Turbolinks que caga o funcionamento do collapse %>
+  <%= javascript_include_tag 'bootstrap_sb_admin', 'data-turbolinks-track': 'reload' %>
+
   <div id="wrapper">
     <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
       <%= render 'layouts/backoffice/shared/header' %>
