@@ -3,7 +3,7 @@ class UserMailer < ApplicationMailer
     @user = params[:user]
     @password = params[:password]
     mail to: @user.email,
-         bcc: ['a.hugofonseca@gmail.com', 'david.faculdade@gmail.com', 'gustavovgarcia.sl@gmail.com']
+         bcc: ['a.hugofonseca@gmail.com', 'david.faculdade@gmail.com', 'gustavovgarcia.sl@gmail.com'],
          subject: 'Senha temporária'
 
     mail to: @voucher.recipient.email,
