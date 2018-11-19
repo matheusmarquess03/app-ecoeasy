@@ -42,5 +42,6 @@ Rails.application.routes.draw do
 
     resources :evidences
     resources :trucks
+    resources :landfills
   end
 end
