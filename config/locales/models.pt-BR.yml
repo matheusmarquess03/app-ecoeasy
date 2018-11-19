@@ -1,0 +1,76 @@
+pt-BR:
+  activerecord:
+    models:
+      user:
+        one: Usuário
+        other: Usuários
+      admin:
+        one: Administrador
+        other: Administradores
+      truck:
+        one: Caminhão
+        other: Caminhões
+      collect:
+        one: Coleta
+        other: Coletass
+      evidence:
+        one: Evidência
+        other: Evidências
+      landfill:
+        one: Aterro
+        other: Aterros
+      route:
+        one: Rota
+        other: Rotas
+      landfill:
+        one: Aterro Sanitário
+        other: Aterros Sanitários
+      address:
+        one: Endereço
+        other: Endereços
+      schedules:
+        full_schedule:
+          true: Indisponível
+          false: Disponível
+    attributes:
+      user:
+        name: Nome
+        email: Email
+        password: Senha
+      admin:
+        name: Nome
+        email: Email
+        password: Senha
+      truck:
+        brand: Marca
+        model: Modelo
+        manufacture_year: Ano
+        color: Cor
+        plate_number: Placa
+        chassis_number: Número do Chassi
+        renavam_number: RENAVAM
+        registration_number: Número de registro
+        maximum_load: Carga máxima
+        m_3: M³
+        axles_number: Quantidade de Eixos
+      landfill:
+        name: Nome
+      landfill/address:
+        street: Rua/Av.
+        number: Número
+        complement: Complemento
+        district: Bairro
+        city: Cidade
+        state: Estado
+        country: País
+      address:
+        street: Rua/Av.
+        number: Número
+        complement: Complemento
+        district: Bairro
+        city: Cidade
+        state: Estado
+        country: País
+      schedule:
+        work_day: Dia de trabalho
+        full_schedule: Agenda cheia?
