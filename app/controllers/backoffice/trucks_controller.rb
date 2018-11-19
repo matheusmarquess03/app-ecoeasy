@@ -2,6 +2,10 @@ class Backoffice::TrucksController < BackofficeController
   before_action :set_truck, only: [:edit, :update, :destroy]
   def index
     @trucks = Truck.all
+    if @trucks.blank?
+      flash[:info] = 'Não há caminhões cadastrado até o momento'
+      redirect_to new_backoffice_truck_path
+    end
   end
 
   def new
