@@ -7,6 +7,6 @@ json.district           @address.district
 json.city               @address.city
 json.state              @address.state
 json.country            @address.country
-json.latitude           @address.latitude
-json.longitude          @address.longitude
+json.latitude           @address.latitude.to_f
+json.longitude          @address.longitude.to_f
 json.default            @address.default

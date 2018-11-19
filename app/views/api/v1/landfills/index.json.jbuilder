@@ -11,7 +11,7 @@ json.array! @landfills do |landfill|
     json.city               landfill.address&.city
     json.state              landfill.address&.state
     json.country            landfill.address&.country
-    json.latitude           landfill.address&.latitude
-    json.longitude          landfill.address&.longitude
+    json.latitude           landfill.address&.latitude.to_f
+    json.longitude          landfill.address&.longitude.to_f
   end
 end

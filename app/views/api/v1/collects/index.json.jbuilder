@@ -13,8 +13,8 @@ json.array! @collects do |collect|
     json.city               collect.address&.city
     json.state              collect.address&.state
     json.country            collect.address&.country
-    json.latitude           collect.address&.latitude
-    json.longitude          collect.address&.longitude
+    json.latitude           collect.address&.latitude.to_f
+    json.longitude          collect.address&.longitude.to_f
   end
   json.routes do
     if collect.daily_garbage_collection?
@@ -24,8 +24,8 @@ json.array! @collects do |collect|
         json.city               address.city
         json.state              address.state
         json.country            address.country
-        json.latitude           address.latitude
-        json.longitude          address.longitude
+        json.latitude           address.latitude.to_f
+        json.longitude          address.longitude.to_f
       end
     end
   end
