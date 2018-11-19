@@ -35,7 +35,7 @@ class Backoffice::TrucksController < BackofficeController
   def destroy
     if @truck.destroy
       flash[:success] = 'Caminhão deletado com sucesso'
-      redirect_to backoffice_schedules_path
+      redirect_to backoffice_trucks_path
     else
       flash[:alert] = 'Falha para deletar o caminhão. Tente novamente mais tarde'
       render :edit
