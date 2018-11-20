@@ -1,46 +1,76 @@
 <%= form_for [:backoffice, @route] do |f| %>
-  <div class="col-lg-12">
-    <h1 class="page-header"><i class="fa fa-recycle fa-fw"></i> MODULO COLETA DE LIXO DIÁRIA</h1>
 
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h4><i class="fa fa-map-marker fa-fw"></i> Gerenciar rotas</h4>
-      </div>
+  <h1 class="page-header"><i class="fa fa-recycle fa-fw"></i> MODULO COLETA DE LIXO DIÁRIA</h1>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4><i class="fa fa-map-marker fa-fw"></i> Gerenciar rotas</h4>
+    </div>
 
 
-      <div class="panel-body">
+    <div class="panel-body">
+      <div class="col-lg-6">
         <div class="row">
-          <div class="col-lg-8">
-            <h5>Seleciona a agenda do camminhoneiro: </h5>
-            <%= f.select(
-                :schedule_id,
-                options_from_collection_for_select(
-                  @schedules,
-                  :id,
-                  'trucker_schedule_label',
-                  f.object.schedule_id
-                ),
-                { include_blank: 'Seleciona a agenda do camminhoneiro' },
-                { class: 'form-control' })
-            %>
+          <div class="col-lg-12">
+            <%= f.label :title %>
+            <%= f.text_field :title, class: 'form-control' %><br>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <%= f.label :description %>
+            <%= f.text_area :description, class: 'form-control' %>
           </div>
         </div>
 
-        <br><h5>Bairros: </h5>
+        <br><h5><b>Bairros: </b></h5>
         <div id="address">
           <%= f.fields_for :address do |address_fields| %>
             <%= render partial: 'address_fields', locals: {f: address_fields} %>
           <% end %>
 
-          <%= link_to_add_association f, :address, class: 'btn btn-outline btn-success' do %>
-            <i class="fa fa-plus-square fa-fw"></i> Adicionar Bairro
-          <% end %>
-        </div>
-        <%# <div id="map_to_routes"></div> %>
 
+          <div class="col-lg-6 p-0">
+            <%= link_to_add_association f, :address, class: 'btn btn-outline btn-success' do %>
+              <i class="fa fa-plus-square fa-fw"></i> Adicionar Bairro
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="maps" id="map_to_daily_collect"></div>
       </div>
     </div>
   </div>
 
   <%= button_tag 'Salvar', class: 'btn btn-success btn-lg' %>
+<% end %>
+
+<% if @route.persisted? %>
+  <% provide :head_tags do %>
+    <meta name='turbolinks-visit-control' content='reload'>
+    <script>
+      var locations = []
+      <% @route.address.pluck(:latitude, :longitude).each do |location| %>
+        locations.push(<%= raw location %>);
+      <% end %>
+
+      document.addEventListener("DOMContentLoaded", function() {
+        showDailyCollectInMap(locations);
+        listenerRemoveMarkerReplyOnMap();
+      });
+    </script>
+  <% end %>
+
+<% else %>
+  <% provide :head_tags do %>
+    <meta name='turbolinks-visit-control' content='reload'>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        initMapOnNewForm();
+        listenerRemoveMarkerReplyOnMap();
+      });
+    </script>
+  <% end %>
 <% end %>

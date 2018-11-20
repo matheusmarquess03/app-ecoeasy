@@ -1,6 +1,6 @@
 <div class="nested-fields">
-  <div class="form-group input-group col-lg-8">
-    <%= f.text_field   :district, class: 'form-control district-field', placeholder: 'Digite o bairro para a coleta', onfocus: 'autocompleteAddressGoogle();' %>
+  <div class="form-group input-group col-lg-12">
+    <%= f.text_field   :district, class: 'form-control district-field', placeholder: 'Digite o bairro para a coleta', onfocus: 'autocompleteAddressGoogle(this.id);' %>
     <%= f.hidden_field :city, class: 'city-field' %>
     <%= f.hidden_field :state, class: 'state-field' %>
     <%= f.hidden_field :country, class: 'country-field' %>

@@ -16,32 +16,32 @@
         <table class="table table-hover">
           <thead>
             <tr>
-              <th>Caminhoneiro</th>
-              <th>Data</th>
-              <th>Rota</th>
+              <th>Titulo</th>
+              <th>Descrição</th>
+              <th>Endereços</th>
             </tr>
           </thead>
 
           <tbody>
             <% @routes.each do |route| %>
               <tr>
-                <td><%= route.schedule.user.name %></td>
-                <td><%= route.schedule.work_day.strftime("%d/%m/%Y") %></td>
+                <td><%= route.title %></td>
+                <td><%= route.description %></td>
                 <td><%= route.address.count %> bairros programados para a coleta de lixo</td>
                 <td>
-                  <%= link_to backoffice_route_path(route), class: 'btn btn-outline btn-info' do %>
-                    <i class="fa fa-search-plus"></i> Detalhes
-                  <% end %>
-                </td>
-                <td>
-                  <%= link_to '#', class: 'btn btn-outline btn-warning', disabled: true do %>
-                    <i class="fa fa-edit"></i> Editar
-                  <% end %>
-                </td>
-                <td>
-                  <%= link_to backoffice_route_path(route), class: 'btn btn-outline btn-danger', method: :delete, data: { confirm: 'Tem certeza que deseja deletar esta rota?' } do %>
+                  <div class="pull-right">
+                    <%= link_to backoffice_route_path(route), class: 'btn btn-outline btn-info' do %>
+                      <i class="fa fa-search-plus"></i> Detalhes
+                    <% end %>
+
+                    <%= link_to edit_backoffice_route_path(route), class: 'btn btn-outline btn-warning' do %>
+                      <i class="fa fa-edit"></i> Editar
+                    <% end %>
+
+                    <%= link_to backoffice_route_path(route), class: 'btn btn-outline btn-danger', method: :delete, data: { confirm: 'Tem certeza que deseja deletar esta rota?' } do %>
                       <i class="fa fa-times"></i> Deletar
-                  <% end %>
+                    <% end %>
+                  </div>
                 </td>
               </tr>
             <% end %>
