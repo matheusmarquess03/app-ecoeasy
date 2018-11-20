@@ -29,9 +29,8 @@ pt-BR:
         one: Endereço
         other: Endereços
       schedules:
-        full_schedule:
-          true: Indisponível
-          false: Disponível
+        one: Agenda
+        other: Agendas
     attributes:
       user:
         name: Nome
@@ -53,6 +52,9 @@ pt-BR:
         maximum_load: Carga máxima
         m_3: M³
         axles_number: Quantidade de Eixos
+      route:
+        title: Titulo
+        description: Descrição
       landfill:
         name: Nome
       landfill/address:
