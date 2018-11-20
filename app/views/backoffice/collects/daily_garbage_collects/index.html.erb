@@ -1,0 +1,50 @@
+<div class="col-lg-12">
+  <h1 class="page-header">MODULO COLETA DE LIXO DIÁRIA</h1>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4>Coleta de lixo diária
+        <%= link_to new_backoffice_collects_daily_garbage_collect_path, class: 'btn btn-outline btn-success pull-right', style:"margin-top: -5px" do %>
+          <i class="fa fa-plus-square fa-fw"></i> Cadastrar
+        <% end %>
+      </h4>
+    </div>
+    <br/>
+
+    <div class="panel-body">
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Caminhoneiro</th>
+              <th>Coleta agendada para</th>
+              <th>Rota</th>
+              <th colspan="2"></th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @collects.each do |collect| %>
+              <tr>
+                <td><%= collect.schedule.user.name %></td>
+                <td><%= I18n.l collect.schedule.work_day, :format => :with_day_of_week, :locale => 'pt-BR' if collect.collect_date.present? %></td>
+                <td><%= collect.schedule&.routes.first.title %></td>
+                <td>
+                  <div class="pull-right">
+                    <%= link_to edit_backoffice_collects_daily_garbage_collect_path(collect), class: 'btn btn-outline btn-warning' do %>
+                      <i class="fa fa-edit"></i> Editar
+                    <% end %>
+
+                    <%= link_to backoffice_collects_daily_garbage_collect_path(collect), class: 'btn btn-outline btn-danger', method: :delete, data: { confirm: 'Tem certeza que deseja fazer isto?' } do %>
+                        <i class="fa fa-times"></i> Deletar
+                    <% end %>
+                  </div>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

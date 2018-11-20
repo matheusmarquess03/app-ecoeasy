@@ -1,0 +1,40 @@
+<%= form_for [:backoffice, :collects, :daily_garbage, @collect], html: { class: 'form' } do |f| %>
+
+  <h1 class="page-header"><i class="fa fa-recycle fa-fw"></i> MODULO COLETA DE LIXO DIÁRIA</h1>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h1>Coleta de lixo diária</h1>
+    </div>
+    <br/>
+
+    <div class="panel-body">
+      <div class="form-group">
+        <div class="col-lg-12">
+          <h4>Selecione uma agenda disponível: </h4>
+          <%= f.select :schedule_id,
+              options_from_collection_for_select(@free_schedules, :id, 'trucker_schedule_label', f.object.schedule_id),
+              { include_blank: 'Selecione uma agenda' },
+              { class: 'form-control' }
+          %>
+          <br>
+        </div>
+
+        <div class="col-lg-12">
+          <%= f.fields_for :schedules_routes do |route| %>
+            <h4>Selecione uma rota: </h4>
+            <%= route.select :route_id,
+                options_from_collection_for_select(@routes, :id, :title, route_selected(f.object)),
+                { include_blank: 'Selecione uma agenda' },
+                { class: 'form-control' }
+            %>
+            <br>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br />
+
+  <%= f.submit 'Salvar', class: 'btn btn-success btn-lg' %>
+<% end %>

@@ -1,9 +1,9 @@
 class Schedule < ApplicationRecord
   # Associations
   belongs_to :user
-  has_many :collects
-  has_many :routes
-  has_many :routes, through: :schedules_route
+  has_many   :collects
+  has_many   :schedules_routes
+  has_many   :routes, through: :schedules_routes
 
   # Validations
   validates :work_day, uniqueness: {
@@ -15,6 +15,7 @@ class Schedule < ApplicationRecord
   scope :free_schedules, -> {
     joins(:user).
     where(full_schedule: false).
+    where('work_day >= (?)', Date.today).
     order('users.name, work_day ASC')
   }
 
@@ -25,6 +26,14 @@ class Schedule < ApplicationRecord
   }
 
   # Methods
+  def self.free_schedules_to_daily_collects
+    schedules = []
+    self.free_schedules.map do |s|
+      schedules << s if s.collects.count == 0
+    end
+    return schedules
+  end
+
   def trucker_schedule_label
     "#{self.user.name} - #{I18n.l self.work_day, :format => :long, :locale => 'pt-BR'}"
   end
