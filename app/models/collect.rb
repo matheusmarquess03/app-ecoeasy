@@ -7,6 +7,7 @@ class Collect < ApplicationRecord
   belongs_to :user, optional: true
   belongs_to :schedule, optional: true
   belongs_to :address, optional: true
+  belongs_to :landfill, optional: true
 
   # Validates
   validates :address_id, presence: true, if: :not_daily_garbage_collection?

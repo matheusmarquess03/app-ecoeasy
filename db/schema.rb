@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_19_192857) do
+ActiveRecord::Schema.define(version: 2018_11_20_060531) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,7 +63,9 @@ ActiveRecord::Schema.define(version: 2018_11_19_192857) do
     t.bigint "schedule_id"
     t.bigint "user_id"
     t.bigint "address_id"
+    t.bigint "landfill_id"
     t.index ["address_id"], name: "index_collects_on_address_id"
+    t.index ["landfill_id"], name: "index_collects_on_landfill_id"
     t.index ["schedule_id"], name: "index_collects_on_schedule_id"
     t.index ["user_id"], name: "index_collects_on_user_id"
   end
@@ -169,6 +171,7 @@ ActiveRecord::Schema.define(version: 2018_11_19_192857) do
   add_foreign_key "addresses", "landfills"
   add_foreign_key "addresses", "routes"
   add_foreign_key "collects", "addresses"
+  add_foreign_key "collects", "landfills"
   add_foreign_key "collects", "schedules"
   add_foreign_key "collects", "users"
   add_foreign_key "evidences", "addresses"
