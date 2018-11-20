@@ -1,0 +1,6 @@
+'pt-BR':
+  booleans:
+    schedules:
+      full_schedule:
+        'true': Indisponível
+        'false': Disponível
