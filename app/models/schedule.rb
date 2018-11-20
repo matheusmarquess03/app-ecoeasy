@@ -3,6 +3,7 @@ class Schedule < ApplicationRecord
   belongs_to :user
   has_many :collects
   has_many :routes
+  has_many :routes, through: :schedules_route
 
   # Validations
   validates :work_day, uniqueness: {

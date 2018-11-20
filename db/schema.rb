@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_18_190241) do
+ActiveRecord::Schema.define(version: 2018_11_19_192857) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -92,10 +92,10 @@ ActiveRecord::Schema.define(version: 2018_11_18_190241) do
   end
 
   create_table "routes", force: :cascade do |t|
-    t.bigint "schedule_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["schedule_id"], name: "index_routes_on_schedule_id"
+    t.string "title"
+    t.string "description"
   end
 
   create_table "schedules", force: :cascade do |t|
@@ -105,6 +105,15 @@ ActiveRecord::Schema.define(version: 2018_11_18_190241) do
     t.bigint "user_id"
     t.boolean "full_schedule", default: false
     t.index ["user_id"], name: "index_schedules_on_user_id"
+  end
+
+  create_table "schedules_routes", force: :cascade do |t|
+    t.bigint "schedule_id"
+    t.bigint "route_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["route_id"], name: "index_schedules_routes_on_route_id"
+    t.index ["schedule_id"], name: "index_schedules_routes_on_schedule_id"
   end
 
   create_table "trucks", force: :cascade do |t|
@@ -164,6 +173,7 @@ ActiveRecord::Schema.define(version: 2018_11_18_190241) do
   add_foreign_key "collects", "users"
   add_foreign_key "evidences", "addresses"
   add_foreign_key "evidences", "users"
-  add_foreign_key "routes", "schedules"
   add_foreign_key "schedules", "users"
+  add_foreign_key "schedules_routes", "routes"
+  add_foreign_key "schedules_routes", "schedules"
 end
