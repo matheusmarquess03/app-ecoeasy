@@ -1,5 +1,6 @@
-function autocompleteAddressGoogle() {
-  var input = document.activeElement;
+function autocompleteAddressGoogle(element) {
+  var input       = document.getElementById(element),
+      inputObject = $('#'+element+'');
 
   if (input) {
     var searchBox = new google.maps.places.SearchBox(input);
@@ -16,19 +17,42 @@ function autocompleteAddressGoogle() {
       var latitude        = place.geometry.location.lat();
       var longitude       = place.geometry.location.lng();
 
-      var districtFields  = document.getElementsByClassName("district-field");
-      var cityFields      = document.getElementsByClassName("city-field");
-      var stateFields     = document.getElementsByClassName("state-field");
-      var countryFields   = document.getElementsByClassName("country-field");
-      var latitudeFields  = document.getElementsByClassName("latitude-field");
-      var longitudeFields = document.getElementsByClassName("longitude-field");
+      inputObject.parent().find('.district-field').val(district);
+      inputObject.parent().find('.city-field').val(city);
+      inputObject.parent().find('.state-field').val(state);
+      inputObject.parent().find('.country-field').val(country);
+      inputObject.parent().find('.latitude-field').val(latitude);
+      inputObject.parent().find('.longitude-field').val(longitude);
 
-      districtFields[districtFields.length - 1].value   = district
-      cityFields[cityFields.length - 1].value           = city
-      stateFields[stateFields.length - 1].value         = state
-      countryFields[countryFields.length - 1].value     = country
-      latitudeFields[latitudeFields.length - 1].value   = latitude
-      longitudeFields[longitudeFields.length - 1].value = longitude
+      includeMarkerOnMap(place);
     });
+  });
+}
+
+
+function includeMarkerOnMap(place) {
+  marker = new google.maps.Marker({
+    animation: google.maps.Animation.DROP,
+    map: window.map
+  });
+
+  marker.setPosition(place.geometry.location);
+  marker.setVisible(true);
+  window.markers.push(marker);
+}
+
+function listenerRemoveMarkerReplyOnMap() {
+  $('#address').on('click', 'a.remove_fields', function(){
+    var lat = $(this).parent().parent().find('.latitude-field').val();
+    var lng = $(this).parent().parent().find('.longitude-field').val();
+
+    var myCoords = new google.maps.LatLng(lat, lng);
+
+    window.markers.map( function( marker ) {
+      if ( (myCoords.lat() == marker.getPosition().lat()) && (myCoords.lng() == marker.getPosition().lng()) ){
+        marker.setMap(null);
+        marker.setVisible(false);
+      }
+    })
   });
 }
