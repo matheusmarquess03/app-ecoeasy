@@ -1,8 +1,8 @@
 // Update movimentation using firebase and Printing movimentation
 function truckerTracking(firebase_reference_access) {
 
-  var lat = '-22.4650817'
-  var lng = '-41.9394892'
+  var lat = '-22.5273041'
+  var lng = '-41.9463158'
 
   var myCoords = new google.maps.LatLng(lat, lng);
 
@@ -30,12 +30,16 @@ function truckerTracking(firebase_reference_access) {
   };
 
   var poly = new google.maps.Polyline(polyOptions);
-
   poly.setMap(map);
-  firebase.database().ref(firebase_reference_access).on('child_added', function(snapshot) {
-    if (!snapshot.val().latitude) {
-      marker = null;
+
+  firebase.database().ref(firebase_reference_access).once('value').then(function(snapshot) {
+    if (snapshot.val() == null) {
+      marker.setMap(null);
+      marker.setVisible(false);
     }
+  });
+
+  firebase.database().ref(firebase_reference_access).on('child_added', function(snapshot) {
     var path = poly.getPath();
     var latLng = new google.maps.LatLng(snapshot.val().latitude, snapshot.val().longitude)
 
