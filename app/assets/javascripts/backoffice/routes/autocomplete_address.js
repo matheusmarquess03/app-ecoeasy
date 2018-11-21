@@ -31,6 +31,8 @@ function autocompleteAddressGoogle(element) {
 
 
 function includeMarkerOnMap(place) {
+  if (typeof window.markers == 'undefined') { window.markers = [] }
+  
   marker = new google.maps.Marker({
     animation: google.maps.Animation.DROP,
     map: window.map
