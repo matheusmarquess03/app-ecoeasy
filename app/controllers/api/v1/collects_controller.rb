@@ -30,10 +30,28 @@ module Api::V1
       render json: { message: e.message }, status: 500
     end
 
+    def dump_collects
+      @collects = Collect.trucker_collected(current_api_v1_user.id)
+      unless @collects.present?
+        render json: { message: 'Não há coletas pendentes para despejo relacionadas a este caminhoneiro' }
+      end
+
+      Collect.transaction do
+        @collects.map do |collect|
+          collect.dumped!
+          collect.update!(collects_params)
+        end
+      end
+    rescue ActiveRecord::RecordInvalid => e
+      render json: { message: e.message }, status: 422
+    rescue StandardError => e
+      render json: { message: e.message }, status: 500
+    end
+
     private
 
     def collects_params
-      params.fetch(:collect, {}).permit(:status, :address_id)
+      params.fetch(:collect, {}).permit(:status, :address_id, :landfill_id)
     end
 
     def set_collect

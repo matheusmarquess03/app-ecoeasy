@@ -14,8 +14,10 @@ Rails.application.routes.draw do
 
       devise_scope :user do
         resources :address,   only: [:create, :update, :index]
-        resource  :schedules, only: [:show, :update]
+        resource  :schedules, only: [:show]
         resources :collects,  only: [:index, :create, :update]
+        put 'dump_collects', to: 'collects#dump_collects'
+
         resource  :evidences, only: [:create]
         resource  :routes,    only: [:show]
         resources :landfills, only: [:index]
