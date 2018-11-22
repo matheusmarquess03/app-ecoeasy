@@ -3,7 +3,7 @@ class Backoffice::TruckersController < BackofficeController
   before_action :set_trucker, only: [:edit, :update, :destroy]
 
   def index
-    @truckers = Trucker.all.order(:name)
+    @truckers = Trucker.all.order(name: :asc)
   end
 
   def new
