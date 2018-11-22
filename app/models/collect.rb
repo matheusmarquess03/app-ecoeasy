@@ -1,6 +1,6 @@
 class Collect < ApplicationRecord
   # Enumerators
-  enum status: [:requested, :proposed_date, :confirmed, :cancelled, :collected]
+  enum status: [:requested, :proposed_date, :confirmed, :cancelled, :collected, :dumped]
   enum type_collect: [:rubble_collect, :daily_garbage_collection, :road_cleaning]
 
   # Associations
@@ -16,6 +16,11 @@ class Collect < ApplicationRecord
   # Scopes
   scope :scheduled, -> {
     where(status: [ Collect.statuses[:proposed_date], Collect.statuses[:confirmed] ])
+  }
+
+  scope :trucker_collected, ->(trucker_id) {
+    joins(:schedule).
+    where(schedules: { user_id: trucker_id }, status: Collect.statuses[:collected])
   }
 
   # Methods
