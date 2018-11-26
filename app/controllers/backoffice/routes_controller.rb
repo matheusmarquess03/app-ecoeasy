@@ -52,7 +52,7 @@ module Backoffice
     private
 
     def route_params
-      params.fetch(:route, {}).permit(:title, :description, address_attributes: [:id, :district, :city, :state, :country, :latitude, :longitude, :default, :_destroy])
+      params.fetch(:route, {}).permit(:title, :description, address_attributes: [:id, :district, :city, :state, :country, :zip_code, :latitude, :longitude, :default, :_destroy])
     end
 
     def set_route

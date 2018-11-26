@@ -1,4 +1,7 @@
 class Route < ApplicationRecord
+  # Callbacks
+  before_save :remove_last_address_blank
+
   # Associations
   has_many   :schedules_routes
   has_many   :schedules, through: :schedules_routes
@@ -16,4 +19,12 @@ class Route < ApplicationRecord
   }
 
   # Methods
+
+  private
+
+  def remove_last_address_blank
+    if self.address.last.latitude.blank? || self.address.last.longitude.blank?
+      self.address.last.destroy
+    end
+  end
 end

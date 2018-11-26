@@ -23,14 +23,14 @@
           </div>
         </div>
 
-        <br><h5><b>Bairros: </b></h5>
+        <br><h5><b>Endereços: </b></h5>
         <div id="address">
           <%= f.fields_for :address do |address_fields| %>
             <%= render partial: 'address_fields', locals: {f: address_fields} %>
           <% end %>
 
 
-          <div class="col-lg-6 p-0">
+          <div class="col-lg-6 p-0" hidden>
             <%= link_to_add_association f, :address, class: 'btn btn-outline btn-success' do %>
               <i class="fa fa-plus-square fa-fw"></i> Adicionar Bairro
             <% end %>
@@ -57,8 +57,9 @@
       <% end %>
 
       document.addEventListener("DOMContentLoaded", function() {
+        buildRoute();
         showDailyCollectInMap(locations);
-        listenerRemoveMarkerReplyOnMap();
+        listenerRemoveAddressReplyOnMap();
       });
     </script>
   <% end %>
@@ -68,8 +69,9 @@
     <meta name='turbolinks-visit-control' content='reload'>
     <script>
       document.addEventListener("DOMContentLoaded", function() {
-        initMapOnNewForm();
-        listenerRemoveMarkerReplyOnMap();
+        initWaypoits();
+        buildRoute();
+        listenerRemoveAddressReplyOnMap();
       });
     </script>
   <% end %>

@@ -1,9 +1,13 @@
 <div class="nested-fields">
   <div class="form-group input-group col-lg-12">
-    <%= f.text_field   :district, class: 'form-control district-field', placeholder: 'Digite o bairro para a coleta', onfocus: 'autocompleteAddressGoogle(this.id);' %>
+    <%= text_field_tag 'formatted_address', nil, class: 'form-control formatted-address-field', readonly: true, value: address_formatted_to_maps(f.object) %>
+    <%= f.hidden_field :number, class: 'number-field' %>
+    <%= f.hidden_field :street, class: 'stret-field' %>
+    <%= f.hidden_field :district, class: 'district-field' %>
     <%= f.hidden_field :city, class: 'city-field' %>
     <%= f.hidden_field :state, class: 'state-field' %>
     <%= f.hidden_field :country, class: 'country-field' %>
+    <%= f.hidden_field :zip_code, class: 'zip-code-field' %>
     <%= f.hidden_field :latitude, class: 'latitude-field' %>
     <%= f.hidden_field :longitude, class: 'longitude-field' %>
     <%= f.hidden_field :default, value: 'false' %>
