@@ -9,6 +9,8 @@ json.collects do
       json.type_collect     collect.read_attribute_before_type_cast(:type_collect)
       if collect.daily_garbage_collection?
         json.routes do
+          json.title        collect.schedule.routes&.last.title
+          json.description  collect.schedule.routes&.last.description
           json.array! collect.schedule.routes&.last.address do |address|
             json.id                 address.id
             json.district           address.district
