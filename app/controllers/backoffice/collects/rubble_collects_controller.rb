@@ -28,6 +28,10 @@ module Backoffice::Collects
       end
     end
 
+    def trucker_tracking
+      @schedules_trackable = Schedule.trackable(Collect.type_collects[:rubble_collect])
+    end
+
     private
 
     def collect_params

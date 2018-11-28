@@ -19,9 +19,10 @@ class Schedule < ApplicationRecord
     order('users.name, work_day ASC')
   }
 
-  scope :trackable, -> {
-    joins(:routes).
-    where(work_day: Date.today).
+  scope :trackable, ->(type_collect) {
+    joins(:collects).
+    where(work_day: Date.today, collects: { status: Collect.statuses[:confirmed] }).
+    where(collects: { type_collect: type_collect }).
     distinct
   }
 

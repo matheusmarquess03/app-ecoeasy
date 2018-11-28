@@ -1,6 +1,6 @@
 module Backoffice::Collects
   class DailyGarbageCollectsController < BackofficeController
-    before_action :set_collect, only: [:edit, :update]
+    before_action :set_collect, only: [:edit, :update, :destroy]
     before_action :set_free_schedules_to_options, :set_routes_to_options, only: [:new, :create, :edit, :update, :index]
 
     def index
@@ -55,6 +55,23 @@ module Backoffice::Collects
     rescue
       flash[:alert] = "Falha para atualizar o agendamento. Tente novamente mais tarde"
       render :edit
+    end
+
+    def destroy
+      @collect.transaction do
+        @collect.schedule.update!(full_schedule: false)
+        @collect.schedule.routes.delete(@collect.schedule.routes.first)
+        @collect.destroy
+      end
+      flash[:success] = 'Agendamento deletado com sucesso'
+      redirect_to backoffice_collects_daily_garbage_collects_path
+    rescue
+      flash[:alert] = "Falha para atualizar o agendamento. Tente novamente mais tarde"
+      redirect_to backoffice_collects_daily_garbage_collects_path
+    end
+
+    def trucker_tracking
+      @schedules_trackable = Schedule.trackable(Collect.type_collects[:daily_garbage_collection])
     end
 
     private

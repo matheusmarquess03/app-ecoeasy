@@ -45,10 +45,6 @@ module Backoffice
       render :edit
     end
 
-    def trucker_tracking
-      @schedules_trackable = Schedule.trackable
-    end
-
     private
 
     def route_params

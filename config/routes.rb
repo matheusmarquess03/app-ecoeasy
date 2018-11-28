@@ -39,9 +39,10 @@ Rails.application.routes.draw do
       resources :rubble_collects
       resources :daily_garbage_collects
     end
-    resources :routes
-    get 'trucker_tracking', to: 'routes#trucker_tracking'
+    get 'rubble_collects/trucker_tracking', to: 'collects/rubble_collects#trucker_tracking'
+    get 'daily_garbage_collects/trucker_tracking', to: 'collects/daily_garbage_collects#trucker_tracking'
 
+    resources :routes
     resources :evidences
     resources :trucks
     resources :landfills
