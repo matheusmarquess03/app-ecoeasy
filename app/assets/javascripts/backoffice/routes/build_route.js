@@ -53,7 +53,11 @@ function calculateRoute(){
     if (status == 'OK') {
       directionsDisplay.setDirections(result);
     } else {
-      window.alert('Directions request failed due to ' + status);
+      if (status == 'MAX_WAYPOINTS_EXCEEDED') {
+        window.alert('Você selecionou o máximo de pontos permitidos');
+      }else {
+        window.alert('Directions request failed due to ' + status);
+      }
     }
   });
 }
