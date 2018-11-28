@@ -28,12 +28,6 @@
               <th>Ano</th>
               <th>Cor</th>
               <th>Placa</th>
-              <th>Nº Chassi</th>
-              <th>Nº Registro</th>
-              <th>RENAVAM</th>
-              <th>Carga máxima</th>
-              <th>M3</th>
-              <th>Número de Eixos</th>
               <th colspan="2"></th>
             </tr>
           </thead>
@@ -46,12 +40,6 @@
                 <td><%= truck.manufacture_year %></td>
                 <td><%= truck.color %></td>
                 <td><%= truck.plate_number %></td>
-                <td><%= truck.chassis_number %></td>
-                <td><%= truck.renavam_number %></td>
-                <td><%= truck.registration_number %></td>
-                <td><%= truck.maximum_load %></td>
-                <td><%= truck.m_3 %></td>
-                <td><%= truck.axles_number %></td>
                 <td>
                   <div class="pull-right">
                     <%= link_to edit_backoffice_truck_path(truck), class: 'btn btn-outline btn-warning' do %>
