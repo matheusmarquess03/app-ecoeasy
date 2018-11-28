@@ -11,14 +11,16 @@ json.collects do
         json.routes do
           json.title        collect.schedule.routes&.last.title
           json.description  collect.schedule.routes&.last.description
-          json.array! collect.schedule.routes&.last.address do |address|
-            json.id                 address.id
-            json.district           address.district
-            json.city               address.city
-            json.state              address.state
-            json.country            address.country
-            json.latitude           address.latitude.to_f
-            json.longitude          address.longitude.to_f
+          json.address do
+            json.array! collect.schedule.routes&.last.address do |address|
+              json.id                 address.id
+              json.district           address.district
+              json.city               address.city
+              json.state              address.state
+              json.country            address.country
+              json.latitude           address.latitude.to_f
+              json.longitude          address.longitude.to_f
+            end
           end
         end
       elsif collect.rubble_collect?
