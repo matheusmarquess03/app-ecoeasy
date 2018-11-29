@@ -36,10 +36,15 @@
                 <td><%= schedule.collects.count %> coletas agendadas até o momento</td>
                 <td>
                   <div class="pull-right">
-                    <%= link_to backoffice_schedule_path(schedule), class: 'btn btn-outline btn-info' do %>
-                      <i class="fa fa-search-plus"></i> Detalhes
+                    <% if schedule.collects.blank? || schedule.collects&.first&.rubble_collect? %>
+                      <%= link_to backoffice_schedule_path(schedule), class: 'btn btn-outline btn-info' do %>
+                        <i class="fa fa-search-plus"></i> Detalhes
+                      <% end %>
+                    <% else %>
+                      <%= link_to '', class: 'btn btn-outline btn-info', disabled: true do %>
+                        <i class="fa fa-search-plus"></i> Detalhes
+                      <% end %>
                     <% end %>
-
                     <%= link_to edit_backoffice_schedule_path(schedule), class: 'btn btn-outline btn-warning' do %>
                       <i class="fa fa-edit"></i> Editar
                     <% end %>
