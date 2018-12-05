@@ -43,7 +43,10 @@ Rails.application.routes.draw do
     get 'daily_garbage_collects/trucker_tracking', to: 'collects/daily_garbage_collects#trucker_tracking'
 
     resources :routes
-    resources :evidences
+    namespace :evidences do
+      resources :simple_evidences, only: [:index, :show]
+      resources :incidents,        only: [:index, :show]
+    end
     resources :trucks
     resources :landfills
   end

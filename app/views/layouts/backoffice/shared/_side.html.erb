@@ -97,12 +97,14 @@
         <a href="#"><i class="fa fa-road fa-fw"></i> Limpeza de vias<span class="fa arrow"></span></a>
         <ul class="nav nav-second-level">
           <li>
-            <%= link_to backoffice_evidences_path do %>
+            <%= link_to backoffice_evidences_simple_evidences_path do %>
               <i class="fa fa-photo fa-fw"></i> Evidências
             <% end %>
           </li>
           <li>
-            <a href="#"><i class="fa fa-exclamation-circle fa-fw"></i> Ocorrências</a>
+            <%= link_to backoffice_evidences_incidents_path do %>
+              <i class="fa fa-exclamation-circle fa-fw"></i> Ocorrências
+            <% end %>
           </li>
       </li>
     </ul>
