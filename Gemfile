@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.4.2'
+
+
 # Essential Gems ###############################################################
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 3.11'
@@ -31,6 +33,7 @@ gem 'rack-cors'
 # Utils Gems ###################################################################
 gem 'cpf_utils'
 gem 'faker'
+gem 'image_processing', '~> 1.2'
 
 
 # See https://github.com/rails/execjs#readme for more supported runtimes
