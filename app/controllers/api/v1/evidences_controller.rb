@@ -3,6 +3,8 @@ module Api::V1
     def create
       @evidence = Evidence.new(evidence_params)
       @evidence.user_id = current_api_v1_user.id
+      @evidence.evidence_type = params[:evidence_type].to_i
+
       convert_base64_to_image_file
       @evidence.save!
     rescue ActiveRecord::RecordInvalid => e
@@ -14,7 +16,7 @@ module Api::V1
     private
 
     def evidence_params
-      params.fetch(:evidence, {}).permit(:description)
+      params.fetch(:evidence, {}).permit(:description, :full_address)
     end
 
     def convert_base64_to_image_file
