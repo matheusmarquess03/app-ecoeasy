@@ -3,6 +3,10 @@ class Backoffice::Evidences::SimpleEvidencesController < BackofficeController
     @evidences = Evidence.simple_evidence
   end
 
+  def show
+    @evidence = Evidence.find(params[:id])
+  end
+
   private
 
   def evidences_params

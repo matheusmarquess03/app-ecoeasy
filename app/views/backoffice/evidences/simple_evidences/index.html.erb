@@ -23,7 +23,7 @@
 
           <tbody id="simple_evidence">
             <% @evidences.each do |evidence| %>
-              <tr>
+              <tr data-link="<%= backoffice_evidences_simple_evidence_path(evidence) %>">
                 <td><%= evidence.supervisor.name %></td>
                 <td><%= evidence.description %></td>
                 <td><%= I18n.l evidence.created_at.localtime, :format => :with_day_of_week, :locale => 'pt-BR' %></td>
