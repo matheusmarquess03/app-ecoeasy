@@ -1,5 +1,9 @@
 module Api::V1
   class EvidencesController < ApiController
+    def index
+      @evidences = Evidence.todays_evidences(current_api_v1_user)
+    end
+
     def create
       @evidence = Evidence.new(evidence_params)
       @evidence.user_id = current_api_v1_user.id
