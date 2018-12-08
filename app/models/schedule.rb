@@ -1,6 +1,7 @@
 class Schedule < ApplicationRecord
   # Associations
   belongs_to :user
+  belongs_to :truck, optional: true
   has_many   :collects
   has_many   :schedules_routes
   has_many   :routes, through: :schedules_routes

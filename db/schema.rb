@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_08_023135) do
+ActiveRecord::Schema.define(version: 2018_12_08_025844) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -129,6 +129,8 @@ ActiveRecord::Schema.define(version: 2018_12_08_023135) do
     t.datetime "updated_at", null: false
     t.bigint "user_id"
     t.boolean "full_schedule", default: false
+    t.bigint "truck_id"
+    t.index ["truck_id"], name: "index_schedules_on_truck_id"
     t.index ["user_id"], name: "index_schedules_on_user_id"
   end
 
@@ -200,6 +202,7 @@ ActiveRecord::Schema.define(version: 2018_12_08_023135) do
   add_foreign_key "collects", "users"
   add_foreign_key "evidences", "addresses"
   add_foreign_key "evidences", "users"
+  add_foreign_key "schedules", "trucks"
   add_foreign_key "schedules", "users"
   add_foreign_key "schedules_routes", "routes"
   add_foreign_key "schedules_routes", "schedules"
