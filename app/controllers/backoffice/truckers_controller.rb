@@ -12,10 +12,10 @@ class Backoffice::TruckersController < BackofficeController
 
   def create
     if @trucker.save
-      flash[:success] = 'Caminhoneiro cadastrado com sucesso'
+      flash[:success] = 'Motorista cadastrado com sucesso'
       redirect_to backoffice_truckers_path
     else
-      flash[:alert] = 'Falha para cadastrar o Caminhoneiro'
+      flash[:alert] = 'Falha para cadastrar o Motorista'
       render :new
     end
   end
@@ -25,19 +25,19 @@ class Backoffice::TruckersController < BackofficeController
 
   def update
     if @trucker.update!(trucker_params)
-      flash[:success] = 'Caminhoneiro cadastrado com sucesso'
+      flash[:success] = 'Motorista cadastrado com sucesso'
       redirect_to backoffice_truckers_path
     else
-      flash[:alert] = 'Falha para cadastrar o Caminhoneiro'
+      flash[:alert] = 'Falha para cadastrar o Motorista'
       render :edit
     end
   end
 
   def destroy
     if @trucker.destroy
-      flash[:success] = 'Caminhoneiro deletado com sucesso'
+      flash[:success] = 'Motorista deletado com sucesso'
     else
-      flash[:alert] = 'Falha para deletar caminhoneiro'
+      flash[:alert] = 'Falha para deletar Motorista'
     end
     redirect_to backoffice_truckers_path
   end

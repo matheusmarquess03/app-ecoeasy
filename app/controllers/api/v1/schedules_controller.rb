@@ -4,7 +4,7 @@ module Api::V1
 
     def show
       unless @schedule.present?
-        render json: { message: 'Não há coletas agendadas para hoje para este caminhoneiro' }
+        render json: { message: 'Não há coletas agendadas para hoje para este motorista' }
       end
     rescue ActiveRecord::RecordInvalid => e
       render json: { message: e.message }, status: 422

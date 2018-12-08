@@ -33,7 +33,7 @@ module Api::V1
     def dump_collects
       @collects = Collect.trucker_collected(current_api_v1_user.id)
       unless @collects.present?
-        render json: { message: 'Não há coletas pendentes para despejo relacionadas a este caminhoneiro' }
+        render json: { message: 'Não há coletas pendentes para despejo relacionadas a este motorista' }
       end
 
       Collect.transaction do

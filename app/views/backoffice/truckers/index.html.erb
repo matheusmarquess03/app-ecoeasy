@@ -1,9 +1,9 @@
 <div class="col-lg-12">
-  <h1 class="page-header">MODULO CAMINHONEIRO</h1>
+  <h1 class="page-header">MODULO MOTORISTA</h1>
 
   <div class="panel panel-default">
     <div class="panel-heading">
-      <h4>Caminhoneiros
+      <h4>Motoristas
         <%= link_to new_backoffice_trucker_path, class: 'btn btn-outline btn-success pull-right', style:"margin-top: -5px" do %>
           <i class="fa fa-plus-square fa-fw"></i> Cadastrar
         <% end %>
@@ -33,7 +33,7 @@
                       <i class="fa fa-edit"></i> Editar
                     <% end %>
 
-                    <%= link_to backoffice_trucker_path(trucker), class: 'btn btn-outline btn-danger', method: :delete, data: { confirm: 'Ao confirmar esta operação será perdido definitivamente a agenda e os dados deste caminhoneiro. Tem certeza que deseja fazer isto?' } do %>
+                    <%= link_to backoffice_trucker_path(trucker), class: 'btn btn-outline btn-danger', method: :delete, data: { confirm: 'Ao confirmar esta operação será perdido definitivamente a agenda e os dados deste motorista. Tem certeza que deseja fazer isto?' } do %>
                         <i class="fa fa-times"></i> Deletar
                     <% end %>
                   </div>
