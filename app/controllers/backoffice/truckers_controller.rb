@@ -46,7 +46,7 @@ class Backoffice::TruckersController < BackofficeController
 
   def trucker_params
     return params.fetch(:trucker, {}).permit(:name, :email) if password_blank?
-    params.fetch(:trucker, {}).permit(:name, :email, :password, :password_confirmation)
+    params.fetch(:trucker, {}).permit(:name, :email, :cpf, :cnh, :password, :password_confirmation)
   end
 
   def password_blank?

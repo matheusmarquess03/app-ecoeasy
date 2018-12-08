@@ -18,6 +18,8 @@
             <tr>
               <th>Nome</th>
               <th>E-mail</th>
+              <th>CPF</th>
+              <th>Carteira de Habilitação</th>
               <th colspan="2"></th>
             </tr>
           </thead>
@@ -27,6 +29,8 @@
               <tr>
                 <td><%= trucker.name %></td>
                 <td><%= trucker.email %></td>
+                <td><%= trucker.cpf %></td>
+                <td><%= trucker.cnh %></td>
                 <td>
                   <div class="pull-right">
                     <%= link_to edit_backoffice_trucker_path(trucker), class: 'btn btn-outline btn-warning' do %>

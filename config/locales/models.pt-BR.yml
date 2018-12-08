@@ -36,6 +36,8 @@ pt-BR:
         name: Nome
         email: Email
         password: Senha
+        cpf: CPF
+        cnh: Carteira de Habilitação
       admin:
         name: Nome
         email: Email
