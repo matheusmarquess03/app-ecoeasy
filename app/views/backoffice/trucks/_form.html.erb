@@ -11,59 +11,74 @@
       <br/>
 
       <div class="panel-body">
-        <div class="form-group">
-          <div class="col-lg-4">
-            <%= f.label :brand %>
-            <%= f.text_field :brand, class: 'form-control' %>
-          </div>
-          <div class="col-lg-4">
-            <%= f.label :model %>
-            <%= f.text_field :model, class: 'form-control' %>
-          </div>
-          <div class="col-lg-4">
-            <%= f.label :manufacture_year %>
-            <%= f.text_field :manufacture_year, class: 'form-control' %><br>
+        <div class="row">
+          <div class="form-group">
+            <div class="col-lg-4">
+              <%= f.label :truck_type %>
+              <%= f.select :truck_type,
+                  options_for_select(truck_types_i18n, selected: f.object.truck_type),
+                  { include_blank: 'Selecione o tipo do equipamento' },
+                  { class: 'form-control' }
+              %>
+            </div>
           </div>
         </div>
 
-        <div class="form-group">
-          <div class="col-lg-4">
-            <%= f.label :color %>
-            <%= f.text_field :color, class: 'form-control' %>
+        <div class="row">
+          <div class="form-group">
+            <div class="col-lg-4"><br>
+              <%= f.label :brand %>
+              <%= f.text_field :brand, class: 'form-control' %>
+            </div>
+            <div class="col-lg-4"><br>
+              <%= f.label :model %>
+              <%= f.text_field :model, class: 'form-control' %>
+            </div>
+            <div class="col-lg-4"><br>
+              <%= f.label :manufacture_year %>
+              <%= f.text_field :manufacture_year, class: 'form-control' %><br>
+            </div>
           </div>
-          <div class="col-lg-4">
-            <%= f.label :plate_number %>
-            <%= f.text_field :plate_number, class: 'form-control' %>
-          </div>
-          <div class="col-lg-4">
-            <%= f.label :chassis_number %>
-            <%= f.text_field :chassis_number, class: 'form-control' %><br>
-          </div>
-        </div>
 
-        <div class="form-group">
-          <div class="col-lg-4">
-            <%= f.label :renavam_number %>
-            <%= f.text_field :renavam_number, class: 'form-control' %>
+          <div class="form-group">
+            <div class="col-lg-4">
+              <%= f.label :color %>
+              <%= f.text_field :color, class: 'form-control' %>
+            </div>
+            <div class="col-lg-4">
+              <%= f.label :plate_number %>
+              <%= f.text_field :plate_number, class: 'form-control' %>
+            </div>
+            <div class="col-lg-4">
+              <%= f.label :chassis_number %>
+              <%= f.text_field :chassis_number, class: 'form-control' %><br>
+            </div>
           </div>
-          <div class="col-lg-4">
-            <%= f.label :registration_number %>
-            <%= f.text_field :registration_number, class: 'form-control' %>
-          </div>
-          <div class="col-lg-4">
-            <%= f.label :maximum_load %>
-            <%= f.text_field :maximum_load, class: 'form-control' %><br>
-          </div>
-        </div>
 
-        <div class="form-group">
-          <div class="col-lg-4">
-            <%= f.label :m_3 %>
-            <%= f.text_field :m_3, class: 'form-control' %>
+          <div class="form-group">
+            <div class="col-lg-4">
+              <%= f.label :renavam_number %>
+              <%= f.text_field :renavam_number, class: 'form-control' %>
+            </div>
+            <div class="col-lg-4">
+              <%= f.label :registration_number %>
+              <%= f.text_field :registration_number, class: 'form-control' %>
+            </div>
+            <div class="col-lg-4">
+              <%= f.label :maximum_load %>
+              <%= f.text_field :maximum_load, class: 'form-control' %><br>
+            </div>
           </div>
-          <div class="col-lg-4">
-            <%= f.label :axles_number %>
-            <%= f.text_field :axles_number, class: 'form-control' %>
+
+          <div class="form-group">
+            <div class="col-lg-4">
+              <%= f.label :m_3 %>
+              <%= f.text_field :m_3, class: 'form-control' %>
+            </div>
+            <div class="col-lg-4">
+              <%= f.label :axles_number %>
+              <%= f.text_field :axles_number, class: 'form-control' %>
+            </div>
           </div>
         </div>
       </div>

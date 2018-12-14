@@ -26,6 +26,7 @@
               <th>Marca</th>
               <th>Modelo</th>
               <th>Ano</th>
+              <th>Tipo</th>
               <th>Cor</th>
               <th>Placa</th>
               <th colspan="2"></th>
@@ -38,6 +39,7 @@
                 <td><%= truck.brand %></td>
                 <td><%= truck.model %></td>
                 <td><%= truck.manufacture_year %></td>
+                <td><%= t("enums.trucks.truck_type.#{truck.truck_type}") if truck.truck_type.present? %></td>
                 <td><%= truck.color %></td>
                 <td><%= truck.plate_number %></td>
                 <td>

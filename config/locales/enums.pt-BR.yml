@@ -7,3 +7,8 @@
         confirmed: 'Coleta confirmada'
         cancelled: 'Coleta cancelada'
         collected: 'Coletado'
+    trucks:
+      truck_type:
+        open_bucket: 'Caçamba aberta'
+        open_bady: 'Carroceria aberta'
+        articulated_dump: 'Baré'

@@ -45,6 +45,7 @@ pt-BR:
       truck:
         brand: Marca
         model: Modelo
+        truck_type: Tipo de Caminhão
         manufacture_year: Ano
         color: Cor
         plate_number: Placa

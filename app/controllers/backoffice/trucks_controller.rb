@@ -53,6 +53,6 @@ class Backoffice::TrucksController < BackofficeController
   end
 
   def trucks_params
-    params.fetch(:truck, {}).permit(:brand, :model, :manufacture_year, :color, :plate_number, :chassis_number, :renavam_number, :registration_number, :maximum_load, :m_3, :axles_number)
+    params.fetch(:truck, {}).permit(:truck_type, :brand, :model, :manufacture_year, :color, :plate_number, :chassis_number, :renavam_number, :registration_number, :maximum_load, :m_3, :axles_number)
   end
 end
