@@ -56,6 +56,8 @@ module Api::V1
 
     def set_collect
       @collect = Collect.find(params[:id])
+    rescue ActiveRecord::RecordNotFound => e
+      render json: { message: 'Coleta não encontrada' }, status: 404
     end
   end
 end
