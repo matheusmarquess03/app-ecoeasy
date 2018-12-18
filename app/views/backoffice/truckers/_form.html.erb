@@ -22,10 +22,14 @@
 
       <div class="form-group">
         <div class="col-lg-6">
+          <%= f.label :phone_number %>
+          <%= f.text_field :phone_number, class: 'form-control' %>
+        </div>
+        <div class="col-lg-3">
           <%= f.label :cpf %>
           <%= f.text_field :cpf, class: 'form-control' %>
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-3">
           <%= f.label :cnh %>
           <%= f.text_field :cnh, class: 'form-control' %><br>
         </div>

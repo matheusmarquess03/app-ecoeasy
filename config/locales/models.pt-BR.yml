@@ -38,6 +38,7 @@ pt-BR:
         password: Senha
         cpf: CPF
         cnh: Carteira de Habilitação
+        phone_number: Telefone
       admin:
         name: Nome
         email: Email
