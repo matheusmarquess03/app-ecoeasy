@@ -60,6 +60,7 @@ pt-BR:
         description: Descrição
       landfill:
         name: Nome
+        phone: Telefone
       landfill/address:
         street: Rua/Av.
         number: Número
