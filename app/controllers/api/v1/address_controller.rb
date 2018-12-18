@@ -34,6 +34,7 @@ module Api::V1
       else
         @address.destroy
       end
+      render json: { message: 'Endereço apagado com sucesso' }, status: 200
     rescue ActiveRecord::RecordInvalid => e
       render json: { message: e.message }, status: 422
     rescue StandardError => e
