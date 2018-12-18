@@ -56,7 +56,7 @@ class Backoffice::LandfillsController < BackofficeController
   end
 
   def landfills_params
-    params.fetch(:landfill, {}).permit(:name)
+    params.fetch(:landfill, {}).permit(:name, :phone)
   end
 
   def address_params
