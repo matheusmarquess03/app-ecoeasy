@@ -18,6 +18,11 @@ class Address < ApplicationRecord
   # Scopes
 
   # Methods
+
+  def already_used?
+    collects.present? || evidences.present? || landfill.present? || route.present?
+  end
+
   private
 
   def prepare_user_addresses_before_update

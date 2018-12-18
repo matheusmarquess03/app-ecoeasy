@@ -1,6 +1,6 @@
 module Api::V1
   class AddressController < ApiController
-    before_action :set_address, only: [:update]
+    before_action :set_address, only: [:update, :destroy]
 
     def index
       @addresses = Address.where(user_id: current_api_v1_user.id)
@@ -28,6 +28,18 @@ module Api::V1
       render json: { message: e.message }, status: 500
     end
 
+    def destroy
+      if @address.already_used?
+        @address.update(user_id: nil)
+      else
+        @address.destroy
+      end
+    rescue ActiveRecord::RecordInvalid => e
+      render json: { message: e.message }, status: 422
+    rescue StandardError => e
+      render json: { message: e.message }, status: 500
+    end
+
     private
 
     def address_params
@@ -36,6 +48,8 @@ module Api::V1
 
     def set_address
       @address = Address.find(params[:id])
+    rescue ActiveRecord::RecordNotFound => e
+      render json: { message: 'Endereço não encontrado' }, status: 404
     end
   end
 end

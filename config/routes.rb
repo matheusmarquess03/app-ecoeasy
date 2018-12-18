@@ -13,7 +13,7 @@ Rails.application.routes.draw do
       get 'client/session_active',    to: 'clients#user_session_active?'
 
       devise_scope :user do
-        resources :address,   only: [:create, :update, :index]
+        resources :address,   only: [:index, :create, :update, :destroy]
         resource  :schedules, only: [:show, :update]
         resources :collects,  only: [:index, :create, :update]
         put 'dump_collects', to: 'collects#dump_collects'
