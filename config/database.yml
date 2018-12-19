@@ -17,8 +17,6 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  # For details on connection pooling, see Rails configuration guide
-  # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
 development:
@@ -26,6 +24,19 @@ development:
   database: limpeza-app-ro_development
   username: postgres
   password:  postgres
+
+test:
+  <<: *default
+  database: limpeza-app-ro_test
+  username: postgres
+  password:  postgres
+
+production:
+  url: <%= ENV['DATABASE_URL'] %>
+
+
+  # For details on connection pooling, see Rails configuration guide
+  # http://guides.rubyonrails.org/configuring.html#database-pooling
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -57,11 +68,7 @@ development:
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
-test:
-  <<: *default
-  database: limpeza-app-ro_test
-  username: postgres
-  password:  postgres
+
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -82,8 +89,3 @@ test:
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
-production:
-  <<: *default
-  database: limpeza-app-ro_production
-  username: limpeza-app-ro
-  password: <%= ENV['LIMPEZA-APP-RO_DATABASE_PASSWORD'] %>
