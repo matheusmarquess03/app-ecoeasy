@@ -14,8 +14,8 @@ class Route < ApplicationRecord
   # Scopes
   scope :current_route, ->(trucker) {
     joins(:schedule).
-    where(schedules: { user_id: trucker.id }).first
-    # where(schedules: { work_day: Date.today, user_id: trucker.id })
+    # where(schedules: { user_id: trucker.id }).first
+    where(schedules: { work_day: Date.today, user_id: trucker.id })
   }
 
   # Methods
