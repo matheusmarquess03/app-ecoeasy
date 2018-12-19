@@ -9,81 +9,83 @@
 # Create a default admin user ==================================================
 puts 'CRIANDO USUARIO ADMINISTRADOR'
 Admin.find_or_create_by!(email: 'admin@email.com') do |u|
-  u.password = '12345678'
-  u.password_confirmation = '12345678'
+  u.password = 'Prizma123!'
+  u.password_confirmation = 'Prizma123!'
 end
 puts 'USUARIO ADMINISTRADOR CRIADO COM SUCESSO'
 
-# Create a default trucker user ================================================
-puts 'CRIANDO USUARIO TRUCKER'
-Trucker.find_or_create_by!(email: 'trucker@email.com') do |u|
-  u.password = '12345678'
-  u.password_confirmation = '12345678'
-  u.name = Faker::Name.name
-  u.cpf = CpfUtils.cpf
-  u.phone_number = Faker::PhoneNumber.phone_number
-end
-puts 'USUARIO TRUCKER CRIADO COM SUCESSO'
+unless Rails.env.production?
+  # Create a default trucker user ================================================
+  puts 'CRIANDO USUARIO TRUCKER'
+  Trucker.find_or_create_by!(email: 'trucker@email.com') do |u|
+    u.password = '12345678'
+    u.password_confirmation = '12345678'
+    u.name = Faker::Name.name
+    u.cpf = CpfUtils.cpf
+    u.phone_number = Faker::PhoneNumber.phone_number
+  end
+  puts 'USUARIO TRUCKER CRIADO COM SUCESSO'
 
-# Create a default supervisor user =============================================
-puts 'CRIANDO USUARIO SUPERVISOR'
-Supervisor.find_or_create_by!(email: 'supervisor@email.com') do |u|
-  u.password = '12345678'
-  u.password_confirmation = '12345678'
-  u.name = Faker::Name.name
-  u.cpf = CpfUtils.cpf
-  u.phone_number = Faker::PhoneNumber.phone_number
-end
-puts 'USUARIO TRUCKER CRIADO COM SUCESSO'
+  # Create a default supervisor user =============================================
+  puts 'CRIANDO USUARIO SUPERVISOR'
+  Supervisor.find_or_create_by!(email: 'supervisor@email.com') do |u|
+    u.password = '12345678'
+    u.password_confirmation = '12345678'
+    u.name = Faker::Name.name
+    u.cpf = CpfUtils.cpf
+    u.phone_number = Faker::PhoneNumber.phone_number
+  end
+  puts 'USUARIO TRUCKER CRIADO COM SUCESSO'
 
-# Create a default customer user ===============================================
-puts 'CRIANDO USUARIO CLIENT WITH ADDRESS'
-if Address.where(user: Client.find_by(email: 'client@email.com')).count == 0
-  Address.create(
-    street: 'Rua Emílio Wolf',
-    number: '320',
-    complement: 'Bloco 2, Apartamento: 405',
-    district: 'Barra da Tijuca',
-    city: 'Rio de Janeiro',
-    state: 'RJ',
-    country: 'Brasil',
-    zip_code: '22783-225',
-    user: Client.find_or_create_by!(email: 'client@email.com') do |u|
-      u.password = '12345678'
-      u.password_confirmation = '12345678'
-      u.name = Faker::Name.name
-      u.cpf = CpfUtils.cpf
-      u.phone_number = Faker::PhoneNumber.phone_number
-    end
-  )
-end
-puts 'USUARIO CLIENT CRIADO COM SUCESSO'
+  # Create a default customer user ===============================================
+  puts 'CRIANDO USUARIO CLIENT WITH ADDRESS'
+  if Address.where(user: Client.find_by(email: 'client@email.com')).count == 0
+    Address.create(
+      street: 'Rua Emílio Wolf',
+      number: '320',
+      complement: 'Bloco 2, Apartamento: 405',
+      district: 'Barra da Tijuca',
+      city: 'Rio de Janeiro',
+      state: 'RJ',
+      country: 'Brasil',
+      zip_code: '22783-225',
+      user: Client.find_or_create_by!(email: 'client@email.com') do |u|
+        u.password = '12345678'
+        u.password_confirmation = '12345678'
+        u.name = Faker::Name.name
+        u.cpf = CpfUtils.cpf
+        u.phone_number = Faker::PhoneNumber.phone_number
+      end
+    )
+  end
+  puts 'USUARIO CLIENT CRIADO COM SUCESSO'
 
-# Create a collect status requested ============================================
-puts 'CRIANDO COLETA'
-Collect.all.destroy_all
-if Collect.all.count == 0
-  Collect.create(
-    status: 'requested',
-    type_collect: 'rubble_collect',
-    user: Client.last,
-    address_id: Client.last.addresses.first.id
-  )
-end
-puts 'COLETA CRIADA COM SUCESSO'
+  # Create a collect status requested ============================================
+  puts 'CRIANDO COLETA'
+  Collect.all.destroy_all
+  if Collect.all.count == 0
+    Collect.create(
+      status: 'requested',
+      type_collect: 'rubble_collect',
+      user: Client.last,
+      address_id: Client.last.addresses.first.id
+    )
+  end
+  puts 'COLETA CRIADA COM SUCESSO'
 
-# Create a Landfill ============================================================
-Landfill.find_or_create_by!(name: 'Aterro de Gericinó') do |l|
-  l.address = Address.create(
-    street: 'Estrada do Gericinó',
-    number: '',
-    complement: '',
-    district: 'Gericinó',
-    city: 'Rio de Janeiro',
-    state: 'Rio de Janeiro',
-    country: 'Brasil',
-    zip_code: '',
-    latitude: '-22.8429971',
-    longitude: '-43.4745312'
-  )
+  # Create a Landfill ============================================================
+  Landfill.find_or_create_by!(name: 'Aterro de Gericinó') do |l|
+    l.address = Address.create(
+      street: 'Estrada do Gericinó',
+      number: '',
+      complement: '',
+      district: 'Gericinó',
+      city: 'Rio de Janeiro',
+      state: 'Rio de Janeiro',
+      country: 'Brasil',
+      zip_code: '',
+      latitude: '-22.8429971',
+      longitude: '-43.4745312'
+    )
+  end
 end
