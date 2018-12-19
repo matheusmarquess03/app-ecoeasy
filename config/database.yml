@@ -32,7 +32,7 @@ test:
   password:  postgres
 
 production:
-  url: <%= ENV['DATABASE_URL'] %>
+  url: <%= ENV['HEROKU_POSTGRESQL_GRAY_URL'] %>
 
 
   # For details on connection pooling, see Rails configuration guide
