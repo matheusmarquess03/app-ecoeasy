@@ -25,6 +25,15 @@ module Backoffice
 
     def edit; end
 
+    def update
+      @contract.update!(contract_params)
+      flash[:success] = 'Contrato atualizado com sucesso'
+      redirect_to backoffice_contracts_path
+    rescue StandardError
+      flash[:alert] = 'Falha ao atualizar o contrato.'
+      render :edit
+    end
+
     private
 
     def contract_params
