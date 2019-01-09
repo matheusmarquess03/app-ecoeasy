@@ -34,6 +34,16 @@ module Backoffice
       render :edit
     end
 
+    def destroy
+      if @contract.destroy
+        flash[:success] = 'Contrato deletado com sucesso'
+        redirect_to backoffice_contracts_path
+      else
+        flash[:alert] = 'Falha ao deletar o contrato.'
+        redirect_to backoffice_contracts_path
+      end
+    end
+
     private
 
     def contract_params
