@@ -2,6 +2,8 @@
 
 module Backoffice
   class ContractsController < BackofficeController
+    before_action :set_contract, only: [:edit, :update, :destroy]
+
     def index
       @contracts = Contract.all
     end
@@ -21,10 +23,16 @@ module Backoffice
       render :new
     end
 
+    def edit; end
+
     private
 
     def contract_params
       params.fetch(:contract, {}).permit(:name, :observation)
+    end
+
+    def set_contract
+      @contract = Contract.find(params[:id])
     end
   end
 end

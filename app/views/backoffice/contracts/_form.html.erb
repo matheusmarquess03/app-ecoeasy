@@ -1,0 +1,35 @@
+<%= form_for([:backoffice, @contract], html: { class: 'form' }) do |f| %>
+
+  <br/>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h1>Contrato</h1>
+    </div>
+    <br/>
+
+    <div class="panel-body">
+      <div class="col-lg-12">
+        <div class="form-group">
+          <div class="col-lg-6">
+            <%= f.label :name %>
+            <%= f.text_field :name, class: 'form-control' %>
+            <br />
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-12">
+        <div class="form-group">
+          <div class="col-lg-6">
+            <%= f.label :observation %>
+            <%= f.text_area :observation, class: 'form-control' %>
+            <br />
+          </div>
+        </div>
+      </div>
+    </div>
+    <br />
+  </div>
+  <%= button_tag 'Salvar', class: 'btn btn-success btn-lg' %>
+<% end %>
