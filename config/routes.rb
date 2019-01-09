@@ -50,5 +50,6 @@ Rails.application.routes.draw do
     end
     resources :trucks
     resources :landfills
+    resources :contracts
   end
 end
