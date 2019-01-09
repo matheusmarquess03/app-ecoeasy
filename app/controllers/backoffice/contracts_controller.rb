@@ -9,5 +9,22 @@ module Backoffice
     def new
       @contract = Contract.new
     end
+
+    def create
+      @contract = Contract.new(contract_params)
+      @contract.save!
+
+      flash[:success] = 'Contrato cadastrado com sucesso'
+      redirect_to backoffice_contracts_path
+    rescue StandardError
+      flash[:alert] = 'Falha ao cadastrar o contrato.'
+      render :new
+    end
+
+    private
+
+    def contract_params
+      params.fetch(:contract, {}).permit(:name, :observation)
+    end
   end
 end
