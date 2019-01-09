@@ -31,6 +31,9 @@ pt-BR:
       schedules:
         one: Agenda
         other: Agendas
+      contracts:
+        one: Contrato
+        other: Contratos
     attributes:
       user:
         name: Nome
@@ -81,3 +84,6 @@ pt-BR:
       schedule:
         work_day: Dia de trabalho
         full_schedule: Agenda cheia?
+      contract:
+        name: Nome
+        observation: Observação
