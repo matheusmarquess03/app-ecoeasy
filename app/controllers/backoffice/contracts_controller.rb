@@ -26,6 +26,7 @@ module Backoffice
     def edit; end
 
     def update
+      @contract.images.attach(contract_params[:images])
       @contract.update!(contract_params)
       flash[:success] = 'Contrato atualizado com sucesso'
       redirect_to backoffice_contracts_path
@@ -47,7 +48,7 @@ module Backoffice
     private
 
     def contract_params
-      params.fetch(:contract, {}).permit(:name, :observation)
+      params.fetch(:contract, {}).permit(:name, :observation, images: [])
     end
 
     def set_contract
