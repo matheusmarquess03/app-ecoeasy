@@ -17,7 +17,6 @@
           <thead>
             <tr>
               <th>Nome</th>
-              <!-- <th colspan="2"></th> -->
             </tr>
           </thead>
 
@@ -27,6 +26,10 @@
                 <td><%= contract.name %></td>
                 <td>
                   <div class="pull-right">
+                    <%= link_to backoffice_contract_path(contract), class: 'btn btn-outline btn-info' do %>
+                      <i class="fa fa-search-plus"></i> Detalhes
+                    <% end %>
+
                     <%= link_to edit_backoffice_contract_path(contract), class: 'btn btn-outline btn-warning' do %>
                       <i class="fa fa-edit"></i> Editar
                     <% end %>
