@@ -28,8 +28,13 @@
             <tbody>
               <% @contract.attachments.each do |attachment| %>
                 <tr>
-                  <td><%=  attachment.filename.to_s %></td>
-                  <td><%=  number_to_human_size(attachment.blob.byte_size) %>
+                  <td>
+                    <%= link_to rails_blob_path(attachment, disposition: "attachment") do %>
+                      <i class="fa fa-download"></i>
+                    <% end %>
+                    <%= attachment.filename.to_s %>
+                  </td>
+                  <td><%= number_to_human_size(attachment.blob.byte_size) %>
                 </tr>
               <% end %>
             </tbody>
