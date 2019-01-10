@@ -88,4 +88,16 @@ unless Rails.env.production?
       longitude: '-43.4745312'
     )
   end
+
+  puts 'CRIANDO CONTRATO'
+  Contract.find_or_create_by!(name: 'Licitação Prefeitura de Townsville') do |contract|
+    contract.observation = <<~HEREDOC
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+      Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+      Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    HEREDOC
+  end
+  puts 'CONTRATO CRIADO COM SUCESSO'
 end
