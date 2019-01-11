@@ -22,6 +22,7 @@ Rails.application.routes.draw do
         resources :evidences, only: [:create, :index]
         resource  :routes,    only: [:show]
         resources :landfills, only: [:index]
+        resources :contracts
       end
     end
   end
