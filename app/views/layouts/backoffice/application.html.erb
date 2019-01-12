@@ -14,10 +14,12 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css', media: "all", "data-turbolinks-track" => true %>
+
     <%= javascript_include_tag 'https://www.gstatic.com/firebasejs/5.5.7/firebase.js' %>
     <%= javascript_include_tag 'https://maps.googleapis.com/maps/api/js?key=AIzaSyAlv8xYymeUMF2_WutdXxEPgewZEpnuuhY&libraries=places' %>
-
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'https://maps.googleapis.com/maps/api/js?key=AIzaSyAlv8xYymeUMF2_WutdXxEPgewZEpnuuhY&libraries=visualization' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
     <%= yield(:head_tags) %>
@@ -26,6 +28,7 @@
 <body>
   <%# Manter este include aqui no BODY por causa do Turbolinks que caga o funcionamento do collapse %>
   <%= javascript_include_tag 'bootstrap_sb_admin', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js' %>
 
   <div id="wrapper">
     <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
