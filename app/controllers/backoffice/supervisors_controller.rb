@@ -41,6 +41,10 @@ class Backoffice::SupervisorsController < BackofficeController
     redirect_to backoffice_supervisors_path
   end
 
+  def tracking
+    @supervisors = Supervisor.all
+  end
+
   private
 
   def supervisor_params
