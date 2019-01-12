@@ -48,6 +48,17 @@ unless Rails.env.production?
   end
   puts 'USUARIO ZELADOR CRIADO COM SUCESSO'
 
+  # Create a default janitor user =============================================
+  puts 'CRIANDO USUARIO ATENDENTE'
+  Janitor.find_or_create_by!(email: 'atendente@email.com') do |u|
+    u.password = '12345678'
+    u.password_confirmation = '12345678'
+    u.name = Faker::Name.name
+    u.cpf = CpfUtils.cpf
+    u.phone_number = Faker::PhoneNumber.phone_number
+  end
+  puts 'USUARIO ATENDENTE CRIADO COM SUCESSO'
+
   # Create a default customer user ===============================================
   puts 'CRIANDO USUARIO CLIENT WITH ADDRESS'
   if Address.where(user: Client.find_by(email: 'client@email.com')).count == 0
