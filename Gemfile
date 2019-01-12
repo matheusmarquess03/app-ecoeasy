@@ -37,6 +37,11 @@ gem 'faker'
 gem 'image_processing', '~> 1.2'
 
 
+# Others Gems ##################################################################
+gem 'geocoder'
+gem 'ransack'
+
+
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'mini_racer', platforms: :ruby
 
