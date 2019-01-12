@@ -32,6 +32,11 @@ module Backoffice::Collects
       @schedules_trackable = Schedule.trackable(Collect.type_collects[:rubble_collect])
     end
 
+    def reports
+      @q = Collect.rubble_collect.ransack(params[:q])
+      @collects = @q.result(distinct: true)
+    end
+
     private
 
     def collect_params

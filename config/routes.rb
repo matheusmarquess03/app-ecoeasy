@@ -36,10 +36,15 @@ Rails.application.routes.draw do
 
     resources :truckers
     resources :schedules
+
     namespace :collects do
-      resources :rubble_collects
+      resources :rubble_collects do
+        get 'reports', on: :collection
+      end
+
       resources :daily_garbage_collects
     end
+
     get 'rubble_collects/trucker_tracking', to: 'collects/rubble_collects#trucker_tracking'
     get 'daily_garbage_collects/trucker_tracking', to: 'collects/daily_garbage_collects#trucker_tracking'
 

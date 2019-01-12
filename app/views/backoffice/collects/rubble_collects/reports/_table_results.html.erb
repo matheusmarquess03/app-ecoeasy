@@ -1,0 +1,32 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+      Coletas de entulho
+  </div>
+
+  <div class="panel-body">
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Solicitante</th>
+            <th>Data da solicitação</th>
+            <th>Data do recolhimento</th>
+            <th>Status</th>
+            <th colspan="2"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @collects.each do |collect| %>
+            <tr>
+              <td><%= collect.client.name %></td>
+              <td><%= I18n.l collect.created_at.localtime, :format => :with_day_of_week, :locale => 'pt-BR' %></td>
+              <td><%= collect.collect_date.present? ? (I18n.l collect.collect_date.localtime, :format => :with_day_of_week, :locale => 'pt-BR') : 'Não definida até o momento' %></td>
+              <td><%= t "enums.collects.status.#{collect.status}" %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

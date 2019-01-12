@@ -7,4 +7,8 @@ module Backoffice::CollectHelper
       return collect&.schedule&.routes&.first&.id
     end
   end
+
+  def collects_statuses_i18n
+    Collect.statuses.to_a.map { |w| [ I18n.t("enums.collects.status.#{w[0]}"), w[1] ] }
+  end
 end
