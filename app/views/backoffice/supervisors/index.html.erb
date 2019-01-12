@@ -1,0 +1,52 @@
+<div class="col-lg-12">
+  <h1 class="page-header">MODULO SUPERVISOR</h1>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4>Supervisores
+        <%= link_to new_backoffice_supervisor_path, class: 'btn btn-outline btn-success pull-right', style:"margin-top: -5px" do %>
+          <i class="fa fa-plus-square fa-fw"></i> Cadastrar
+        <% end %>
+      </h4>
+    </div>
+    <br/>
+
+    <div class="panel-body">
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>E-mail</th>
+              <th>Telefone</th>
+              <th>CPF</th>
+              <th colspan="2"></th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @supervisors.each do |supervisor| %>
+              <tr>
+                <td><%= supervisor.name %></td>
+                <td><%= supervisor.email %></td>
+                <td><%= supervisor.phone_number %></td>
+                <td><%= supervisor.cpf %></td>
+                <td>
+                  <div class="pull-right">
+                    <%= link_to edit_backoffice_supervisor_path(supervisor), class: 'btn btn-outline btn-warning' do %>
+                      <i class="fa fa-edit"></i> Editar
+                    <% end %>
+
+                    <%= link_to backoffice_supervisor_path(supervisor), class: 'btn btn-outline btn-danger', method: :delete, data: { confirm: 'Ao confirmar esta operação será perdido definitivamente os dados deste supervisor. Tem certeza que deseja fazer isto?' } do %>
+                        <i class="fa fa-times"></i> Deletar
+                    <% end %>
+                  </div>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

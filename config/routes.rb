@@ -36,6 +36,7 @@ Rails.application.routes.draw do
 
     resources :truckers
     resources :janitors
+    resources :supervisors
     resources :schedules
     namespace :collects do
       resources :rubble_collects

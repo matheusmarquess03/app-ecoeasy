@@ -1,0 +1,3 @@
+<%= form_for([:backoffice, @supervisor], url: backoffice_supervisors_path, html: { class: 'form' }) do |f| %>
+  <%= render partial: 'form', locals: { f: f } %>
+<% end %>
