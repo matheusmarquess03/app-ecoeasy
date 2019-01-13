@@ -51,6 +51,10 @@ Rails.application.routes.draw do
     end
     resources :trucks
     resources :landfills
-    resources :contracts
+    resources :contracts do
+      member do
+        delete :destroy_attachment
+      end
+    end
   end
 end

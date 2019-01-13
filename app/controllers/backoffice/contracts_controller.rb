@@ -46,6 +46,13 @@ module Backoffice
       redirect_to backoffice_contracts_path
     end
 
+    def destroy_attachment
+      @blob_file = ActiveStorage::Blob.find_signed(params[:id])
+      @blob_file.attachments.first.purge
+      @blob_file.purge
+      redirect_back fallback_location: backoffice_contracts_path
+    end
+
     private
 
     def contract_params
