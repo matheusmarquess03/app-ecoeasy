@@ -36,6 +36,9 @@ Rails.application.routes.draw do
     get '', to: 'dashboard#index'
 
     resources :truckers
+    resources :janitors
+    resources :supervisors
+    resources :clerks
     resources :schedules
     namespace :collects do
       resources :rubble_collects

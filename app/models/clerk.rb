@@ -1,0 +1,2 @@
+class Clerk < User
+end
