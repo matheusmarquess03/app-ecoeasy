@@ -37,7 +37,9 @@ Rails.application.routes.draw do
 
     resources :truckers
     resources :janitors
-    resources :supervisors
+    resources :supervisors do
+      get 'tracking', on: :collection
+    end
     resources :clerks
     resources :schedules
     namespace :collects do

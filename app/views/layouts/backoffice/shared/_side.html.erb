@@ -53,15 +53,25 @@
             </ul>
           </li>
 
-          <li>
-            <%= link_to backoffice_janitors_path do %>
-              <i class="fa fa-user fa-fw"></i> Zelador
-            <% end %>
+          <li class>
+            <a href="#"><i class="fa fa-user fa-fw"></i> Supervisor<span class="fa arrow"></span></a>
+            <ul class="nav nav-third-level">
+              <li>
+                <%= link_to backoffice_supervisors_path do %>
+                  <i class="fa fa-th-list fa-fw"></i> Dados do Supervisor
+                <% end %>
+              </li>
+              <li>
+                <%= link_to tracking_backoffice_supervisors_path do %>
+                  <i class="fa fa-globe fa-fw"></i> Acompanhe em tempo real
+                <% end %>
+              </li>
+            </ul>
           </li>
 
           <li>
-            <%= link_to backoffice_supervisors_path do %>
-              <i class="fa fa-user fa-fw"></i> Supervisores
+            <%= link_to backoffice_janitors_path do %>
+              <i class="fa fa-user fa-fw"></i> Zelador
             <% end %>
           </li>
 
