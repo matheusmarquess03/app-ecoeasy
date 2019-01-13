@@ -1,6 +1,6 @@
 class Address < ApplicationRecord
   geocoded_by :full_address
-  after_validation :geocode, if: :address_changed?
+  after_commit :reverse_geocoding
 
   # Callbacks
   before_save    :change_default_address
@@ -34,10 +34,14 @@ class Address < ApplicationRecord
 
   private
 
+  def reverse_geocoding
+    ReverseGeocodingJob.perform_later(id) if latitude.blank? || longitude.blank? || address_changed?
+  end
+
   def address_changed?
     street_changed? || number_changed? || district_changed? || city_changed? || state_changed? || country_changed?
   end
-  
+
   def set_default_address
     if self.default == true
       new_address_default = Address.where(user_id: self.user_id).where.not(id: self.id).first
