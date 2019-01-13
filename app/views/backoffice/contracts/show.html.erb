@@ -30,15 +30,14 @@
                 <tr>
                   <td>
                     <%= link_to rails_blob_path(attachment, disposition: "attachment") do %>
-                      <i class="fa fa-download"></i>
+                      <i class="fa fa-download"></i> <%= attachment.filename.to_s %>
                     <% end %>
-                    <%= attachment.filename.to_s %>
                   </td>
                   <td><%= number_to_human_size(attachment.blob.byte_size) %>
                 </tr>
               <% end %>
             </tbody>
-          </table> 
+          </table>
         </div>
       <% end %>
     </div>
