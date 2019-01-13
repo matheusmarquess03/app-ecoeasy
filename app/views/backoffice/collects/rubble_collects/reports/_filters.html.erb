@@ -4,7 +4,7 @@
       <strong>Situação: </strong>
       <%= f.select :status_eq,
         options_for_select(collects_statuses_i18n, selected: params[:q].present? ? params[:q][:status_eq] : nil),
-        { include_blank: 'Selecione um status' }, { class: 'form-control' }
+        { include_blank: 'Todas coletas' }, { class: 'form-control' }
       %>
     </div>
 
