@@ -11,4 +11,12 @@ module Backoffice::CollectHelper
   def collects_statuses_i18n
     Collect.statuses.to_a.map { |w| [ I18n.t("enums.collects.status.#{w[0]}"), w[1] ] }
   end
+
+  def collect_params
+    if params[:q].present?
+      return { status_eq: params[:q][:status_eq], collect_date_gteq: params[:q][:collect_date_gteq] }
+    else
+      return ''
+    end
+  end
 end

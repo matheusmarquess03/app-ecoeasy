@@ -24,6 +24,28 @@ class Collect < ApplicationRecord
   }
 
   # Methods
+  def self.to_csv(collects)
+    headers = ['Nome', 'Data da solicitação', 'Data do recolhimento', 'Situação', 'Endereço']
+
+    CSV.generate(headers: true) do |csv|
+      csv << headers
+
+      collects.each do |collect|
+        csv << [
+          collect.client.name,
+          I18n.l(collect.created_at.localtime, :format => :with_day_of_week, :locale => 'pt-BR'),
+          collect.collect_date.present? ? (I18n.l collect.collect_date.localtime, :format => :with_day_of_week, :locale => 'pt-BR') : 'Não definida até o momento',
+          I18n.t("enums.collects.status.#{collect.status}"),
+          collect.address_formatted
+        ]
+      end
+    end
+  end
+
+  def address_formatted
+    "#{address.street}, #{address.number} - #{address.district}, #{address.city}, #{address.state} - #{address.country}"
+  end
+
   def client
     self.user
   end

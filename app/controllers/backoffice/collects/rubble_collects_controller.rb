@@ -35,6 +35,11 @@ module Backoffice::Collects
     def reports
       @q = Collect.rubble_collect.ransack(params[:q])
       @collects = @q.result(distinct: true)
+
+      respond_to do |format|
+        format.html
+        format.csv { send_data Collect.to_csv(@collects), filename: "coleta-de-entulho-#{Date.today}.csv" }
+      end
     end
 
     private
