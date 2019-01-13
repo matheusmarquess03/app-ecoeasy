@@ -20,7 +20,7 @@
             <input id="toggle-trigger" type="checkbox" data-toggle="toggle">
             <strong> Mapa de Calor</strong>
           </div>
-          
+
           <div id="map-collect-reports" class="maps"></div>
         </div>
 
@@ -38,21 +38,11 @@
 <% provide :head_tags do %>
   <meta name='turbolinks-visit-control' content='reload'>
   <script>
-    var locations = []
-    <% @collects.each do |collect| %>
-      <% if collect.address.latitude.present? && collect.address.longitude.present? %>
-        locations.push(
-          <%= raw [
-            collect.address.latitude.to_f,
-            collect.address.longitude.to_f,
-            collect.status
-          ] %>
-        );
-      <% end %>
-    <% end %>
+    var locations = <%= raw return_lat_lng_locations %>
 
     document.addEventListener("DOMContentLoaded", function() {
       showCollectsOnMaps(locations);
+
       $('#toggle-trigger').change(function() {
         if ( $(this).prop('checked') ) {
           heatMaps(locations);

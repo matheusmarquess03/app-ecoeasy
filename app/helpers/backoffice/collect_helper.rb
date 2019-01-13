@@ -19,4 +19,18 @@ module Backoffice::CollectHelper
       return ''
     end
   end
+
+  def return_lat_lng_locations
+    locations = []
+    @collects.each do |collect|
+      if collect.address.latitude.present? && collect.address.longitude.present?
+        locations << [
+          collect.address.latitude.to_f,
+          collect.address.longitude.to_f,
+          collect.status
+        ]
+      end
+    end
+    return locations
+  end
 end
