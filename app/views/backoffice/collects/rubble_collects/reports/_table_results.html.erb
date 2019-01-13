@@ -1,6 +1,10 @@
 <div class="panel panel-default">
   <div class="panel-heading">
-      Coletas de entulho
+    Coleta de entulho
+
+    <%= link_to reports_backoffice_collects_rubble_collects_path(format: :csv, q: collect_params), class: 'pull-right' do %>
+      <i class="fa fa-download"></i> Exportar para planilha
+    <% end %>
   </div>
 
   <div class="panel-body">
@@ -12,6 +16,7 @@
             <th>Data da solicitação</th>
             <th>Data do recolhimento</th>
             <th>Status</th>
+            <th>Endereço</th>
             <th colspan="2"></th>
           </tr>
         </thead>
@@ -23,6 +28,7 @@
               <td><%= I18n.l collect.created_at.localtime, :format => :with_day_of_week, :locale => 'pt-BR' %></td>
               <td><%= collect.collect_date.present? ? (I18n.l collect.collect_date.localtime, :format => :with_day_of_week, :locale => 'pt-BR') : 'Não definida até o momento' %></td>
               <td><%= t "enums.collects.status.#{collect.status}" %></td>
+              <td><%= collect.address_formatted %></td>
             </tr>
           <% end %>
         </tbody>
