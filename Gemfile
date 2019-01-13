@@ -40,6 +40,8 @@ gem 'image_processing', '~> 1.2'
 # Others Gems ##################################################################
 gem 'geocoder'
 gem 'ransack'
+gem 'redis-rails'
+gem 'sidekiq'
 
 
 # See https://github.com/rails/execjs#readme for more supported runtimes

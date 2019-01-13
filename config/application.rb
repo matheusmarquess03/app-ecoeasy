@@ -14,6 +14,8 @@ module LimpezaAppRo
 
     config.i18n.default_locale = :"pt-BR"
 
+    # Queue adapter
+    config.active_job.queue_adapter = :sidekiq
 
     # Use Vips for processing variants.
     config.active_storage.variant_processor = :vips
