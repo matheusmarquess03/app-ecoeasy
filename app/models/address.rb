@@ -1,4 +1,7 @@
 class Address < ApplicationRecord
+  geocoded_by :full_address
+  after_validation :geocode, if: :address_changed?
+
   # Callbacks
   before_save    :change_default_address
   before_destroy :set_default_address
@@ -21,12 +24,20 @@ class Address < ApplicationRecord
 
   # Methods
 
+  def full_address
+    [ street, number, district, city, state, country ].compact.join(', ')
+  end
+
   def already_used?
     collects.present? || evidences.present? || landfill.present? || route.present?
   end
 
   private
 
+  def address_changed?
+    street_changed? || number_changed? || district_changed? || city_changed? || state_changed? || country_changed?
+  end
+  
   def set_default_address
     if self.default == true
       new_address_default = Address.where(user_id: self.user_id).where.not(id: self.id).first
