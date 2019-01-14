@@ -34,7 +34,7 @@ module Backoffice::Collects
 
     def reports
       @q = Collect.rubble_collect.ransack(params[:q])
-      @collects = @q.result(distinct: true)
+      @collects = @q.result.includes(:user)
 
       respond_to do |format|
         format.html
