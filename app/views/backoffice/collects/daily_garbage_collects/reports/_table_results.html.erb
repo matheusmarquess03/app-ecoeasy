@@ -1,0 +1,38 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    Coleta de entulho
+
+    <%= link_to reports_backoffice_collects_daily_garbage_collects_path(format: :csv, q: collect_params), class: 'pull-right' do %>
+      <i class="fa fa-download"></i> Exportar para planilha
+    <% end %>
+  </div>
+
+  <div class="panel-body">
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th><%= sort_link(@q, :schedule_user_name, 'Motorista') %></th>
+            <th><%= sort_link(@q, :schedule_work_day, 'Coleta agendada para') %></th>
+            <th><%= sort_link(@q, :schedule_routes_title, 'Rota') %></th>
+            <th><%= sort_link(@q, :status, 'Situação') %></th>
+            <th><%= sort_link(@q, :landfill_name, 'Aterro') %></th>
+            <th colspan="2"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @collects.each do |collect| %>
+            <tr>
+              <td><%= collect.schedule.user.name %></td>
+              <td><%= I18n.l collect.schedule.work_day, :format => :with_day_of_week, :locale => 'pt-BR' if collect.collect_date.present? %></td>
+              <td><%= collect.schedule&.routes.first.title %></td>
+              <td><%= t "enums.collects.status.#{collect.status}" %></td>
+              <td><%= collect.landfill.present? ? collect.landfill.name : 'Não foi despejado até o momento' %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

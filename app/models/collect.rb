@@ -42,6 +42,24 @@ class Collect < ApplicationRecord
     end
   end
 
+  def self.daily_collect_to_csv(collects)
+    headers = ['Motorista', 'Coleta agendada para', 'Rota', 'Situação', 'Aterro']
+
+    CSV.generate(headers: true, encoding: 'ISO-8859-1') do |csv|
+      csv << headers
+
+      collects.each do |collect|
+        csv << [
+          collect.schedule.user.name,
+          I18n.l(collect.schedule.work_day, :format => :with_day_of_week, :locale => 'pt-BR'),
+          collect.schedule&.routes.first.title,
+          I18n.t("enums.collects.status.#{collect.status}"),
+          collect.landfill.present? ? collect.landfill.name : 'Não foi despejado até o momento'
+        ]
+      end
+    end
+  end
+
   def address_formatted
     "#{address.street}, #{address.number} - #{address.district}, #{address.city}, #{address.state} - #{address.country}"
   end

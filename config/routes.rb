@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   require 'sidekiq/web'
   mount Sidekiq::Web => '/sidekiq'
-  
+
   ## Routes to Users - using Devise Token Auth
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
@@ -51,7 +51,9 @@ Rails.application.routes.draw do
         get 'reports', on: :collection
       end
 
-      resources :daily_garbage_collects
+      resources :daily_garbage_collects do
+        get 'reports', on: :collection
+      end
     end
 
     get 'rubble_collects/trucker_tracking', to: 'collects/rubble_collects#trucker_tracking'

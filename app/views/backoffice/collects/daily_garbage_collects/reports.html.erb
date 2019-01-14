@@ -1,0 +1,23 @@
+<h1 class="page-header"><i class="fa fa-trash-o fa-fw"></i> MODULO COLETA DE LIXO DIÁRIA</h1>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4>Relatório de coleta de entulho</h4>
+  </div>
+  <br/>
+
+  <div class="panel-body">
+    <div class="form-group">
+
+      <div class="filters">
+        <%= render partial: 'backoffice/collects/daily_garbage_collects/reports/filters' %>
+        <hr>
+      </div>
+
+      <div class="table">
+        <%= render partial: 'backoffice/collects/daily_garbage_collects/reports/table_results' %>
+      </div>
+
+    </div>
+  </div>
+</div>

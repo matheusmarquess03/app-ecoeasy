@@ -74,6 +74,16 @@ module Backoffice::Collects
       @schedules_trackable = Schedule.trackable(Collect.type_collects[:daily_garbage_collection])
     end
 
+    def reports
+      @q = Collect.daily_garbage_collection.ransack(params[:q])
+      @collects = @q.result.includes(schedule: :user)
+
+      respond_to do |format|
+        format.html
+        format.csv { send_data Collect.daily_collect_to_csv(@collects), filename: "coleta-de-entulho-#{Date.today}.csv" }
+      end
+    end
+
     private
 
     def routes_params
