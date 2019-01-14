@@ -1,0 +1,23 @@
+<%= search_form_for @q, url: reports_backoffice_collects_rubble_collects_url do |f| %>
+  <div class="row">
+    <div class="col-lg-4">
+      <strong>Situação: </strong>
+      <%= f.select :status_eq,
+        options_for_select(collects_statuses_i18n, selected: params[:q].present? ? params[:q][:status_eq] : nil),
+        { include_blank: 'Todas coletas' }, { class: 'form-control' }
+      %>
+    </div>
+
+    <div class="col-lg-4">
+      <strong>Data: </strong>
+      <%= date_field_tag :collect_date_gteq, nil, { class: 'form-control' } %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12 col-lg-3">
+      <br>
+      <%= f.submit 'Aplicar Filtro', class: 'btn btn-info' %>
+    </div>
+  </div>
+<% end %>

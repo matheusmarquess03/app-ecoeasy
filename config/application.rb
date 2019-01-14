@@ -1,6 +1,7 @@
 require_relative 'boot'
 
 require 'rails/all'
+require 'csv'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -13,6 +14,8 @@ module LimpezaAppRo
 
     config.i18n.default_locale = :"pt-BR"
 
+    # Queue adapter
+    config.active_job.queue_adapter = :sidekiq
 
     # Use Vips for processing variants.
     config.active_storage.variant_processor = :vips

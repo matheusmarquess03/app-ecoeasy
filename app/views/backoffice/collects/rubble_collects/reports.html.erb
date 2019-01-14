@@ -1,0 +1,55 @@
+<h1 class="page-header"><i class="fa fa-trash-o fa-fw"></i> MODULO COLETA DE ENTULHO</h1>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4>Relatório de coleta de entulho</h4>
+  </div>
+  <br/>
+
+  <div class="panel-body">
+    <div class="form-group">
+
+      <div class="filters">
+        <%= render partial: 'backoffice/collects/rubble_collects/reports/filters' %>
+        <hr>
+      </div>
+
+      <div class="reports-in-maps">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <input id="toggle-trigger" type="checkbox" data-toggle="toggle">
+            <strong> Mapa de Calor</strong>
+          </div>
+
+          <div id="map-collect-reports" class="maps"></div>
+        </div>
+
+      </div>
+
+      <div class="table">
+        <%= render partial: 'backoffice/collects/rubble_collects/reports/table_results' %>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<% provide :head_tags do %>
+  <meta name='turbolinks-visit-control' content='reload'>
+  <script>
+    var locations = <%= raw return_lat_lng_locations %>
+
+    document.addEventListener("DOMContentLoaded", function() {
+      showCollectsOnMaps(locations);
+
+      $('#toggle-trigger').change(function() {
+        if ( $(this).prop('checked') ) {
+          heatMaps(locations);
+        } else {
+          showCollectsOnMaps(locations);
+        }
+       });
+    });
+  </script>
+<% end %>
