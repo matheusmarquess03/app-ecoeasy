@@ -24,20 +24,22 @@ module Api::V1
     end
 
     def convert_base64_to_image_file
-      # Process the file, decode the base64 encoded file
-      @decoded_file = Base64.decode64(params[:images])
+      Array(params[:images]).each do |image|
+        # Process the file, decode the base64 encoded file
+        @decoded_file = Base64.decode64(image)
 
-      @filename = "image_file_#{Time.now.to_i}"     # this will be used to create a tmpfile and also, while setting the filename to attachment
-      @tmp_file = Tempfile.new([@filename, '.png']) # This creates an in-memory file [details here][1]
-      @tmp_file.binmode                             # This helps writing the file in binary mode.
-      @tmp_file.write @decoded_file
-      @tmp_file.rewind()
+        @filename = "image_file_#{Time.now.to_i}"     # this will be used to create a tmpfile and also, while setting the filename to attachment
+        @tmp_file = Tempfile.new([@filename, '.png']) # This creates an in-memory file [details here][1]
+        @tmp_file.binmode                             # This helps writing the file in binary mode.
+        @tmp_file.write @decoded_file
+        @tmp_file.rewind
 
-      # We create a new model instance
-      @evidence.images.attach(io: @tmp_file, filename: @filename) # attach the created in-memory file, using the filename defined
+        # We create a new model instance
+        @evidence.images.attach(io: @tmp_file, filename: @filename) # attach the created in-memory file, using the filename defined
 
-      # deletes the temp file
-      @tmp_file.unlink
+        # deletes the temp file
+        @tmp_file.unlink
+      end
     end
   end
 end
