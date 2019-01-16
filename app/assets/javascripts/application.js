@@ -21,6 +21,7 @@
 //= require turbolinks
 //= require bootstrap-modal
 //= require bootstrap-modalmanager
+//= require activestorage
 //= require_tree .
 
 document.addEventListener("turbolinks:load", function() {
