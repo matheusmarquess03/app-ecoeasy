@@ -3,7 +3,7 @@ module Api::V1
     skip_before_action :authenticate_api_v1_user!, only: [:already_registered?]
 
     def already_registered?
-      @client = Client.find_by_email(client_params[:email])
+      @client = Client.where('cpf = ? OR email = ?', client_params[:login], client_params[:login])
       render json: { registered: @client.present? }, status: 200
     rescue ActiveRecord::RecordInvalid => e
       render json: { message: e.message }, status: 422
@@ -22,7 +22,7 @@ module Api::V1
     private
 
     def client_params
-      params.permit(:email)
+      params.permit(:login)
     end
   end
 end
