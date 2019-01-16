@@ -1,4 +1,7 @@
 class Collect < ApplicationRecord
+  # Callbacks
+  before_validation :generate_protocol_number, on: :create
+
   # Enumerators
   enum status: [:requested, :proposed_date, :confirmed, :cancelled, :collected, :dumped]
   enum type_collect: [:rubble_collect, :daily_garbage_collection, :road_cleaning]
@@ -12,6 +15,7 @@ class Collect < ApplicationRecord
   # Validates
   validates :address_id, presence: true, if: :not_daily_garbage_collection?
   validates :user_id,    presence: true, if: :not_daily_garbage_collection?
+  validates :protocol_number, uniqueness: true
 
   # Scopes
   scope :scheduled, -> {
@@ -24,6 +28,7 @@ class Collect < ApplicationRecord
   }
 
   # Methods
+
   def self.to_csv(collects)
     headers = ['Nome', 'Data da solicitação', 'Data do recolhimento', 'Situação', 'Endereço']
 
@@ -69,6 +74,10 @@ class Collect < ApplicationRecord
   end
 
   private
+
+  def generate_protocol_number
+    self.protocol_number = DateTime.now.to_i
+  end
 
   def not_daily_garbage_collection?
     type_collect != 'daily_garbage_collection'

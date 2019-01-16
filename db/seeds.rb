@@ -90,8 +90,7 @@ unless Rails.env.production?
       status: 'requested',
       type_collect: 'rubble_collect',
       user: Client.last,
-      address_id: Client.last.addresses.first.id,
-      protocol_number: DateTime.now.to_i
+      address_id: Client.last.addresses.first.id
     )
   end
   puts 'COLETA CRIADA COM SUCESSO'
