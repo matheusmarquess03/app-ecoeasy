@@ -10,6 +10,7 @@ class Evidence < ApplicationRecord
 
   has_many_attached :images
   has_one_attached  :bill
+  has_one_attached  :signature
 
   # Scopes
   scope :todays_evidences, ->(user) {

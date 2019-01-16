@@ -8,6 +8,8 @@ module Images
     end
 
     def run
+      return if encoded_image.blank?
+
       relation.attach(io: decoded_image, filename: filename)
 
       decoded_image.unlink

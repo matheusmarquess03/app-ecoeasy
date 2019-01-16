@@ -27,7 +27,7 @@ Rails.application.routes.draw do
         put 'dump_collects', to: 'collects#dump_collects'
 
         resources :trucks,        only: [:index]
-        resources :evidences,     only: [:create, :index]
+        resources :evidences, only: [:create, :index, :update]
         resources :infringements, only: [:index] do
           resources :contestations, only: [:create, :index]
         end
