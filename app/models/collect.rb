@@ -30,13 +30,14 @@ class Collect < ApplicationRecord
   # Methods
 
   def self.to_csv(collects)
-    headers = ['Nome', 'Data da solicitação', 'Data do recolhimento', 'Situação', 'Endereço']
+    headers = ['Número de protocolo', 'Nome', 'Data da solicitação', 'Data do recolhimento', 'Situação', 'Endereço']
 
-    CSV.generate(headers: true) do |csv|
+    CSV.generate(headers: true, encoding: 'ISO-8859-1') do |csv|
       csv << headers
 
       collects.each do |collect|
         csv << [
+          collect.protocol_number,
           collect.client.name,
           I18n.l(collect.created_at.localtime, :format => :with_day_of_week, :locale => 'pt-BR'),
           collect.collect_date.present? ? (I18n.l collect.collect_date.localtime, :format => :with_day_of_week, :locale => 'pt-BR') : 'Não definida até o momento',
@@ -48,13 +49,14 @@ class Collect < ApplicationRecord
   end
 
   def self.daily_collect_to_csv(collects)
-    headers = ['Motorista', 'Coleta agendada para', 'Rota', 'Situação', 'Aterro']
+    headers = ['Número de protocolo', 'Motorista', 'Coleta agendada para', 'Rota', 'Situação', 'Aterro']
 
     CSV.generate(headers: true, encoding: 'ISO-8859-1') do |csv|
       csv << headers
 
       collects.each do |collect|
         csv << [
+          collect.protocol_number,
           collect.schedule.user.name,
           I18n.l(collect.schedule.work_day, :format => :with_day_of_week, :locale => 'pt-BR'),
           collect.schedule&.routes.first.title,
