@@ -16,6 +16,7 @@
         <table class="table table-hover">
           <thead>
             <tr>
+              <th>Número de protocolo</th>
               <th>Motorista</th>
               <th>Coleta agendada para</th>
               <th>Rota</th>
@@ -26,6 +27,7 @@
           <tbody>
             <% @collects.each do |collect| %>
               <tr>
+                <td><%= collect.protocol_number %></td>
                 <td><%= collect.schedule.user.name %></td>
                 <td><%= I18n.l collect.schedule.work_day, :format => :with_day_of_week, :locale => 'pt-BR' if collect.collect_date.present? %></td>
                 <td><%= collect.schedule&.routes.first.title %></td>

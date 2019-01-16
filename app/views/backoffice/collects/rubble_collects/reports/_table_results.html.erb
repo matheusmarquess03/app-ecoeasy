@@ -12,6 +12,7 @@
       <table class="table table-hover">
         <thead>
           <tr>
+            <th><%= sort_link(@q, :protocol_number, 'Número de protocolo') %></th>
             <th><%= sort_link(@q, :user_name, 'Solicitante') %></th>
             <th><%= sort_link(@q, :created_at, 'Data da solicitação') %></th>
             <th><%= sort_link(@q, :collect_date, 'Data do recolhimento') %></th>
@@ -24,6 +25,7 @@
         <tbody>
           <% @collects.each do |collect| %>
             <tr>
+              <td><%= collect.protocol_number %></td>
               <td><%= collect.client.name %></td>
               <td><%= I18n.l collect.created_at.localtime, :format => :with_day_of_week, :locale => 'pt-BR' %></td>
               <td><%= collect.collect_date.present? ? (I18n.l collect.collect_date.localtime, :format => :with_day_of_week, :locale => 'pt-BR') : 'Não definida até o momento' %></td>

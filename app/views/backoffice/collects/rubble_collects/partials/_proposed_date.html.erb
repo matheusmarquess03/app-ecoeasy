@@ -3,6 +3,7 @@
     <table class="table table-hover">
       <thead>
         <tr>
+          <th>Número de protocolo</th>
           <th>Solicitante</th>
           <th>Data da solicitação</th>
           <th>Data proposta</th>
@@ -14,6 +15,7 @@
       <tbody>
         <% @collects.proposed_date.each do |collect| %>
           <tr>
+            <td><%= collect.protocol_number %></td>
             <td><%= collect.client.name %></td>
             <td><%= I18n.l collect.created_at.localtime, :format => :with_day_of_week, :locale => 'pt-BR' %></td>
             <td><%= I18n.l collect.collect_date.localtime, :format => :with_day_of_week, :locale => 'pt-BR' if collect.collect_date.present? %></td>
