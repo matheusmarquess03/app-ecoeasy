@@ -21,10 +21,11 @@ Rails.application.routes.draw do
         resources :collects,  only: [:index, :create, :update]
         put 'dump_collects', to: 'collects#dump_collects'
 
-        resources :trucks,    only: [:index]
-        resources :evidences, only: [:create, :index]
-        resource  :routes,    only: [:show]
-        resources :landfills, only: [:index]
+        resources :trucks,        only: [:index]
+        resources :evidences,     only: [:create, :index]
+        resources :infringements, only: [:index]
+        resource  :routes,        only: [:show]
+        resources :landfills,     only: [:index]
         resources :contracts
       end
     end
