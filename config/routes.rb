@@ -20,9 +20,6 @@ Rails.application.routes.draw do
         end
       end
 
-      # get 'client/already_registred', to: 'clients#already_registered?'
-      # get 'client/session_active',    to: 'clients#user_session_active?'
-
       devise_scope :user do
         resources :address,   only: [:index, :create, :update, :destroy]
         resource  :schedules, only: [:show, :update]
