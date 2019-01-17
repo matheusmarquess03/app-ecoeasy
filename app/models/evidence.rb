@@ -1,6 +1,6 @@
 class Evidence < ApplicationRecord
   # Enumerators
-  enum evidence_type: [:simple_evidence, :incident]
+  enum evidence_type: [:simple_evidence, :incident, :advertence, :mulct]
 
   # Associations
   belongs_to :user
@@ -18,8 +18,12 @@ class Evidence < ApplicationRecord
   def get_all_images_url
     images.map { |image| ActiveStorage::Blob.service.send(:path_for, image.key) }
   end
-  
+
   def supervisor
-    self.user
+    User.find(user_id)
+  end
+
+  def client
+    User.find(client_id)
   end
 end
