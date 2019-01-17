@@ -10,8 +10,8 @@ json.array! @evidences do |evidence|
   end
 
   json.supervisor do
-    json.id             evidence.user.id
-    json.name           evidence.user.name
-    json.email          evidence.user.email
+    json.id             evidence.supervisor.id
+    json.name           evidence.supervisor.name
+    json.email          evidence.supervisor.email
   end
 end

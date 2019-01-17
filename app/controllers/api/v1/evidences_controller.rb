@@ -1,5 +1,7 @@
 module Api::V1
   class EvidencesController < ApiController
+    before_action :authorization_user
+
     def index
       @evidences = Evidence.todays_evidences(current_api_v1_user)
     end
@@ -17,7 +19,15 @@ module Api::V1
       render json: { message: e.message }, status: 500
     end
 
+    def update
+      #code
+    end
+
     private
+
+    def authorization_user
+      render json: { message: 'Você não tem acesso para fazer esta ação' }, status: :forbidden if current_api_v1_user.type != 'Supervisor'
+    end
 
     def evidence_params
       params.fetch(:evidence, {}).permit(:description, :full_address)
