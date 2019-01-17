@@ -16,9 +16,7 @@ module Api::V1
       unless @schedule.present?
         render json: { message: 'Não há coletas agendadas para hoje para este motorista' }
       else
-        if @schedule.update(schedule_params)
-          head :ok
-        end
+        @schedule.update(schedule_params)
       end
     rescue ActiveRecord::RecordInvalid => e
       render json: { message: e.message }, status: 422
