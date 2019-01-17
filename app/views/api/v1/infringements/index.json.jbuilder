@@ -9,7 +9,7 @@ json.array! @infringements do |infringement|
     json.array! infringement.get_all_images_url
   end
 
-  json.client do
+  json.citizen do
     json.id             infringement.client.id
     json.name           infringement.client.name
     json.email          infringement.client.email
