@@ -1,5 +1,5 @@
 // Update movimentation using firebase and Printing movimentation
-function tracking(firebase_reference_access, elementId, imagePath) {
+function tracking(firebase_reference_access, elementId, imagePath, callbackFunction) {
   var lat = '-22.5273041'
   var lng = '-41.9463158'
 
@@ -41,6 +41,10 @@ function tracking(firebase_reference_access, elementId, imagePath) {
   firebase.database().ref(firebase_reference_access).on('child_added', function(snapshot) {
     var path = poly.getPath();
     var latLng = new google.maps.LatLng(snapshot.val().latitude, snapshot.val().longitude)
+    
+    if (typeof callbackFunction === "function") {
+      callbackFunction(snapshot);
+    }
 
     path.push(latLng);
     marker.setPosition(latLng);

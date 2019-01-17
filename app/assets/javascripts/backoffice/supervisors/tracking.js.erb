@@ -2,5 +2,22 @@ function supervisorTracking(firebase_reference_access) {
   var elementId = 'supervisorTracking'
   var imagePath = "<%= image_path 'supervisor_pointer.png' %>"
 
-  tracking(firebase_reference_access, elementId, imagePath)
+  var showPhoneInfo = function(snapshot) {
+    var batteryLevel = snapshot.val().battery_level;
+    var lastAccess = snapshot.val().last_access;
+
+    if (batteryLevel != undefined) {
+      $('#battery-level-container').removeClass("hidden");
+      $('#battery-level').text(batteryLevel + '%');
+    }
+
+    if (lastAccess != undefined) {
+      $('#last-access-container').removeClass("hidden");
+      // Necessary to multiply timestamp to 1000 so it is in milliseconds
+      var formattedDate = new Date(lastAccess*1000).toLocaleString();
+      $('#last-access').text(formattedDate);
+    }
+  }
+
+  tracking(firebase_reference_access, elementId, imagePath, showPhoneInfo)
 }
