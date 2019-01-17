@@ -12,8 +12,16 @@ Rails.application.routes.draw do
           passwords:     'api/v1/devise/passwords'
         }
 
-      get 'client/already_registred', to: 'clients#already_registered?'
-      get 'client/session_active',    to: 'clients#user_session_active?'
+      resources :clients, only: [] do
+        collection do
+          get 'already_registered'
+          get 'session_active'
+          get 'search'
+        end
+      end
+
+      # get 'client/already_registred', to: 'clients#already_registered?'
+      # get 'client/session_active',    to: 'clients#user_session_active?'
 
       devise_scope :user do
         resources :address,   only: [:index, :create, :update, :destroy]
