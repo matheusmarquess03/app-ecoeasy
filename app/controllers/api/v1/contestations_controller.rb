@@ -10,7 +10,6 @@ module Api::V1
     end
 
     def create
-      binding.pry
       @contestation = current_api_v1_user.contestations.new
       @contestation.evidence_id   = params[:infringement_id]
       @contestation.justification = contestation_params[:justification]
