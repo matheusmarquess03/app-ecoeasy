@@ -76,7 +76,7 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     address:              'smtp.gmail.com',
     port:                 587,
-    domain:               'gmail.com',
+    domain:               'http://www.ecoeasyapp.com.br',
     user_name:            'ecoeasy.contato@gmail.com',
     password:             '1234Trocar',
     authentication:       'plain',

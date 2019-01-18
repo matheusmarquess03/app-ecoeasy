@@ -7,6 +7,7 @@ class Evidence < ApplicationRecord
   belongs_to :address, optional: true
 
   has_many_attached :images
+  has_one_attached  :bill
 
   # Scopes
   scope :todays_evidences, ->(user) {
