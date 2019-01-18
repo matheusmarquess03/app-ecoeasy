@@ -13,3 +13,9 @@
         open_bucket: 'Caçamba aberta'
         open_bady: 'Carroceria aberta'
         articulated_dump: 'Baré'
+    evidences:
+      evidence_type:
+        simple_evidence: Evidência
+        incident: Ocorrência
+        advertence: Advertência
+        mulct: Multa

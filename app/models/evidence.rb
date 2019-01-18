@@ -15,6 +15,10 @@ class Evidence < ApplicationRecord
     where('created_at BETWEEN ? AND ?', DateTime.now.beginning_of_day, DateTime.now.end_of_day)
   }
 
+  scope :infringements, -> {
+    where(evidence_type: [ Evidence.evidence_types[:advertence], Evidence.evidence_types[:mulct] ])
+  }
+
   # Methods
   def get_all_images_url
     images.map { |image| ActiveStorage::Blob.service.send(:path_for, image.key) }

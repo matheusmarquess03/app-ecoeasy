@@ -1,0 +1,82 @@
+<div class="col-lg-12">
+  <h1 class="page-header">MODULO INFRAÇÕES</h1>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4>Infrações</h4>
+    </div>
+    <br/>
+
+    <div class="panel-body">
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Supervisor</th>
+              <th>Tipo da infração</th>
+              <th>Descrição</th>
+              <th>Data</th>
+              <th>Endereço</th>
+              <th>Imagem</th>
+              <th>Infrator</th>
+              <th>Boleto</th>
+              <th></th>
+              <th colspan="2"></th>
+            </tr>
+          </thead>
+
+          <tbody id="incident">
+            <% @infringements.each do |infringement| %>
+              <tr data-link="<%= backoffice_infringement_path(infringement) %>">
+                <td><%= infringement.supervisor.name %></td>
+                <td><%= t("enums.evidences.evidence_type.#{infringement.evidence_type}") %></td>
+                <td><%= infringement.description %></td>
+                <td><%= I18n.l infringement.created_at.localtime, :format => :with_day_of_week, :locale => 'pt-BR' %></td>
+                <td><%= infringement.full_address %></td>
+                <td><%= image_tag infringement.images.first.variant(resize: "50x50") if infringement.images.attached? %></td>
+                <td><%= infringement.client.name %></td>
+                <td>
+                  <%= link_to rails_blob_path(infringement.bill, disposition: "bill") do %>
+                    <i class="fa fa-download"></i> <%= infringement.bill.filename.to_s %> <%= number_to_human_size(infringement.bill.blob.byte_size) %>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="reports-in-maps">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <input id="toggle-trigger" type="checkbox" data-toggle="toggle">
+            <strong> Mapa de Calor</strong>
+          </div>
+
+          <div id="map-collect-reports" class="maps"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<% provide :head_tags do %>
+  <meta name='turbolinks-visit-control' content='reload'>
+  <script>
+    var locations = <%# raw return_lat_lng_locations %>
+
+    document.addEventListener("DOMContentLoaded", function() {
+      showCollectsOnMaps(locations);
+
+      $('#toggle-trigger').change(function() {
+        if ( $(this).prop('checked') ) {
+          heatMaps(locations);
+        } else {
+          showCollectsOnMaps(locations);
+        }
+       });
+    });
+  </script>
+<% end %>
