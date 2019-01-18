@@ -27,18 +27,21 @@
 
           <tbody id="incident">
             <% @infringements.each do |infringement| %>
-              <tr data-link="<%= backoffice_infringement_path(infringement) %>">
+              <tr>
                 <td><%= infringement.supervisor.name %></td>
                 <td><%= t("enums.evidences.evidence_type.#{infringement.evidence_type}") %></td>
                 <td><%= infringement.description %></td>
                 <td><%= I18n.l infringement.created_at.localtime, :format => :with_day_of_week, :locale => 'pt-BR' %></td>
                 <td><%= infringement.full_address %></td>
-                <td><%= image_tag infringement.images.first.variant(resize: "50x50") if infringement.images.attached? %></td>
+                <td><%= image_tag infringement.images.first.variant(resize: "25x25") if infringement.images.attached? %></td>
                 <td><%= infringement.client.name %></td>
                 <td>
-                  <%= link_to rails_blob_path(infringement.bill, disposition: "bill") do %>
-                    <i class="fa fa-download"></i> <%= infringement.bill.filename.to_s %> <%= number_to_human_size(infringement.bill.blob.byte_size) %>
+                  <% if infringement.bill.attached? %>
+                    <%= link_to rails_blob_path(infringement.bill, disposition: "bill") do %>
+                      <i class="fa fa-download"></i> <%= infringement.bill.filename.to_s %> <%= number_to_human_size(infringement.bill.blob.byte_size) %>
+                    <% end %>
                   <% end %>
+
                 </td>
               </tr>
             <% end %>
