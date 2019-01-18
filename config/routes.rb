@@ -28,7 +28,9 @@ Rails.application.routes.draw do
 
         resources :trucks,        only: [:index]
         resources :evidences,     only: [:create, :index]
-        resources :infringements, only: [:index]
+        resources :infringements, only: [:index] do
+          resources :contestations, only: [:create, :index]
+        end
         resource  :routes,        only: [:show]
         resources :landfills,     only: [:index]
         resources :contracts

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_18_012004) do
+ActiveRecord::Schema.define(version: 2019_01_18_040949) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -97,6 +97,16 @@ ActiveRecord::Schema.define(version: 2019_01_18_012004) do
     t.bigint "user_id", null: false
     t.index ["collect_id", "user_id"], name: "index_collects_users_on_collect_id_and_user_id", unique: true
     t.index ["user_id", "collect_id"], name: "index_collects_users_on_user_id_and_collect_id", unique: true
+  end
+
+  create_table "contestations", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "evidence_id"
+    t.string "justification"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["evidence_id"], name: "index_contestations_on_evidence_id"
+    t.index ["user_id"], name: "index_contestations_on_user_id"
   end
 
   create_table "contracts", force: :cascade do |t|
@@ -218,6 +228,8 @@ ActiveRecord::Schema.define(version: 2019_01_18_012004) do
   add_foreign_key "collects", "landfills"
   add_foreign_key "collects", "schedules"
   add_foreign_key "collects", "users"
+  add_foreign_key "contestations", "evidences"
+  add_foreign_key "contestations", "users"
   add_foreign_key "evidences", "addresses"
   add_foreign_key "evidences", "users"
   add_foreign_key "infringements", "evidences"
