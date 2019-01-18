@@ -5,7 +5,7 @@ json.array! @infringements do |infringement|
   json.full_address  infringement.full_address
   json.evidence_type infringement.read_attribute_before_type_cast(:evidence_type)
   json.value_mulct   infringement.value_mulct
-  json.boleto        url_for(Contract.last.attachments.first)
+  json.boleto        url_for(Contract.first.attachments.first)
 
   json.images do
     json.array! infringement.get_all_images_url
