@@ -7,7 +7,7 @@ json.array! @infringements do |infringement|
   json.mulct_value   infringement.mulct_value
   json.boleto        url_for(Contract.first&.attachments.first.service_url)
 
-  json.images        infringement.images.first.service_url
+  json.images        url_for(infringement.images&.first&.service_url)
 
   json.citizen do
     json.id             infringement.client.id
