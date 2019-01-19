@@ -28,7 +28,8 @@ Rails.application.routes.draw do
 
         resources :trucks,        only: [:index]
         resources :evidences, only: [:create, :index, :update]
-        resources :infringements, only: [:index] do
+        resources :infringements, only: [:index, :show] do
+          get 'send_bill_to_email', on: :member
           resources :contestations, only: [:create, :index]
         end
         resource  :routes,        only: [:show]
