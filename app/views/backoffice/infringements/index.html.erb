@@ -33,7 +33,7 @@
                 <td><%= infringement.description %></td>
                 <td><%= I18n.l infringement.created_at.localtime, :format => :with_day_of_week, :locale => 'pt-BR' %></td>
                 <td><%= infringement.full_address %></td>
-                <td> <%= infringement.images.count %> </td>
+                <td><%= image_tag infringement.images.first.variant(resize: "25x25") if infringement.images.attached? %></td>
                 <td><%= infringement.client&.name %></td>
                 <td>
                   <% if infringement.bill.attached? %>
@@ -67,7 +67,7 @@
 <% provide :head_tags do %>
   <meta name='turbolinks-visit-control' content='reload'>
   <script>
-    var locations = <%= raw @infringements.pluck(:latitude, :longitude) %>
+    var locations = <%# raw return_lat_lng_locations %>
 
     document.addEventListener("DOMContentLoaded", function() {
       showCollectsOnMaps(locations);
