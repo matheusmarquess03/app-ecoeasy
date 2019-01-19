@@ -11,7 +11,9 @@ json.images do
 end
 
 json.images_2 do
-  json.array! evidence.images.first.service_url
+  json.array! evidence.images do |image|
+    evidence.images.first.service_url
+  end
 end
 
 json.images_3  do
