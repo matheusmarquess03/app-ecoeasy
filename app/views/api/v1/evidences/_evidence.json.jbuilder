@@ -5,7 +5,9 @@ json.full_address  evidence.full_address
 json.evidence_type evidence.read_attribute_before_type_cast(:evidence_type)
 
 json.images do
-  json.array! evidence.get_all_images_url
+  json.array! evidence.images do |image|
+    url_for(image&.service_url)
+  end
 end
 
 if evidence.signature.attached?
