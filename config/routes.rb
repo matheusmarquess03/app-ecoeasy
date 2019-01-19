@@ -70,8 +70,8 @@ Rails.application.routes.draw do
     resources :routes
     resources :infringements, only: [:index, :show]
     namespace :evidences do
-      resources :simple_evidences, only: [:index, :show]
-      resources :incidents,        only: [:index, :show]
+      resources :simple_evidences, only: [:index, :show, :update, :edit]
+      resources :incidents,        only: [:index, :show, :update, :edit]
     end
     resources :trucks
     resources :landfills
