@@ -38,7 +38,7 @@ module Api::V1
     end
 
     def evidence_params
-      params.fetch(:evidence, {}).permit(:description, :full_address, :citizen_cpf)
+      params.fetch(:evidence, {}).permit(:description, :full_address, :citizen_cpf, :latitude, :longitude)
     end
 
     def attach_images

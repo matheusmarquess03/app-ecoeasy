@@ -35,6 +35,10 @@ function showCollectsOnMaps(locations) {
 
     var status = statuses[locations[i][2]];
 
+    if (status == undefined) {
+      var status = statuses['requested']
+    }
+
     var marker = new google.maps.Marker({
       position: new google.maps.LatLng(locations[i][0], locations[i][1]),
       map: map,
