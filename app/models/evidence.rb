@@ -33,6 +33,6 @@ class Evidence < ApplicationRecord
   end
 
   def client
-    User.find(client_id)
+    User.find_by_cpf(citizen_cpf)
   end
 end
