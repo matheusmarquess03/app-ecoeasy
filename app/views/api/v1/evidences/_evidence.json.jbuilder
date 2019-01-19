@@ -11,7 +11,9 @@ json.images do
 end
 
 json.images_2 do
-  json.array! evidence.get_all_images_url
+  json.array! evidence.images do |image|
+    rails_blob_url(image&.service_url)
+  end
 end
 
 if evidence.signature.attached?

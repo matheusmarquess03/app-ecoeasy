@@ -23,10 +23,6 @@ class Evidence < ApplicationRecord
   }
 
   # Methods
-  def get_all_images_url
-    return unless images.attached?
-    images.map { |image| ActiveStorage::Blob.service.send(:path_for, image.key) }
-  end
 
   def supervisor
     User.find(user_id)
