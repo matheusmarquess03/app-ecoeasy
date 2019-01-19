@@ -1,0 +1,19 @@
+<%= form_for @collect, url: backoffice_collects_rubble_collect_path do |f| %>
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="panel panel-yellow">
+      <div class="panel-heading">
+        <h4>Alterar status
+          <button type="button" class="close pull-right" data-dismiss="modal" aria-hidden="true">×</button>
+        </h4>
+      </div>
+
+      <div class="panel-body">
+        <%= f.select :status, @statuses, {}, { class: "form-control" } %>
+      </div>
+
+      <div class="panel-footer">
+        <%= f.submit 'Enviar', class: 'btn btn-outline btn-warning' %>
+      </div>
+    </div>
+  </div>
+<% end %>

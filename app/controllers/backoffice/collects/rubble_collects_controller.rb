@@ -1,6 +1,7 @@
 module Backoffice::Collects
   class RubbleCollectsController < BackofficeController
-    before_action :set_collect, only: [:edit, :update]
+    before_action :set_collect, only: [:edit, :change_status, :update]
+    before_action :set_statuses_to_options, only: [:change_status]
     before_action :set_free_schedules_to_options, only: [:edit, :index]
 
     def index
@@ -13,19 +14,21 @@ module Backoffice::Collects
       end
     end
 
+    def change_status
+      respond_to do |format|
+        format.js
+      end
+    end
+
     def update
-      begin
-        @collect.transaction do
-          @collect.update(collect_params)
-          @collect.proposed_date!
-          schedule = Schedule.find(collect_params[:schedule_id])
-          flash[:notice] = 'Agenda selecionada com sucesso'
-          redirect_to backoffice_schedule_path(schedule)
-        end
-      rescue
-        flash[:alert] = 'Falha para selecionar a agenda'
+      @collect.transaction do
+        @collect.update(collect_params)
+        flash[:notice] = 'Agenda selecionada com sucesso'
         redirect_to backoffice_collects_rubble_collects_path
       end
+    rescue StandardError
+      flash[:alert] = 'Falha para selecionar a agenda'
+      redirect_to backoffice_collects_rubble_collects_path
     end
 
     def trucker_tracking
@@ -45,7 +48,7 @@ module Backoffice::Collects
     private
 
     def collect_params
-      params.fetch(:collect, {}).permit(:collect_date, :schedule_id)
+      params.fetch(:collect, {}).permit(:collect_date, :schedule_id, :status)
     end
 
     def set_free_schedules_to_options
@@ -54,6 +57,15 @@ module Backoffice::Collects
 
     def set_collect
       @collect = Collect.find(params[:id])
+    end
+
+    def set_statuses_to_options
+      @statuses = Collect.statuses.map do |status, _value|
+        [
+          I18n.t('enums.collects.status')[status.to_sym],
+          status
+        ]
+      end
     end
   end
 end
