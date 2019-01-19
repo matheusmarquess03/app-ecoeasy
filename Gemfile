@@ -41,6 +41,7 @@ gem 'image_processing', '~> 1.2'
 gem 'geocoder'
 gem 'ransack'
 gem 'redis-rails'
+gem 'sendgrid-ruby'
 gem 'sidekiq'
 
 
