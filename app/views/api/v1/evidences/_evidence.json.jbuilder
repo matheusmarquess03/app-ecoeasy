@@ -12,7 +12,7 @@ end
 
 json.images do
   json.array! evidence.images do |image|
-    Rails.application.routes.url_helpers.rails_blob_path(evidence.image, only_path: true)
+    Rails.application.routes.url_helpers.rails_blob_path(image, only_path: true)
   end
 end
 
