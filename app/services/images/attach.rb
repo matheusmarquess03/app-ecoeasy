@@ -22,7 +22,7 @@ module Images
     end
 
     def filename
-      @filename ||= "image_file_#{Time.now.to_i}"
+      @filename ||= "image_file_#{Time.now.to_i}.png"
     end
   end
 end

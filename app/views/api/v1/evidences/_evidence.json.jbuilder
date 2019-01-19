@@ -10,6 +10,10 @@ json.images do
   end
 end
 
+json.images_2 do
+  json.array! evidence.get_all_images_url
+end
+
 if evidence.signature.attached?
   json.signature url_for(evidence.signature)
 else
