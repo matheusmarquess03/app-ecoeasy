@@ -16,9 +16,7 @@ json.images_2 do
   end
 end
 
-json.images_3 do
-  Evidence.last.images.first.service_url
-end
+json.images_3   Evidence.last.images.first.service_url
 
 
 if evidence.signature.attached?
