@@ -25,7 +25,10 @@ class Evidence < ApplicationRecord
   # Methods
   def get_all_images_url
     return unless images.attached?
-    images.map { |image| image.service_url }
+    
+    images_array = []
+    images.map { |image| images_array < image.service_url }
+    return images_array
   end
 
   def supervisor

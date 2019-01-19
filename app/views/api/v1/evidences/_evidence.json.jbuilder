@@ -21,13 +21,13 @@ json.images_3  do
 end
 
 json.images_4 do
-  evidence.images.each do |image|
+  evidence.images.map do |image|
     image.service_url
   end
 end
 
 json.images_5 do
-  evidence.images.each do |image|
+  evidence.images.map do |image|
     url_for(image.service_url)
   end
 end
