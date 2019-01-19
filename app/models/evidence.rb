@@ -23,6 +23,10 @@ class Evidence < ApplicationRecord
   }
 
   # Methods
+  def get_all_images_url
+    return unless images.attached?
+    images.map { |image| image.service_url }
+  end
 
   def supervisor
     User.find(user_id)

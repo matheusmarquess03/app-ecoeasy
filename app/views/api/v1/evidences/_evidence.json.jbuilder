@@ -16,7 +16,21 @@ json.images_2 do
   end
 end
 
-json.images_3   evidence.images.first.service_url
+json.images_3  do
+  evidence.get_all_images_url
+end
+
+json.images_4 do
+  evidence.images.each do |image|
+    image.service_url
+  end
+end
+
+json.images_5 do
+  evidence.images.each do |image|
+    url_for(image.service_url)
+  end
+end
 
 
 if evidence.signature.attached?
