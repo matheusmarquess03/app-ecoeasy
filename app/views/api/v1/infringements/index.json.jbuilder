@@ -8,7 +8,7 @@ json.array! @infringements do |infringement|
   json.boleto        Contract.first&.get_path_attachments
 
   json.images do
-    json.array! infringement.get_all_images_url
+    json.array! infringement&.get_all_images_url
   end
 
   json.citizen do
