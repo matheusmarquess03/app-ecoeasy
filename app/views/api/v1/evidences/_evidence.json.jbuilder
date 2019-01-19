@@ -10,12 +10,15 @@ json.images do
   end
 end
 
-json.images_2 do
-  url_for(Evidence.last.images.last.service_url)
+json.images do
+  json.array! evidence.images do |image|
+    Rails.application.routes.url_helpers.rails_blob_path(evidence.image, only_path: true)
+  end
 end
 
+
 if evidence.signature.attached?
-  json.signature url_for(evidence.signature)
+  json.signature url_for(evidence.signature&.service_url)
 else
   json.signature nil
 end
