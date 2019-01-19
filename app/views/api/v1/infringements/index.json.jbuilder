@@ -17,5 +17,6 @@ json.array! @infringements do |infringement|
     json.id             infringement.client.id
     json.name           infringement.client.name
     json.email          infringement.client.email
+    json.cpf            infringement.client.cpf
   end
 end

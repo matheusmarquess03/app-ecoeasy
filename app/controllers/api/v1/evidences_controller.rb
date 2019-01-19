@@ -30,7 +30,7 @@ module Api::V1
     end
 
     def evidence_params
-      params.fetch(:evidence, {}).permit(:description, :full_address, :client_id)
+      params.fetch(:evidence, {}).permit(:description, :full_address, :citizen_cpf)
     end
 
     def convert_base64_to_image_file
