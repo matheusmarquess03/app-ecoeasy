@@ -23,7 +23,7 @@ class Evidence < ApplicationRecord
 
   # Methods
   def get_all_images_url
-    images.attached?
+    return unless images.attached?
     images.map { |image| ActiveStorage::Blob.service.send(:path_for, image.key) }
   end
 
