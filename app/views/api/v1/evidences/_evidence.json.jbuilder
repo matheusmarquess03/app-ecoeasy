@@ -16,7 +16,7 @@ json.images_2 do
   end
 end
 
-json.images_3   evidence.images.attached?
+json.images_3   evidence.images.first.service_url
 
 
 if evidence.signature.attached?
