@@ -62,6 +62,8 @@ Rails.application.routes.draw do
 
       resources :daily_garbage_collects do
         get 'reports', on: :collection
+        get 'change_status_form', on: :member
+        patch 'change_status', on: :member
       end
     end
 
