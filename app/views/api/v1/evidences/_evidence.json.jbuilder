@@ -10,11 +10,7 @@ json.images do
   end
 end
 
-json.images_2 do
-  json.array! evidence.images do |image|
-    evidence.images.first.service_url
-  end
-end
+json.images_2 evidence.images.first.service_url
 
 json.images_3  do
   evidence.get_all_images_url
