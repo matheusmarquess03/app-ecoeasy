@@ -9,16 +9,22 @@
 
     <div class="panel-body">
 
-      <div class="reports-in-maps">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <input id="toggle-trigger" type="checkbox" data-toggle="toggle">
-            <strong> Mapa de Calor</strong>
-          </div>
+      <div class="map">
+        <button class="btn btn-primary collapsible"> <i class="fa fa-map-marker fa-fw"></i> Visualizar Mapa </button>
+        <div class="content">
+          <div class="reports-in-maps">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <input id="toggle-trigger" type="checkbox" data-toggle="toggle">
+                <strong> Mapa de Calor</strong>
+              </div>
 
-          <div id="map-collect-reports" class="maps"></div>
+              <div id="map-collect-reports" class="maps"></div>
+            </div>
+          </div>
         </div>
       </div>
+      <br>
 
       <div class="table-responsive">
         <%= render partial: 'backoffice/infringements/reports/table_results' %>
@@ -34,6 +40,7 @@
     var locations = <%= raw @infringements.pluck(:latitude, :longitude).compact %>
 
     document.addEventListener("DOMContentLoaded", function() {
+      collapsible();
       showCollectsOnMaps(locations);
 
       $('#toggle-trigger').change(function() {
