@@ -16,7 +16,6 @@
               <th>Descrição</th>
               <th>Data</th>
               <th>Endereço</th>
-              <th>Imagem</th>
               <th colspan="2"></th>
             </tr>
           </thead>
@@ -28,7 +27,6 @@
                 <td><%= evidence.description %></td>
                 <td><%= I18n.l evidence.created_at.localtime, :format => :with_day_of_week, :locale => 'pt-BR' %></td>
                 <td><%= evidence.full_address %></td>
-                <td><%= image_tag evidence.images.first.variant(resize: "100x100") if evidence.images.attached? %></td>
               </tr>
             <% end %>
           </tbody>

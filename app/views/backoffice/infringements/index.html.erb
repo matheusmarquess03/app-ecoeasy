@@ -17,9 +17,7 @@
               <th>Descrição</th>
               <th>Data</th>
               <th>Endereço</th>
-              <th>Imagem</th>
               <th>Infrator</th>
-              <th>Boleto</th>
               <th></th>
               <th colspan="2"></th>
             </tr>
@@ -33,15 +31,7 @@
                 <td><%= infringement.description %></td>
                 <td><%= I18n.l infringement.created_at.localtime, :format => :with_day_of_week, :locale => 'pt-BR' %></td>
                 <td><%= infringement.full_address %></td>
-                <td> <%= infringement.images.count %> </td>
                 <td><%= infringement.client&.name %></td>
-                <td>
-                  <% if infringement.bill.attached? %>
-                    <%= link_to rails_blob_path(infringement.bill, disposition: "bill") do %>
-                      <i class="fa fa-download"></i> <%= infringement.bill.filename.to_s %> <%= number_to_human_size(infringement.bill.blob.byte_size) %>
-                    <% end %>
-                  <% end %>
-                </td>
               </tr>
             <% end %>
           </tbody>
