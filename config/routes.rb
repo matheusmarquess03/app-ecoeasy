@@ -72,7 +72,7 @@ Rails.application.routes.draw do
 
     resources :routes
     resources :infringements, only: [:index, :show]
-    resources :evidences do
+    resources :evidences, only: [:index] do
       resources :comments,         only: [:create, :destroy]
     end
 

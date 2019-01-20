@@ -31,7 +31,7 @@
         </table>
       </div>
 
-      <div class="col-12 text-center" style="background-color: #f7f7f7;">
+      <div class="col-12 text-center carousel-container">
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
           <div class="carousel-inner">
             <% if @evidence.images.attached? %>
@@ -53,6 +53,11 @@
             <span class="sr-only">Next</span>
           </a>
         </div>
+      </div>
+
+      <%# Comments Feed %>
+      <div class="comments-feed">
+        <%= render partial: 'backoffice/evidences/shared/comment_fields' %>
       </div>
     </div>
   </div>
