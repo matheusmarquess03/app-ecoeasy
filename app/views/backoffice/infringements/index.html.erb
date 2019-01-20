@@ -8,35 +8,6 @@
     <br/>
 
     <div class="panel-body">
-      <div class="table-responsive">
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th>Supervisor</th>
-              <th>Tipo da infração</th>
-              <th>Descrição</th>
-              <th>Data</th>
-              <th>Endereço</th>
-              <th>Infrator</th>
-              <th></th>
-              <th colspan="2"></th>
-            </tr>
-          </thead>
-
-          <tbody id="incident">
-            <% @infringements.each do |infringement| %>
-              <tr data-link="<%= backoffice_infringement_path(infringement) %>">
-                <td><%= infringement.supervisor.name %></td>
-                <td><%= t("enums.evidences.evidence_type.#{infringement.evidence_type}") %></td>
-                <td><%= infringement.description %></td>
-                <td><%= I18n.l infringement.created_at.localtime, :format => :with_day_of_week, :locale => 'pt-BR' %></td>
-                <td><%= infringement.full_address %></td>
-                <td><%= infringement.client&.name %></td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-      </div>
 
       <div class="reports-in-maps">
         <div class="panel panel-default">
@@ -49,6 +20,9 @@
         </div>
       </div>
 
+      <div class="table-responsive">
+        <%= render partial: 'backoffice/infringements/reports/table_results' %>
+      </div>
     </div>
   </div>
 </div>
