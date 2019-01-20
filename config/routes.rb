@@ -45,6 +45,8 @@ Rails.application.routes.draw do
 
   # Routes to Backoffice portal (admin)
   namespace :backoffice do
+    # root_path 'dashboard#index'
+
     get '', to: 'dashboard#index'
 
     resources :truckers
@@ -70,10 +72,15 @@ Rails.application.routes.draw do
 
     resources :routes
     resources :infringements, only: [:index, :show]
+    resources :evidences do
+      resources :comments,         only: [:create, :destroy]
+    end
+
     namespace :evidences do
       resources :simple_evidences, only: [:index, :show]
       resources :incidents,        only: [:index, :show]
     end
+
     resources :trucks
     resources :landfills
     resources :contracts do

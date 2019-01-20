@@ -6,7 +6,10 @@ class Evidence < ApplicationRecord
   belongs_to :user
   belongs_to :address, optional: true
 
-  has_one :contestation
+  has_many :comments
+  has_one  :contestation
+  
+  accepts_nested_attributes_for :comments
 
   has_many_attached :images
   has_one_attached  :bill

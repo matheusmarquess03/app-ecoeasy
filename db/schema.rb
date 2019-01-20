@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_19_222112) do
+ActiveRecord::Schema.define(version: 2019_01_20_192028) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 2019_01_19_222112) do
     t.inet "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
     t.index ["email"], name: "index_admins_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
@@ -97,6 +98,18 @@ ActiveRecord::Schema.define(version: 2019_01_19_222112) do
     t.bigint "user_id", null: false
     t.index ["collect_id", "user_id"], name: "index_collects_users_on_collect_id_and_user_id", unique: true
     t.index ["user_id", "collect_id"], name: "index_collects_users_on_user_id_and_collect_id", unique: true
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "evidence_id"
+    t.string "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "admin_id"
+    t.index ["admin_id"], name: "index_comments_on_admin_id"
+    t.index ["evidence_id"], name: "index_comments_on_evidence_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "contestations", force: :cascade do |t|
@@ -231,6 +244,9 @@ ActiveRecord::Schema.define(version: 2019_01_19_222112) do
   add_foreign_key "collects", "landfills"
   add_foreign_key "collects", "schedules"
   add_foreign_key "collects", "users"
+  add_foreign_key "comments", "admins"
+  add_foreign_key "comments", "evidences"
+  add_foreign_key "comments", "users"
   add_foreign_key "contestations", "evidences"
   add_foreign_key "contestations", "users"
   add_foreign_key "evidences", "addresses"

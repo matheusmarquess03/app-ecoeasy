@@ -1,0 +1,28 @@
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Supervisor</th>
+      <th>Descrição</th>
+      <th>Data</th>
+      <th>Endereço</th>
+      <th>Boleto</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody id="incident">
+    <tr>
+      <td><%= @infringement.supervisor.name %></td>
+      <td><%= @infringement.description %></td>
+      <td><%= I18n.l @infringement.created_at.localtime, :format => :with_day_of_week, :locale => 'pt-BR' %></td>
+      <td><%= @infringement.full_address %></td>
+      <td>
+        <% if @infringement.bill.attached? %>
+          <%= link_to rails_blob_path(@infringement.bill, disposition: "bill") do %>
+            <i class="fa fa-download"></i> <%= @infringement.bill.filename.to_s %> <%= number_to_human_size(@infringement.bill.blob.byte_size) %>
+          <% end %>
+        <% end %>
+      </td>
+    </tr>
+  </tbody>
+</table>
