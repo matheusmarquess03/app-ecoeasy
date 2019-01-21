@@ -7,6 +7,8 @@ module Api::V1
     end
 
     def create
+      logger.info "DEBUG: User - #{current_api_v1_user.id}"
+
       @evidence = Evidence.new(evidence_params)
       @evidence.user_id = current_api_v1_user.id
       @evidence.evidence_type = params[:evidence_type].to_i
