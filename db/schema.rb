@@ -140,6 +140,7 @@ ActiveRecord::Schema.define(version: 2019_01_20_192028) do
     t.string "citizen_cpf"
     t.decimal "latitude"
     t.decimal "longitude"
+    t.integer "status", default: 0
     t.index ["address_id"], name: "index_evidences_on_address_id"
     t.index ["user_id"], name: "index_evidences_on_user_id"
   end

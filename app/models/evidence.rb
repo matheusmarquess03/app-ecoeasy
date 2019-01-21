@@ -1,6 +1,7 @@
 class Evidence < ApplicationRecord
   # Enumerators
-  enum evidence_type: [:simple_evidence, :incident, :advertence, :mulct]
+  enum evidence_type: %i[simple_evidence incident advertence mulct]
+  enum status: %i[created attended]
 
   # Associations
   belongs_to :user
@@ -14,6 +15,8 @@ class Evidence < ApplicationRecord
   has_many_attached :images
   has_one_attached  :bill
   has_one_attached  :signature
+
+  validate :cant_delegate_to_created_evidence
 
   # Scopes
   scope :todays_evidences, ->(user) {
@@ -40,5 +43,13 @@ class Evidence < ApplicationRecord
 
   def client
     User.find_by_cpf(citizen_cpf)
+  end
+
+  private
+
+  def cant_delegate_to_created_evidence
+    return if new_record? || created? || !user_id_changed?
+
+    errors.add(:user_id, 'Supervisor não pode ser alterado.')
   end
 end

@@ -1,0 +1,22 @@
+<%= form_for @evidence, url: backoffice_evidences_simple_evidence_path(@evidence), html: { class: 'form', method: :put } do |f| %>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h1 class="page-header">MODULO LIMPEZA DE VIAS</h1>
+    </div>
+    <br/>
+
+    <div class="panel-body">
+      <div class="col-lg-12">
+        <div class="form-group">
+          <div class="col-lg-6">
+            <%= f.label :user_id, "Supervisor" %>
+            <%= f.select :user_id, Supervisor.all.pluck(:name, :id), {}, { class: 'form-control' } %>
+            <br />
+          </div>
+        </div>
+      </div>
+    </div>
+    <br />
+  </div>
+  <%= f.submit 'Salvar', class: 'btn btn-success btn-lg' %>
+<% end %>

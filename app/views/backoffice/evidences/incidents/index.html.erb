@@ -1,5 +1,5 @@
 <div class="col-lg-12">
-  <h1 class="page-header">MODULO COLETA</h1>
+  <h1 class="page-header">MODULO LIMPEZA DE VIAS</h1>
 
   <div class="panel panel-default">
     <div class="panel-heading">
@@ -23,12 +23,22 @@
 
           <tbody id="incident">
             <% @evidences.each do |evidence| %>
-              <tr data-link="<%= backoffice_evidences_incident_path(evidence) %>">
+              <tr>
                 <td><%= evidence.supervisor.name %></td>
                 <td><%= evidence.description %></td>
                 <td><%= I18n.l evidence.created_at.localtime, :format => :with_day_of_week, :locale => 'pt-BR' %></td>
                 <td><%= evidence.full_address %></td>
                 <td><%= image_tag evidence.images.first.variant(resize: "100x100") if evidence.images.attached? %></td>
+                <td>
+                  <div class="pull-right">
+                    <%= link_to backoffice_evidences_incident_path(evidence), class: 'btn btn-outline btn-info' do %>
+                      <i class="fa fa-search-plus"></i> Detalhes
+                    <% end %>
+                    <%= link_to edit_backoffice_evidences_incident_path(evidence), class: 'btn btn-outline btn-warning' do %>
+                      <i class="fa fa-edit"></i> Editar
+                    <% end %>
+                  </div>
+                </td>
               </tr>
             <% end %>
           </tbody>
