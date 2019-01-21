@@ -4,7 +4,10 @@ function showCollectsOnMaps(locations) {
   if (locations.length != 0) {
     for (i = 0; i < locations.length; i++) {
       var marker = addMarkerOnMap(locations, i, map);
-      addInfoWindows(map, marker, locations, i);
+
+      if (locations[i][3] != undefined) {
+        addInfoWindows(map, marker, locations, i);
+      }
     }
   }
 
