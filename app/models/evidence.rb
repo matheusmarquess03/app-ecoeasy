@@ -51,7 +51,8 @@ class Evidence < ApplicationRecord
   private
 
   def generate_protocol_number
-    self.protocol_number = "#{Evidence.last.id + 1}#{DateTime.now.to_i}"
+    Evidence.last == nil ? id = 0 : id = Evidence.last
+    self.protocol_number = "#{id + 1}#{DateTime.now.to_i}"
   end
 
   def cant_delegate_to_created_evidence

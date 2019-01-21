@@ -83,7 +83,8 @@ class Collect < ApplicationRecord
   end
 
   def generate_protocol_number
-    self.protocol_number = "#{Collect.last.id + 1}#{DateTime.now.to_i}"
+    Collect.last == nil ? id = 0 : id = Collect.last
+    self.protocol_number = "#{id + 1}#{DateTime.now.to_i}"
   end
 
   def not_daily_garbage_collection?
