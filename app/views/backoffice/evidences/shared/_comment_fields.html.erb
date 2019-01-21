@@ -29,8 +29,11 @@
                 </div>
                 <div class="panel-footer" style="display: flex; justify-content: space-between">
                   <div class="text-left">
-                    <%= link_to backoffice_evidence_comment_path(@evidence, comment), method: :delete do %>
-                      <i class="fa fa-trash-o"></i> Remover comentário
+                    
+                    <% if current_admin == comment.admin || current_admin.type == 'Admin' %>
+                      <%= link_to backoffice_evidence_comment_path(@evidence, comment), method: :delete do %>
+                        <i class="fa fa-trash-o"></i> Remover comentário
+                      <% end %>
                     <% end %>
                   </div>
 
