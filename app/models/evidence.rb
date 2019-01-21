@@ -1,4 +1,7 @@
 class Evidence < ApplicationRecord
+  # Callbacks
+  before_validation :generate_protocol_number, on: :create
+
   # Enumerators
   enum evidence_type: %i[simple_evidence incident advertence mulct]
   enum status: %i[created attended]
@@ -9,7 +12,7 @@ class Evidence < ApplicationRecord
 
   has_many :comments
   has_one  :contestation
-  
+
   accepts_nested_attributes_for :comments
 
   has_many_attached :images
@@ -46,6 +49,10 @@ class Evidence < ApplicationRecord
   end
 
   private
+
+  def generate_protocol_number
+    self.protocol_number = "#{Evidence.last.id + 1}#{DateTime.now.to_i}"
+  end
 
   def cant_delegate_to_created_evidence
     return if new_record? || created? || !user_id_changed?
