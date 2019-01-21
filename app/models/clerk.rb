@@ -1,2 +1,2 @@
-class Clerk < User
+class Clerk < Admin
 end

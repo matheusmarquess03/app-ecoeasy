@@ -1,2 +1,2 @@
-class Janitor < User
+class Janitor < Admin
 end
