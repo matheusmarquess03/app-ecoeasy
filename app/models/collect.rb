@@ -1,6 +1,7 @@
 class Collect < ApplicationRecord
   # Callbacks
   before_validation :generate_protocol_number, on: :create
+  before_update :send_email, :if => :status_changed?
 
   # Enumerators
   enum status: [:requested, :proposed_date, :confirmed, :cancelled, :collected, :dumped]
@@ -76,6 +77,10 @@ class Collect < ApplicationRecord
   end
 
   private
+
+  def send_email
+    UserMailer.send_change_status(self).deliver
+  end
 
   def generate_protocol_number
     self.protocol_number = "#{Collect.last.id + 1}#{DateTime.now.to_i}"
