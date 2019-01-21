@@ -6,19 +6,35 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-# Create a default admin user ==================================================
+# Create a default admin user =======================================================================================
 puts 'CRIANDO USUARIO ADMINISTRADOR'
 Admin.find_or_create_by!(email: 'admin@email.com') do |u|
   u.name = 'Super Admin'
   u.phone_number = '22 99999-9999'
-  u.cpf = '23123412-92'
+  u.cpf = '23123412492'
   u.password = 'Prizma123!'
   u.password_confirmation = 'Prizma123!'
 end
 puts 'USUARIO ADMINISTRADOR CRIADO COM SUCESSO'
 
+# Create a Landfill =================================================================================================
+Landfill.find_or_create_by!(name: 'Aterro de Gericinó') do |l|
+  l.address = Address.create(
+    street: 'Estrada do Gericinó',
+    number: '',
+    complement: '',
+    district: 'Gericinó',
+    city: 'Rio de Janeiro',
+    state: 'Rio de Janeiro',
+    country: 'Brasil',
+    zip_code: '',
+    latitude: '-22.8429971',
+    longitude: '-43.4745312'
+  )
+end
+
 unless Rails.env.production?
-  # Create a default trucker user ================================================
+  # Create a default trucker user ===================================================================================
   puts 'CRIANDO USUARIO TRUCKER'
   Trucker.find_or_create_by!(email: 'trucker@email.com') do |u|
     u.password = '12345678'
@@ -29,7 +45,7 @@ unless Rails.env.production?
   end
   puts 'USUARIO TRUCKER CRIADO COM SUCESSO'
 
-  # Create a default supervisor user =============================================
+  # Create a default supervisor user ================================================================================
   puts 'CRIANDO USUARIO SUPERVISOR'
   Supervisor.find_or_create_by!(email: 'supervisor@email.com') do |u|
     u.password = '12345678'
@@ -40,7 +56,7 @@ unless Rails.env.production?
   end
   puts 'USUARIO SUPERVISOR CRIADO COM SUCESSO'
 
-  # Create a default janitor user =============================================
+  # Create a default janitor user ===================================================================================
   puts 'CRIANDO USUARIO ZELADOR'
   Janitor.find_or_create_by!(email: 'zelador@email.com') do |u|
     u.password = '12345678'
@@ -51,7 +67,7 @@ unless Rails.env.production?
   end
   puts 'USUARIO ZELADOR CRIADO COM SUCESSO'
 
-  # Create a default janitor user =============================================
+  # Create a default janitor user ===================================================================================
   puts 'CRIANDO USUARIO ATENDENTE'
   Clerk.find_or_create_by!(email: 'atendente@email.com') do |u|
     u.password = '12345678'
@@ -62,7 +78,7 @@ unless Rails.env.production?
   end
   puts 'USUARIO ATENDENTE CRIADO COM SUCESSO'
 
-  # Create a default customer user ===============================================
+  # Create a default customer user ==================================================================================
   puts 'CRIANDO USUARIO CLIENT WITH ADDRESS'
   if Address.where(user: Client.find_by(email: 'client@email.com')).count == 0
     Address.create(
@@ -85,7 +101,7 @@ unless Rails.env.production?
   end
   puts 'USUARIO CLIENT CRIADO COM SUCESSO'
 
-  # Create a collect status requested ============================================
+  # Create a collect status requested ===============================================================================
   puts 'CRIANDO COLETA'
   Collect.all.destroy_all
   if Collect.all.count == 0
@@ -98,22 +114,7 @@ unless Rails.env.production?
   end
   puts 'COLETA CRIADA COM SUCESSO'
 
-  # Create a Landfill ============================================================
-  Landfill.find_or_create_by!(name: 'Aterro de Gericinó') do |l|
-    l.address = Address.create(
-      street: 'Estrada do Gericinó',
-      number: '',
-      complement: '',
-      district: 'Gericinó',
-      city: 'Rio de Janeiro',
-      state: 'Rio de Janeiro',
-      country: 'Brasil',
-      zip_code: '',
-      latitude: '-22.8429971',
-      longitude: '-43.4745312'
-    )
-  end
-
+  # Create Contract ==================================================================================================
   puts 'CRIANDO CONTRATO'
   Contract.find_or_create_by!(name: 'Licitação Prefeitura de Townsville') do |contract|
     contract.observation = <<~HEREDOC
