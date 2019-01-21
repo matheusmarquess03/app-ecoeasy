@@ -3,7 +3,8 @@ function showCollectsOnMaps(locations) {
 
   if (locations.length != 0) {
     for (i = 0; i < locations.length; i++) {
-      addMarkerOnMap(locations, i, map);
+      var marker = addMarkerOnMap(locations, i, map);
+      addInfoWindows(map, marker, locations, i);
     }
   }
 
@@ -30,7 +31,8 @@ function showCollectsOnMaps(locations) {
       "confirmed": "blue",
       "cancelled": "yellow",
       "collected": "green",
-      "dumped": "green"
+      "dumped": "green",
+      "infringement": "red"
     }
 
     var status = statuses[locations[i][2]];
@@ -44,6 +46,30 @@ function showCollectsOnMaps(locations) {
       map: map,
       icon: 'http://maps.google.com/mapfiles/ms/icons/'+status+'-dot.png'
     });
+
+    return marker
   }
-  // heatMaps();
+
+  function addInfoWindows(map, marker, locations, i) {
+    var serviceTypes = {
+      "mulcts": "Multa aplicada",
+      "incidents": "Ocorrência na varredura",
+      "rubble_collects": "Coleta de entulho atendida",
+      "daily_collect": "Coleta de lixo concluída"
+    }
+
+    var contentString = serviceTypes[locations[i][3]]
+
+    var infowindow = new google.maps.InfoWindow({
+      content: contentString
+    });
+
+    marker.addListener('mouseover', function() {
+      infowindow.open(map, marker);
+    });
+
+    marker.addListener('mouseout', function() {
+      infowindow.close(map, marker);
+    });
+  }
 }

@@ -59,6 +59,6 @@ class Backoffice::ClerksController < BackofficeController
 
   def set_clerk_default_data
     @clerk = Clerk.new(clerk_params)
-    @clerk.provider = 'email'
+    # @clerk.provider = 'email'
   end
 end
