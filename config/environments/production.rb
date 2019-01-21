@@ -74,7 +74,7 @@ Rails.application.configure do
     :user_name      => ENV['MAILGUN_SMTP_LOGIN'],
     :password       => ENV['MAILGUN_SMTP_PASSWORD'],
     # :domain         => ENV['MAILGUN_DOMAIN'],
-    :domain         => 'ecoeasy-ro.herokuapp.com',
+    :domain         => 'herokuapp.com',
     :authentication => :plain,
   }
   config.action_mailer.delivery_method = :smtp
