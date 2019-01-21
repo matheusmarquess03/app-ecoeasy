@@ -37,7 +37,7 @@
 <% provide :head_tags do %>
   <meta name='turbolinks-visit-control' content='reload'>
   <script>
-    var locations = <%= raw @infringements.pluck(:latitude, :longitude).compact %>
+    var locations = <%= raw @infringements.where.not(latitude: nil, longitude: nil).pluck(:latitude, :longitude).compact %>
 
     document.addEventListener("DOMContentLoaded", function() {
       collapsible();
