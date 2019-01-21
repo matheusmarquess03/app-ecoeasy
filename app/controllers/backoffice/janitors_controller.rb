@@ -59,6 +59,6 @@ class Backoffice::JanitorsController < BackofficeController
 
   def set_janitor_default_data
     @janitor = Janitor.new(janitor_params)
-    @janitor.provider = 'email'
+    # @janitor.provider = 'email'
   end
 end

@@ -9,6 +9,9 @@
 # Create a default admin user ==================================================
 puts 'CRIANDO USUARIO ADMINISTRADOR'
 Admin.find_or_create_by!(email: 'admin@email.com') do |u|
+  u.name = 'Super Admin'
+  u.phone_number = '22 99999-9999'
+  u.cpf = '23123412-92'
   u.password = 'Prizma123!'
   u.password_confirmation = 'Prizma123!'
 end
