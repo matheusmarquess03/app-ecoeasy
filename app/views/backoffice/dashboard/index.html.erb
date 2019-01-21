@@ -6,7 +6,7 @@
       <div class="panel-heading">
         Resumo de serviços
       </div>
-      <div class="panel-body">
+      <div class="panel-body" style="display: flex; align-items: center;">
         <div class="col-lg-9">
           <div class="maps" id="map-collect-reports"></div>
         </div>
@@ -22,9 +22,8 @@
 <script type="text/javascript">
   var locations = <%= raw get_coordenation_all_services %>
 
-  document.addEventListener("DOMContentLoaded", function() {
-    showCollectsOnMaps(locations);
-  });
+  showCollectsOnMaps(locations);
+
 
   $(function() {
     Morris.Donut({
