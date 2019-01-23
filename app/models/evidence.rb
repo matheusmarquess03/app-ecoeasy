@@ -51,7 +51,7 @@ class Evidence < ApplicationRecord
   private
 
   def generate_protocol_number
-    Evidence.last == nil ? id = 0 : id = Evidence.last
+    Evidence.last == nil ? id = 0 : id = Evidence.last.id
     self.protocol_number = "#{id + 1}#{DateTime.now.to_i}"
   end
 

@@ -83,7 +83,7 @@ class Collect < ApplicationRecord
   end
 
   def generate_protocol_number
-    Collect.last == nil ? id = 0 : id = Collect.last
+    Collect.last == nil ? id = 0 : id = Collect.last.id
     self.protocol_number = "#{id + 1}#{DateTime.now.to_i}"
   end
 
