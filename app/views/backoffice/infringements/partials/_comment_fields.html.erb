@@ -18,6 +18,19 @@
               </div>
             </div>
           </div>
+
+          <% if @infringement.contestation.present? %>
+            <div class="col-lg-6">
+              <div class="panel panel-default">
+                <div class="panel-body">
+                  <strong><%= @infringement.client&.name %>:</strong> <%= @infringement.contestation.justification %>
+                </div>
+                <div class="panel-footer text-right">
+                  <b><%= I18n.l @infringement.contestation.created_at.localtime, :format => :with_day_of_week, :locale => 'pt-BR' %></b>
+                </div>
+              </div>
+            </div>
+          <% end %>
         </div>
 
         <% @infringement.comments.each do |comment| %>
