@@ -38,8 +38,8 @@ module Api::V1
 
       Collect.transaction do
         @collects.map do |collect|
-          collect.dumped!
           collect.update!(collects_params)
+          collect.dumped!
         end
       end
     rescue ActiveRecord::RecordInvalid => e
