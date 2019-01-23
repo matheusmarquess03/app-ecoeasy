@@ -19,6 +19,7 @@
       <td><%= I18n.l @infringement.created_at.localtime, :format => :with_day_of_week, :locale => 'pt-BR' %></td>
       <td><%= @infringement.full_address %></td>
       <td>
+        <%= link_to rails_blob_path(Contract.first&.attachments&.first, disposition: "attachment") if Contract&.first&.attachments&.attached? %>
         <% if @infringement.bill.attached? %>
           <%= link_to rails_blob_path(@infringement.bill, disposition: "bill") do %>
             <i class="fa fa-download"></i> <%= @infringement.bill.filename.to_s %> <%= number_to_human_size(@infringement.bill.blob.byte_size) %>
