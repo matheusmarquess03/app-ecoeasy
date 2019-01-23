@@ -34,8 +34,8 @@ json.collects do
           json.city               collect.address&.city
           json.state              collect.address&.state
           json.country            collect.address&.country
-          json.latitude           collect.address&.latitude
-          json.longitude          collect.address&.longitude
+          json.latitude           collect.address&.latitude.to_f
+          json.longitude          collect.address&.longitude.to_f
         end
         json.citizen do
           json.id                 collect.client.id
