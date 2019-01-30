@@ -1,6 +1,11 @@
 <%= search_form_for @q, url: reports_backoffice_collects_rubble_collects_url do |f| %>
   <div class="row">
     <div class="col-lg-4">
+      <strong>Número de protocolo: </strong>
+      <%= f.text_field :protocol_number_cont, { class: 'form-control' } %>
+    </div>
+    
+    <div class="col-lg-4">
       <strong>Situação: </strong>
       <%= f.select :status_eq,
         options_for_select(collects_statuses_i18n, selected: params[:q].present? ? params[:q][:status_eq] : nil),
