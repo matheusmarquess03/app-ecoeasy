@@ -33,6 +33,9 @@
                 <td><%= collect.schedule&.routes.first.title %></td>
                 <td>
                   <div class="pull-right">
+                    <%= link_to change_status_form_backoffice_collects_daily_garbage_collect_path(collect), remote: true, class: 'btn btn-outline btn-warning' do %>
+                      <i class="fa fa-edit"></i> Alterar status
+                    <% end %>
                     <%= link_to edit_backoffice_collects_daily_garbage_collect_path(collect), class: 'btn btn-outline btn-warning' do %>
                       <i class="fa fa-edit"></i> Editar
                     <% end %>
@@ -50,3 +53,5 @@
     </div>
   </div>
 </div>
+
+<div id="change_status" class="modal fade"></div>

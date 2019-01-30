@@ -20,6 +20,11 @@
             <td><%= I18n.l collect.created_at.localtime, :format => :with_day_of_week, :locale => 'pt-BR' %></td>
             <td><%= I18n.l collect.collect_date.localtime, :format => :with_day_of_week, :locale => 'pt-BR' if collect.collect_date.present? %></td>
             <td><%= t("enums.collects.status.#{collect.status}") %></td>
+            <td>
+              <%= link_to change_status_backoffice_collects_rubble_collect_path(collect), remote: true, class: 'btn btn-outline btn-warning' do %>
+                <i class="fa fa-edit"></i> Trocar status
+              <% end %>
+            </td>
           </tr>
         <% end %>
       </tbody>

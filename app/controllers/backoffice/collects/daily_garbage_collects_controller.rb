@@ -1,6 +1,7 @@
 module Backoffice::Collects
   class DailyGarbageCollectsController < BackofficeController
-    before_action :set_collect, only: [:edit, :update, :destroy]
+    before_action :set_collect, only: [:edit, :update, :destroy, :change_status, :change_status_form]
+    before_action :set_statuses_to_options, only: [:change_status_form]
     before_action :set_free_schedules_to_options, :set_routes_to_options, only: [:new, :create, :edit, :update, :index]
 
     def index
@@ -35,6 +36,21 @@ module Backoffice::Collects
 
     def edit
       @free_schedules << Schedule.find(@collect.schedule_id)
+    end
+
+    def change_status_form
+      respond_to do |format|
+        format.js
+      end
+    end
+
+    def change_status
+      @collect.update(collect_params)
+      flash[:notice] = 'Status alterado com sucesso'
+      redirect_to backoffice_collects_daily_garbage_collects_path
+    rescue StandardError
+      flash[:alert] = 'Falha ao alterar status'
+      redirect_to backoffice_collects_daily_garbage_collects_path
     end
 
     def update
@@ -91,7 +107,7 @@ module Backoffice::Collects
     end
 
     def collect_params
-      params.fetch(:collect, {}).permit(:schedule_id)
+      params.fetch(:collect, {}).permit(:schedule_id, :status)
     end
 
     def set_routes_to_options
@@ -104,6 +120,15 @@ module Backoffice::Collects
 
     def set_collect
       @collect = Collect.find(params[:id])
+    end
+
+    def set_statuses_to_options
+      @statuses = Collect.statuses.map do |status, _value|
+        [
+          I18n.t('enums.collects.status')[status.to_sym],
+          status
+        ]
+      end
     end
   end
 end

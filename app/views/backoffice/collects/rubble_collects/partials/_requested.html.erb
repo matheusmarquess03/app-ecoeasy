@@ -23,6 +23,11 @@
                 <i class="fa fa-edit"></i> Propor data para coleta
               <% end %>
             </td>
+            <td>
+              <%= link_to change_status_backoffice_collects_rubble_collect_path(collect), remote: true, class: 'btn btn-outline btn-warning' do %>
+                <i class="fa fa-edit"></i> Alterar status
+              <% end %>
+            </td>
           </tr>
         <% end %>
       </tbody>
