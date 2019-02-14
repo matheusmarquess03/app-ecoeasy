@@ -3,7 +3,17 @@
 
   <div class="panel panel-default">
     <div class="panel-heading">
-      <h4>Infração</h4>
+      <h4>Infração
+        <% if @infringement.mulct? %>
+          <% unless @infringement.paid_out? %>
+            <%= link_to 'Baixa de pagamento', backoffice_infringement_path(@infringement, infringement: {status: :paid_out}),
+                  class: 'btn btn-warning pull-right', style: 'margin-top: -5px',
+                  method: :put, data: { confirm: 'Tem certeza que deseja fazer isto?' } %>
+          <% else %>
+            <button type="button" name="button" class="btn btn-info pull-right" style="margin-top: -5px" disabled>BOLETO PAGO</button>
+          <% end %>
+        <% end %>
+      </h4>
     </div>
 
 

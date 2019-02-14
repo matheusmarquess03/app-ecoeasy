@@ -4,7 +4,7 @@ class Evidence < ApplicationRecord
 
   # Enumerators
   enum evidence_type: %i[simple_evidence incident advertence mulct]
-  enum status: %i[created attended]
+  enum status: %i[created attended paid_out]
 
   # Associations
   belongs_to :user

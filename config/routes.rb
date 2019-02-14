@@ -45,8 +45,6 @@ Rails.application.routes.draw do
 
   # Routes to Backoffice portal (admin)
   namespace :backoffice do
-    # root_path 'dashboard#index'
-
     get '', to: 'dashboard#index'
 
     resources :truckers
@@ -74,9 +72,9 @@ Rails.application.routes.draw do
     get 'daily_garbage_collects/trucker_tracking', to: 'collects/daily_garbage_collects#trucker_tracking'
 
     resources :routes
-    resources :infringements, only: [:index, :show]
-    resources :evidences, only: [:index] do
-      resources :comments,         only: [:create, :destroy]
+    resources :infringements, only: [:index, :show, :update]
+    resources :evidences,     only: [:index] do
+      resources :comments,      only: [:create, :destroy]
     end
 
     namespace :evidences do
