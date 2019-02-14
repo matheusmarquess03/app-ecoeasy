@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   has_many :schedule, dependent: :destroy
 
   # Validates
+  validates :cpf, cpf: true
 
   # Scopes
 
