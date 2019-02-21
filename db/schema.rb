@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_21_033547) do
+ActiveRecord::Schema.define(version: 2019_02_21_041747) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -128,6 +128,7 @@ ActiveRecord::Schema.define(version: 2019_01_21_033547) do
   create_table "contracts", force: :cascade do |t|
     t.string "name"
     t.text "observation"
+    t.string "address"
   end
 
   create_table "evidences", force: :cascade do |t|
@@ -140,22 +141,13 @@ ActiveRecord::Schema.define(version: 2019_01_21_033547) do
     t.integer "evidence_type"
     t.integer "client_id"
     t.decimal "mulct_value"
+    t.integer "status", default: 0
     t.string "citizen_cpf"
     t.decimal "latitude"
     t.decimal "longitude"
-    t.integer "status", default: 0
     t.string "protocol_number"
     t.index ["address_id"], name: "index_evidences_on_address_id"
     t.index ["user_id"], name: "index_evidences_on_user_id"
-  end
-
-  create_table "infringements", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "evidence_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["evidence_id"], name: "index_infringements_on_evidence_id"
-    t.index ["user_id"], name: "index_infringements_on_user_id"
   end
 
   create_table "landfills", force: :cascade do |t|
@@ -256,8 +248,6 @@ ActiveRecord::Schema.define(version: 2019_01_21_033547) do
   add_foreign_key "contestations", "users"
   add_foreign_key "evidences", "addresses"
   add_foreign_key "evidences", "users"
-  add_foreign_key "infringements", "evidences"
-  add_foreign_key "infringements", "users"
   add_foreign_key "schedules", "trucks"
   add_foreign_key "schedules", "users"
   add_foreign_key "schedules_routes", "routes"
