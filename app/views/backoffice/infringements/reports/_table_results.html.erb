@@ -56,7 +56,8 @@
   function showPosition(position) {
     var latitude  = position.coords.latitude;
     var longitude = position.coords.longitude;
-    var request   = window.location.href + "?latitude=" + latitude + "&longitude=" + longitude;
+    var base_url  = "<%= raw backoffice_infringements_url %>";
+    var request   = base_url + "?latitude=" + latitude + "&longitude=" + longitude;
 
     window.open(request,"_self")
   }
