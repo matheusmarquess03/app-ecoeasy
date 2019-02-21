@@ -3,6 +3,10 @@ class Backoffice::InfringementsController < BackofficeController
 
   def index
     @infringements = Evidence.infringements
+
+    if params[:latitude].present? && params[:longitude].present?
+      @infringements.order_by_distance(params[:latitude].to_f, params[:longitude].to_f)
+    end
   end
 
   def show; end

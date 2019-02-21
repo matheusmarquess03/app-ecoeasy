@@ -1,4 +1,6 @@
 class Evidence < ApplicationRecord
+  reverse_geocoded_by :latitude, :longitude
+
   # Callbacks
   before_validation :generate_protocol_number, on: :create
 
@@ -29,6 +31,10 @@ class Evidence < ApplicationRecord
 
   scope :infringements, -> {
     where(evidence_type: [ Evidence.evidence_types[:advertence], Evidence.evidence_types[:mulct] ])
+  }
+
+  scope :order_by_distance, ->(latitude, longitude) {
+    near([latitude, longitude], 100, order: "distance ASC")
   }
 
   # Methods

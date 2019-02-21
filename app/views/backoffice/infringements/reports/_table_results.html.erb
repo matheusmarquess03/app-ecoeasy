@@ -1,6 +1,10 @@
 <div class="panel panel-default">
   <div class="panel-heading">
-    Infrações
+    <h4>Infrações
+      <button type="button" name="button" class="btn btn-warning pull-right" onclick="getLocation();">
+        Ordernar por distância
+      </button>
+    </h4>
   </div>
 
   <div class="panel-body">
@@ -30,6 +34,7 @@
               <td><%= I18n.l infringement.created_at.localtime, :format => :with_day_of_week, :locale => 'pt-BR' %></td>
               <td><%= infringement.full_address %></td>
               <td><%= infringement.client&.name %></td>
+              <td></td>
             </tr>
           <% end %>
         </tbody>
@@ -37,3 +42,22 @@
     </div>
   </div>
 </div>
+
+
+<script>
+  function getLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+      alert("Browser não suporta Geolocalização.");
+    }
+  }
+
+  function showPosition(position) {
+    var latitude  = position.coords.latitude;
+    var longitude = position.coords.longitude;
+    var request   = window.location.href + "?latitude=" + latitude + "&longitude=" + longitude;
+
+    window.open(request,"_self")
+  }
+</script>
