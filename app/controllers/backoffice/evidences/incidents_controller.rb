@@ -13,6 +13,9 @@ class Backoffice::Evidences::IncidentsController < BackofficeController
     @evidence.update!(evidence_params)
     flash[:notice] = 'Ocorrência atualizada com sucesso'
     redirect_to backoffice_evidences_incident_path(@evidence)
+  rescue ActiveRecord::RecordInvalid => e
+    flash[:alert] = "#{e}"
+    render :edit
   rescue StandardError
     flash[:alert] = 'Falha ao atualizar a Ocorrência.'
     render :edit

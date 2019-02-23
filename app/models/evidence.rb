@@ -64,6 +64,6 @@ class Evidence < ApplicationRecord
   def cant_delegate_to_created_evidence
     return if new_record? || created? || !user_id_changed?
 
-    errors.add(:user_id, 'Supervisor não pode ser alterado.')
+    errors[:base] << 'Não é possível delegar tarefas concluidas.'
   end
 end

@@ -10,7 +10,10 @@ module Api::V1
       @evidence = Evidence.new(evidence_params)
       @evidence.user_id = current_api_v1_user.id
       @evidence.evidence_type = params[:evidence_type].to_i
-      @evidence.status = 'attended'
+
+      if @evidence.advertence? || @evidence.mulct?
+        @evidence.status = 'attended'
+      end
 
       attach_signature
       attach_images
