@@ -20,7 +20,7 @@ module Api::V1
     end
 
     def send_bill_to_email
-      UserMailer.with(infringement: @infringement).send_bill_infringement.deliver
+      InfringementMailer.with(infringement: @infringement).send_bill_infringement.deliver
 
       render json: { message: 'Boleto enviado com sucesso' }, status: 200
     rescue ActiveRecord::RecordInvalid => e

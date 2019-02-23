@@ -10,10 +10,10 @@ module Api::V1
     end
 
     def create
-      @contestation = current_api_v1_user.contestations.new
-      @contestation.evidence_id   = params[:infringement_id]
-      @contestation.justification = contestation_params[:justification]
-      @contestation.save!
+      @infringement = Evidence.find(params[:infringement_id])
+      InfringementMailer.with(infringement: @infringement).send_contestation_form.deliver
+
+      render json: { message: 'Preencha o formulario enviado para seu e-mail, e reenvie-o para ecoeasy.contato@gmail.com' }, status: 200
 
     rescue ActiveRecord::RecordInvalid => e
       render json: { message: e.message }, status: 422
@@ -24,7 +24,7 @@ module Api::V1
     private
 
     def contestation_params
-      params.fetch(:contestation, {}).permit(:infringement_id, :justification)
+      params.fetch(:contestation, {}).permit(:infringement_id)
     end
   end
 end
