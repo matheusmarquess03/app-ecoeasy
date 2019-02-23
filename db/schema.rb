@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_21_041747) do
+ActiveRecord::Schema.define(version: 2019_02_23_155348) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -182,6 +182,12 @@ ActiveRecord::Schema.define(version: 2019_02_21_041747) do
     t.datetime "updated_at", null: false
     t.index ["route_id"], name: "index_schedules_routes_on_route_id"
     t.index ["schedule_id"], name: "index_schedules_routes_on_schedule_id"
+  end
+
+  create_table "template_contestations", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "status", default: 1
   end
 
   create_table "trucks", force: :cascade do |t|

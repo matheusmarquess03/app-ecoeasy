@@ -1,0 +1,53 @@
+<div class="col-lg-12">
+  <h1 class="page-header">RECURSO</h1>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4>Formulários de contestatação
+        <%= link_to new_backoffice_template_contestation_path, class: 'btn btn-outline btn-success pull-right', style:"margin-top: -5px" do %>
+          <i class="fa fa-plus-square fa-fw"></i> Cadastrar
+        <% end %>
+      </h4>
+    </div>
+    <br/>
+
+    <div class="panel-body">
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Nome do Arquivo</th>
+              <th>Tamanho do Arquivo</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @templates.each do |template| %>
+              <tr>
+                <td>
+                  <%= link_to rails_blob_path(template.file, disposition: "file") do %>
+                    <i class="fa fa-download"></i> <%= template.file.filename.to_s %>
+                  <% end %>
+                </td>
+                <td><%= number_to_human_size(template.file.blob.byte_size) %> </td>
+                <td>
+                  <% if template.active? %>
+                    <button type="button" name="button" class="btn btn-success">Ativo</button>
+                  <% end %>
+                </td>
+                <td>
+                  <div class="pull-right">
+                    <%= link_to backoffice_template_contestation_path(template), class: 'btn btn-outline btn-danger', method: :delete, data: { confirm: 'Ao confirmar esta operação será perdido definitivamente o formulário de contestação. Tem certeza que deseja fazer isto?' } do %>
+                        <i class="fa fa-times"></i> Deletar
+                    <% end %>
+                  </div>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -41,7 +41,10 @@ Rails.application.routes.draw do
 
   ## Routes to Admins
   # Devise redirects configurations
-  devise_for :admins, controllers: { sessions: 'devise/admins/sessions' }
+  devise_for :admins, controllers: {
+    sessions: 'devise/admins/sessions',
+    registrations: 'devise/admins/registrations'
+  }
 
   # Routes to Backoffice portal (admin)
   namespace :backoffice do
@@ -89,5 +92,7 @@ Rails.application.routes.draw do
         delete :destroy_attachment
       end
     end
+
+    resources :template_contestations, except: [:show]
   end
 end
