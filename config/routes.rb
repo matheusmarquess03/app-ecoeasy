@@ -93,6 +93,7 @@ Rails.application.routes.draw do
       end
     end
 
+    resources :configurations, only: [:index]
     resources :template_contestations, except: [:show]
   end
 end
