@@ -45,6 +45,12 @@ module Api::V1::Devise
         }
         @resource.save
 
+        # Verificar permissão do usuário de acordo com o aplicativo
+        unless @resource.type.upcase == request.headers['App-Type']&.upcase || (@resource.type == 'Client' && request.headers['App-Type'].blank?)
+          render_app_unauthorized
+          return
+        end
+
         sign_in(:user, @resource, store: false, bypass: false)
 
         yield @resource if block_given?
@@ -58,6 +64,10 @@ module Api::V1::Devise
     end
 
     protected
+
+    def render_app_unauthorized
+      render json: { message: 'Esta conta não está autorizada acessar este aplicativo' }, status: :forbidden
+    end
 
     def render_create_success
       render json: resource_data(resource_json: @resource.token_validation_response)
