@@ -1,0 +1,13 @@
+// Extra small: <576px
+// Small:        ≥576px
+// Medium:       ≥768px
+// Large:        ≥992px
+// Extra large:  ≥1200px
+
+
+/* To screen only mobile */
+@media screen and (max-width: 575px) {
+  .collapsible {
+    width: 60%;
+  }
+}
