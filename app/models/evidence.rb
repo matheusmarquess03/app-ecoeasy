@@ -30,7 +30,8 @@ class Evidence < ApplicationRecord
   }
 
   scope :infringements, -> {
-    where(evidence_type: [ Evidence.evidence_types[:advertence], Evidence.evidence_types[:mulct] ])
+    where(evidence_type: [ Evidence.evidence_types[:advertence], Evidence.evidence_types[:mulct] ]).
+    where('created_at >= ?', Date.today)
   }
 
   scope :order_by_distance, ->(latitude, longitude) {
