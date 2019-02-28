@@ -2,7 +2,7 @@ class Backoffice::InfringementsController < BackofficeController
   before_action :set_infringement, only: %i[show update]
 
   def index
-    @infringements = Evidence.infringements
+    @infringements = Evidence.infringements.order(created_at: :desc)
 
     if params[:latitude].present? && params[:longitude].present?
       @infringements.order_by_distance(params[:latitude].to_f, params[:longitude].to_f)
