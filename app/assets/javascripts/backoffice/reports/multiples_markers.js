@@ -14,8 +14,11 @@ function showCollectsOnMaps(locations) {
 
   // private methods
   function initMap() {
-    var lat = '-22.5174049'
-    var lng = '-41.9463168'
+    // var lat = '-22.5174049'
+    // var lng = '-41.9463168'
+
+    var lat = '-2.501836'
+    var lng = '-44.165189'
 
     var myCoords = new google.maps.LatLng(lat, lng);
 
