@@ -17,23 +17,23 @@ Admin.find_or_create_by!(email: 'admin@email.com') do |u|
 end
 puts 'USUARIO ADMINISTRADOR CRIADO COM SUCESSO'
 
-# Create a Landfill =================================================================================================
-Landfill.find_or_create_by!(name: 'Aterro de Gericinó') do |l|
-  l.address = Address.create(
-    street: 'Estrada do Gericinó',
-    number: '',
-    complement: '',
-    district: 'Gericinó',
-    city: 'Rio de Janeiro',
-    state: 'Rio de Janeiro',
-    country: 'Brasil',
-    zip_code: '',
-    latitude: '-22.8429971',
-    longitude: '-43.4745312'
-  )
-end
-
 unless Rails.env.production?
+  # Create a Landfill =================================================================================================
+  Landfill.find_or_create_by!(name: 'Aterro de Gericinó') do |l|
+    l.address = Address.create(
+      street: 'Estrada do Gericinó',
+      number: '',
+      complement: '',
+      district: 'Gericinó',
+      city: 'Rio de Janeiro',
+      state: 'Rio de Janeiro',
+      country: 'Brasil',
+      zip_code: '',
+      latitude: '-22.8429971',
+      longitude: '-43.4745312'
+    )
+  end
+
   # Create a default trucker user ===================================================================================
   puts 'CRIANDO USUARIO TRUCKER'
   Trucker.find_or_create_by!(email: 'trucker@email.com') do |u|
