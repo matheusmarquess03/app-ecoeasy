@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 module Backoffice::Collects
   class DailyGarbageCollectsController < BackofficeController
-    before_action :set_collect, only: [:edit, :update, :destroy, :change_status, :change_status_form]
+    before_action :set_collect, only: %i[edit update destroy change_status change_status_form]
     before_action :set_statuses_to_options, only: [:change_status_form]
-    before_action :set_free_schedules_to_options, :set_routes_to_options, only: [:new, :create, :edit, :update, :index]
+    before_action :set_free_schedules_to_options, :set_routes_to_options, only: %i[new create edit update index]
 
     def index
       @collects = Collect.daily_garbage_collection
@@ -29,8 +31,8 @@ module Backoffice::Collects
       end
       flash[:success] = 'Agendamento realizado com sucesso'
       redirect_to backoffice_collects_daily_garbage_collects_path
-    rescue
-      flash[:alert] = "Falha para realizar o agendamento. Tente novamente mais tarde"
+    rescue StandardError
+      flash[:alert] = 'Falha para realizar o agendamento. Tente novamente mais tarde'
       render :new
     end
 
@@ -68,8 +70,8 @@ module Backoffice::Collects
       end
       flash[:success] = 'Agendamento realizado com sucesso'
       redirect_to backoffice_collects_daily_garbage_collects_path
-    rescue
-      flash[:alert] = "Falha para atualizar o agendamento. Tente novamente mais tarde"
+    rescue StandardError
+      flash[:alert] = 'Falha para atualizar o agendamento. Tente novamente mais tarde'
       render :edit
     end
 
@@ -81,8 +83,8 @@ module Backoffice::Collects
       end
       flash[:success] = 'Agendamento deletado com sucesso'
       redirect_to backoffice_collects_daily_garbage_collects_path
-    rescue
-      flash[:alert] = "Falha para atualizar o agendamento. Tente novamente mais tarde"
+    rescue StandardError
+      flash[:alert] = 'Falha para atualizar o agendamento. Tente novamente mais tarde'
       redirect_to backoffice_collects_daily_garbage_collects_path
     end
 
@@ -92,11 +94,15 @@ module Backoffice::Collects
 
     def reports
       @q = Collect.daily_garbage_collection.ransack(params[:q])
-      @collects = @q.result.includes(schedule: :user)
+      @collects = @q.result.includes(schedule: %i[user routes],
+                                     landfill: :address)
 
       respond_to do |format|
         format.html
-        format.csv { send_data Collect.daily_collect_to_csv(@collects), filename: "coleta-de-entulho-#{Date.today}.csv" }
+        format.csv do
+          send_data(Collect.daily_collect_to_csv(@collects),
+                    filename: "coleta-de-entulho-#{Date.today}.csv")
+        end
       end
     end
 

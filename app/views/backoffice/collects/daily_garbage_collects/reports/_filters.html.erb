@@ -17,6 +17,16 @@
       <strong>Data: </strong>
       <%= date_field_tag :collect_date_gteq, nil, { class: 'form-control' } %>
     </div>
+
+    <div class="col-lg-4">
+      <br><strong>Rota: </strong>
+      <%= f.text_field :schedule_routes_title_cont, { class: 'form-control' } %>
+    </div>
+
+    <div class="col-lg-8">
+      <br><strong>Endereço de despejo: </strong>
+      <%= f.text_field :landfill_address_street_or_address_number_or_address_district_or_address_city_or_address_state_or_address_country_cont, { class: 'form-control' } %>
+    </div>
   </div>
 
   <div class="row">

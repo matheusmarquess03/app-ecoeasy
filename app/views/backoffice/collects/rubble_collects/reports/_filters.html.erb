@@ -4,7 +4,7 @@
       <strong>Número de protocolo: </strong>
       <%= f.text_field :protocol_number_cont, { class: 'form-control' } %>
     </div>
-    
+
     <div class="col-lg-4">
       <strong>Situação: </strong>
       <%= f.select :status_eq,
@@ -16,6 +16,11 @@
     <div class="col-lg-4">
       <strong>Data: </strong>
       <%= date_field_tag :collect_date_gteq, nil, { class: 'form-control' } %>
+    </div>
+
+    <div class="col-lg-8">
+      <br><strong>Endereço: </strong>
+      <%= f.text_field :address_street_or_address_number_or_address_district_or_address_city_or_address_state_or_address_country_cont, { class: 'form-control' } %>
     </div>
   </div>
 
