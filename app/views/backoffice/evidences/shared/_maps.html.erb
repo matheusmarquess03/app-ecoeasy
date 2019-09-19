@@ -1,0 +1,38 @@
+<div class="map">
+  <button class="btn btn-primary collapsible">
+    <i class="fa fa-map-marker fa-fw"></i> Ver Mapa
+  </button>
+  <div class="content">
+    <div class="reports-in-maps">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <input id="toggle-trigger" type="checkbox" data-toggle="toggle">
+          <strong> Mapa de Calor</strong>
+        </div>
+
+        <div id="map-collect-reports" class="maps"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+<% provide :head_tags do %>
+  <meta name='turbolinks-visit-control' content='reload'>
+  <script>
+    var locations = <%= raw object.where.not(latitude: nil, longitude: nil).pluck(:latitude, :longitude).compact %>
+
+    document.addEventListener("DOMContentLoaded", function() {
+      collapsible();
+      showCollectsOnMaps(locations);
+
+      $('#toggle-trigger').change(function() {
+        if ( $(this).prop('checked') ) {
+          heatMaps(locations);
+        } else {
+          showCollectsOnMaps(locations);
+        }
+       });
+    });
+  </script>
+<% end %>
