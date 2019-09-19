@@ -14,6 +14,23 @@
           </p>
           <br />
         </div>
+
+        <div class="col-lg-6" style="border: 1px solid gray">
+          <p>
+            <br><strong>Data de início</strong><br>
+            <%= @contract.start_date.strftime('%d/%m/%Y') %>
+          </p>
+
+          <p>
+            <strong>Data de renovação</strong><br>
+            <%= @contract.renewal_date.strftime('%d/%m/%Y') %>
+          </p>
+
+          <p>
+            <strong>Valor do empenho</strong><br>
+            <%= @contract.commitment_value %>
+          </p>
+        </div>
       </div>
 
       <% if @contract.attachments.exists? %>

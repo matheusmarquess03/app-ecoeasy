@@ -88,3 +88,6 @@ pt-BR:
         name: Nome
         observation: Observação
         address: Endereço
+        start_date: Data de início
+        renewal_date: Data de renovação
+        commitment_value: Valor do empenho

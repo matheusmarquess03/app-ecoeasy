@@ -56,7 +56,12 @@ module Backoffice
     private
 
     def contract_params
-      params.fetch(:contract, {}).permit(:name, :observation, attachments: [])
+      params.fetch(:contract, {}).permit(:name,
+                                         :observation,
+                                         :start_date,
+                                         :renewal_date,
+                                         :commitment_value,
+                                         attachments: [])
     end
 
     def set_contract
