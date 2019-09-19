@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   require 'sidekiq/web'
   mount Sidekiq::Web => '/sidekiq'
 
-  # Routes to Users - using Devise Token Auth
+  ## Routes to Users - using Devise Token Auth
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       mount_devise_token_auth_for 'User', at: 'auth',
@@ -14,7 +14,6 @@ Rails.application.routes.draw do
           sessions:      'api/v1/devise/sessions',
           passwords:     'api/v1/devise/passwords'
         }
-
 
       resources :clients, only: [] do
         collection do
@@ -43,14 +42,14 @@ Rails.application.routes.draw do
     end
   end
 
-  # Routes to Admins
+  ## Routes to Admins
   # Devise redirects configurations
   devise_for :admins, controllers: {
     sessions: 'devise/admins/sessions',
     registrations: 'devise/admins/registrations'
   }
 
-  # Routes to Backoffice portal admin
+  # Routes to Backoffice portal (admin)
   namespace :backoffice do
     get '', to: 'dashboard#index'
 
