@@ -1,11 +1,14 @@
+# frozen_string_literal: true
+
+# Model about all types of collect
 class Collect < ApplicationRecord
   # Callbacks
   before_validation :generate_protocol_number, on: :create
-  before_update :send_email, :if => :status_changed?
+  before_update :send_email, if: :status_changed?
 
   # Enumerators
-  enum status: [:requested, :proposed_date, :confirmed, :cancelled, :collected, :dumped]
-  enum type_collect: [:rubble_collect, :daily_garbage_collection, :road_cleaning]
+  enum status: %i[requested proposed_date confirmed cancelled collected dumped]
+  enum type_collect: %i[rubble_collect daily_garbage_collection road_cleaning]
 
   # Associations
   belongs_to :user, optional: true
@@ -19,17 +22,32 @@ class Collect < ApplicationRecord
   validates :protocol_number, uniqueness: true
 
   # Scopes
-  scope :scheduled, -> {
-    where(status: [ Collect.statuses[:proposed_date], Collect.statuses[:confirmed] ])
+  scope :scheduled, lambda {
+    where(status: [Collect.statuses[:proposed_date],
+                   Collect.statuses[:confirmed]])
   }
 
-  scope :trucker_collected, ->(trucker_id) {
-    joins(:schedule).
-    where(schedules: { user_id: trucker_id }, status: Collect.statuses[:collected])
+  scope :rubble_collect_to_dump_by_trucker, lambda { |trucker_id|
+    joins(:schedule)
+      .where(schedules: { user_id: trucker_id },
+             status: :collected,
+             type_collect: :rubble_collect)
+  }
+
+  scope :daily_collect_to_dump_by_trucker, lambda { |trucker_id|
+    joins(:schedule)
+      .where(schedules: { user_id: trucker_id },
+             status: :confirmed,
+             type_collect: :daily_garbage_collection)
+  }
+
+  scope :collects_to_dump_by_trucker, lambda { |trucker_id|
+    rubble_collect_to_dump_by_trucker(trucker_id).or(
+      daily_collect_to_dump_by_trucker(trucker_id)
+    )
   }
 
   # Methods
-
   def self.to_csv(collects)
     headers = ['Número de protocolo', 'Nome', 'Data da solicitação', 'Data do recolhimento', 'Situação', 'Endereço']
 
@@ -40,8 +58,8 @@ class Collect < ApplicationRecord
         csv << [
           collect.protocol_number,
           collect.client.name,
-          I18n.l(collect.created_at.localtime, :format => :with_day_of_week, :locale => 'pt-BR'),
-          collect.collect_date.present? ? (I18n.l collect.collect_date.localtime, :format => :with_day_of_week, :locale => 'pt-BR') : 'Não definida até o momento',
+          I18n.l(collect.created_at.localtime, format: :with_day_of_week, locale: 'pt-BR'),
+          collect.collect_date.present? ? (I18n.l collect.collect_date.localtime, format: :with_day_of_week, locale: 'pt-BR') : 'Não definida até o momento',
           I18n.t("enums.collects.status.#{collect.status}"),
           collect.address_formatted
         ]
@@ -59,7 +77,7 @@ class Collect < ApplicationRecord
         csv << [
           collect.protocol_number,
           collect.schedule.user.name,
-          I18n.l(collect.schedule.work_day, :format => :with_day_of_week, :locale => 'pt-BR'),
+          I18n.l(collect.schedule.work_day, format: :with_day_of_week, locale: 'pt-BR'),
           collect.schedule&.routes.first.title,
           I18n.t("enums.collects.status.#{collect.status}"),
           collect.landfill.present? ? collect.landfill.name : 'Não foi despejado até o momento'
@@ -73,7 +91,7 @@ class Collect < ApplicationRecord
   end
 
   def client
-    self.user
+    user
   end
 
   private
@@ -83,7 +101,7 @@ class Collect < ApplicationRecord
   end
 
   def generate_protocol_number
-    Collect.last == nil ? id = 0 : id = Collect.last.id
+    id = Collect.last.nil? ? 0 : Collect.last.id
     self.protocol_number = "#{id + 1}#{DateTime.now.to_i}"
   end
 

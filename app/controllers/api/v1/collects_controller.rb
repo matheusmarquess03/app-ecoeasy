@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Api::V1
   class CollectsController < ApiController
     before_action :set_collect, only: [:update]
@@ -31,7 +33,7 @@ module Api::V1
     end
 
     def dump_collects
-      @collects = Collect.trucker_collected(current_api_v1_user.id)
+      @collects = Collect.collects_to_dump_by_trucker(current_api_v1_user.id)
       unless @collects.present?
         render json: { message: 'Não há coletas pendentes para despejo relacionadas a este motorista' }
       end
@@ -51,12 +53,14 @@ module Api::V1
     private
 
     def collects_params
-      params.fetch(:collect, {}).permit(:status, :address_id, :landfill_id)
+      params.fetch(:collect, {}).permit(
+        :status, :address_id, :landfill_id, :weight
+      )
     end
 
     def set_collect
       @collect = Collect.find(params[:id])
-    rescue ActiveRecord::RecordNotFound => e
+    rescue ActiveRecord::RecordNotFound
       render json: { message: 'Coleta não encontrada' }, status: 404
     end
   end

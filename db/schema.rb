@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_19_172258) do
+ActiveRecord::Schema.define(version: 2019_11_14_234710) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -90,6 +90,7 @@ ActiveRecord::Schema.define(version: 2019_09_19_172258) do
     t.bigint "address_id"
     t.bigint "landfill_id"
     t.string "protocol_number"
+    t.decimal "weight"
     t.index ["address_id"], name: "index_collects_on_address_id"
     t.index ["landfill_id"], name: "index_collects_on_landfill_id"
     t.index ["schedule_id"], name: "index_collects_on_schedule_id"
