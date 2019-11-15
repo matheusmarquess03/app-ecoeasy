@@ -6,7 +6,7 @@ class Backoffice::InfringementsController < BackofficeController
   def index
     @infringements = Evidence.infringements
                              .order(created_at: :desc)
-                             .paginate(page: params[:page])
+                             .paginate(page: params[:page], per_page: 10)
 
     if params[:latitude].present? && params[:longitude].present?
       @infringements.order_by_distance(

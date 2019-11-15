@@ -6,8 +6,8 @@ class Backoffice::SchedulesController < BackofficeController
 
   def index
     @schedules = Schedule.all
-                         .order(:user_id, :work_day)
-                         .paginate(page: params[:page])
+                         .order('work_day DESC, user_id')
+                         .paginate(page: params[:page], per_page: 10)
   end
 
   def show

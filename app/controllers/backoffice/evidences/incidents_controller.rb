@@ -4,7 +4,7 @@ class Backoffice::Evidences::IncidentsController < BackofficeController
   def index
     @evidences = Evidence.incident
                          .order(created_at: :desc)
-                         .paginate(page: params[:page])
+                         .paginate(page: params[:page], per_page: 10)
   end
 
   def show; end
