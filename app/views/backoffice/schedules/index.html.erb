@@ -58,6 +58,13 @@
             <% end %>
           </tbody>
         </table>
+
+        <div class="apple_pagination">
+          <div class="page_info">
+            <%= page_entries_info @schedules %>
+          </div>
+          <%= will_paginate @schedules, :container => false %>
+        </div>
       </div>
     </div>
 

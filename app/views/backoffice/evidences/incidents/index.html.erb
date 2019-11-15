@@ -46,6 +46,13 @@
             <% end %>
           </tbody>
         </table>
+
+        <div class="apple_pagination">
+          <div class="page_info">
+            <%= page_entries_info @evidences %>
+          </div>
+          <%= will_paginate @evidences, :container => false %>
+        </div>
       </div>
     </div>
   </div>

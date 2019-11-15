@@ -39,6 +39,13 @@
           <% end %>
         </tbody>
       </table>
+
+      <div class="apple_pagination">
+        <div class="page_info">
+          <%= page_entries_info @infringements %>
+        </div>
+        <%= will_paginate @infringements, :container => false %>
+      </div>
     </div>
   </div>
 </div>

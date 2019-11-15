@@ -1,8 +1,12 @@
+# frozen_string_literal: true
+
 class Backoffice::Evidences::SimpleEvidencesController < BackofficeController
   before_action :set_evidence, only: %i[show edit update]
 
   def index
     @evidences = Evidence.simple_evidence
+                         .order(created_at: :desc)
+                         .paginate(page: params[:page])
   end
 
   def show; end

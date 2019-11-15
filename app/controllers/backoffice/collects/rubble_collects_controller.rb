@@ -5,7 +5,7 @@ module Backoffice::Collects
     before_action :set_free_schedules_to_options, only: [:edit, :index]
 
     def index
-      @collects = Collect.rubble_collect
+      @collects = Collect.rubble_collect.order(collect_date: :desc)
     end
 
     def edit

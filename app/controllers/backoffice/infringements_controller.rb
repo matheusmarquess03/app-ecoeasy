@@ -1,11 +1,18 @@
+# frozen_string_literal: true
+
 class Backoffice::InfringementsController < BackofficeController
   before_action :set_infringement, only: %i[show update]
 
   def index
-    @infringements = Evidence.infringements.order(created_at: :desc)
+    @infringements = Evidence.infringements
+                             .order(created_at: :desc)
+                             .paginate(page: params[:page])
 
     if params[:latitude].present? && params[:longitude].present?
-      @infringements.order_by_distance(params[:latitude].to_f, params[:longitude].to_f)
+      @infringements.order_by_distance(
+        params[:latitude].to_f,
+        params[:longitude].to_f
+      )
     end
   end
 

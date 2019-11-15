@@ -3,6 +3,8 @@ class Backoffice::Evidences::IncidentsController < BackofficeController
 
   def index
     @evidences = Evidence.incident
+                         .order(created_at: :desc)
+                         .paginate(page: params[:page])
   end
 
   def show; end

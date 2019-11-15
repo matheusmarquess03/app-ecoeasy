@@ -8,6 +8,9 @@ module Backoffice::Collects
 
     def index
       @collects = Collect.daily_garbage_collection
+                         .order(collect_date: :desc)
+                         .paginate(page: params[:page])
+
       if @collects.blank?
         flash[:info] = 'Não há coletas cadastrado até o momento.'
         redirect_to new_backoffice_collects_daily_garbage_collect_path
@@ -94,8 +97,11 @@ module Backoffice::Collects
 
     def reports
       @q = Collect.daily_garbage_collection.ransack(params[:q])
-      @collects = @q.result.includes(schedule: %i[user routes],
-                                     landfill: :address)
+
+      @collects = @q.result
+                    .includes(schedule: %i[user routes], landfill: :address)
+                    .order(collect_date: :desc)
+                    .paginate(page: params[:page])
 
       respond_to do |format|
         format.html

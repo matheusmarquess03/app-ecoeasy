@@ -12,7 +12,7 @@ pt-BR:
         other: Caminhões
       collect:
         one: Coleta
-        other: Coletass
+        other: Coletas
       evidence:
         one: Evidência
         other: Evidências
@@ -28,10 +28,10 @@ pt-BR:
       address:
         one: Endereço
         other: Endereços
-      schedules:
+      schedule:
         one: Agenda
         other: Agendas
-      contracts:
+      contract:
         one: Contrato
         other: Contratos
     attributes:

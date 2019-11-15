@@ -44,6 +44,7 @@ gem 'ransack'
 gem 'redis-rails'
 gem 'sendgrid-ruby'
 gem 'sidekiq'
+gem 'will_paginate', '~> 3.1.0'
 
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'mini_racer', platforms: :ruby

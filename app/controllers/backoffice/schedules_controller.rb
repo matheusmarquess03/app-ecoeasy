@@ -1,9 +1,13 @@
+# frozen_string_literal: true
+
 class Backoffice::SchedulesController < BackofficeController
-  before_action :set_users_collections_for_select, only: [:new, :edit]
-  before_action :set_schedule, only: [:show, :edit, :update, :destroy]
+  before_action :set_users_collections_for_select, only: %i[new edit]
+  before_action :set_schedule, only: %i[show edit update destroy]
 
   def index
-    @schedules = Schedule.all.order(:user_id, :work_day)
+    @schedules = Schedule.all
+                         .order(:user_id, :work_day)
+                         .paginate(page: params[:page])
   end
 
   def show
@@ -25,8 +29,7 @@ class Backoffice::SchedulesController < BackofficeController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @schedule.update(schedule_params)
