@@ -53,9 +53,8 @@ module Api::V1
     private
 
     def collects_params
-      params.fetch(:collect, {}).permit(
-        :status, :address_id, :landfill_id, :weight
-      )
+      params.fetch(:collect, {}).permit(:status, :address_id, :landfill_id)
+            .merge(weight: params[:weight])
     end
 
     def set_collect
