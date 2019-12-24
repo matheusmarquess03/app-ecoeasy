@@ -1,21 +1,26 @@
+# frozen_string_literal: true
+
 class Route < ApplicationRecord
   # Callbacks
-  before_save :remove_last_address_blank
+  before_validation :remove_last_address_blank
 
   # Associations
   has_many   :schedules_routes
   has_many   :schedules, through: :schedules_routes
   has_many   :address, dependent: :destroy
 
-  accepts_nested_attributes_for :address, reject_if: :all_blank, allow_destroy: true
+  accepts_nested_attributes_for :address,
+                                reject_if: :all_blank,
+                                allow_destroy: true
 
   # Validations
+  validates_presence_of :address, allow_blank: false
+  validate :address_cant_be_blank
 
   # Scopes
-  scope :current_route, ->(trucker) {
-    joins(:schedule).
-    # where(schedules: { user_id: trucker.id }).first
-    where(schedules: { work_day: Date.today, user_id: trucker.id })
+  scope :current_route, lambda { |trucker|
+    joins(:schedule)
+      .where(schedules: { work_day: Date.today, user_id: trucker.id })
   }
 
   # Methods
@@ -23,8 +28,16 @@ class Route < ApplicationRecord
   private
 
   def remove_last_address_blank
-    if self.address.last.latitude.blank? || self.address.last.longitude.blank?
-      self.address.last.destroy
+    return unless address.last.latitude.blank? || address.last.longitude.blank?
+
+    address.last.destroy
+  end
+
+  def address_cant_be_blank
+    countries = address.map(&:country)
+
+    if countries.all?(&:blank?)
+      errors.add(:base, 'Você deve selecionar ao menos 1 ponto no mapa')
     end
   end
 end
