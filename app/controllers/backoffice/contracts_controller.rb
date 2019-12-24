@@ -61,6 +61,7 @@ module Backoffice
                                          :start_date,
                                          :renewal_date,
                                          :commitment_value,
+                                         :address,
                                          attachments: [])
     end
 
