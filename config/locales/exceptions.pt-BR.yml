@@ -1,0 +1,5 @@
+pt-BR:
+  genrical_errors:
+    forbidden_destroy: Você não pode fazer isto! Este dado está relacionado a outros dados importantes para o bom funcionamento do sistema. Dúvidas, entre em contato com o administrador do sistema
+    not_found: Este registro não existe ou foi excluído. Verifique seus parâmetros de busca e tente novamente ou entre em contato com o administrador do sistema
+    internal_error: Desculpe, algo deu errado. Por favor, tente novamente ou entre em contato com o administrador do sistema

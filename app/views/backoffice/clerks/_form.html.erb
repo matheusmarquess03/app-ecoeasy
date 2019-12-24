@@ -26,7 +26,7 @@
           <%= f.text_field :phone_number, class: 'form-control', required: true %>
         </div>
         <div class="col-lg-3">
-          <%= f.label :cpf %>
+          <%= f.label :cpf, 'CPF' %>
           <%= f.text_field :cpf, class: 'form-control cpf-field', required: true %>
           <br />
         </div>
@@ -38,7 +38,7 @@
           <%= f.text_field :password, class: 'form-control', placeholder: password_placeholder(@clerk) %>
         </div>
         <div class="col-lg-6">
-          <%= f.label :password_confirmation %>
+          <%= f.label :password_confirmation, 'Confirme sua senha' %>
           <%= f.text_field :password_confirmation, class: 'form-control', placeholder: password_placeholder(@clerk) %>
         </div>
       </div>
