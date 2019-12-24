@@ -28,7 +28,7 @@
 
           <p>
             <strong>Valor do empenho</strong><br>
-            <%= @contract.commitment_value %>
+            <%= number_to_currency @contract.commitment_value, unit: 'R$ ', separator: ',', delimiter: '.' %>
           </p>
         </div>
       </div>

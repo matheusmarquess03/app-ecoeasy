@@ -15,7 +15,7 @@
           <%= f.select :schedule_id,
               options_from_collection_for_select(@free_schedules, :id, 'trucker_schedule_label', f.object.schedule_id),
               { include_blank: 'Selecione uma agenda' },
-              { class: 'form-control' }
+              { class: 'form-control', required: true  }
           %>
           <br>
         </div>
@@ -26,7 +26,7 @@
             <%= route.select :route_id,
                 options_from_collection_for_select(@routes, :id, :title, route_selected(f.object)),
                 { include_blank: 'Selecione uma agenda' },
-                { class: 'form-control' }
+                { class: 'form-control', required: true  }
             %>
             <br>
           <% end %>

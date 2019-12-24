@@ -13,13 +13,13 @@
         <div class="form-group">
           <div class="col-lg-6">
             <%= f.label :name %>
-            <%= f.text_field :name, class: 'form-control' %>
+            <%= f.text_field :name, class: 'form-control', required: true %>
             <br />
           </div>
 
           <div class="col-lg-6">
             <%= f.label :start_date %>
-            <%= f.date_field :start_date, class: 'form-control' %>
+            <%= f.date_field :start_date, class: 'form-control', required: true %>
             <br />
           </div>
         </div>
@@ -29,13 +29,13 @@
         <div class="form-group">
           <div class="col-lg-6">
             <%= f.label :observation %>
-            <%= f.text_area :observation, class: 'form-control' %>
+            <%= f.text_area :observation, class: 'form-control', required: true %>
             <br />
           </div>
 
           <div class="col-lg-6">
             <%= f.label :renewal_date %>
-            <%= f.date_field :renewal_date, class: 'form-control' %>
+            <%= f.date_field :renewal_date, class: 'form-control', required: true %>
             <br />
           </div>
         </div>
@@ -45,7 +45,11 @@
         <div class="form-group">
           <div class="col-lg-6">
             <%= f.label :address %>
-            <%= f.text_field :address, class: 'form-control', placeholder: 'Digite o nome da cidade', id: 'contract-address' %>
+            <%= f.text_field :address,
+                             class: 'form-control',
+                             placeholder: 'Digite o nome da cidade',
+                             id: 'contract-address',
+                             required: true %>
             <br />
           </div>
 
@@ -53,8 +57,11 @@
             <%= f.label :commitment_value %>
             <div class="form-group input-group">
               <span class="input-group-addon">R$</span>
-              <%= f.text_field :commitment_value, class: 'form-control' %>
-              <span class="input-group-addon">,00</span>
+              <%= f.number_field :commitment_value,
+                                 class: 'form-control',
+                                 placeholder: 'Ex.: 5010.45',
+                                 step: 0.01,
+                                 required: true %>
             </div>
             <br />
           </div>

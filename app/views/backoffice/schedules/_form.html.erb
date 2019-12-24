@@ -20,7 +20,7 @@
                   f.object.user_id
                 ),
                 { include_blank: 'Selecione um motorista' },
-                { class: 'form-control' }
+                { class: 'form-control', required: true  }
             ) %>
             <br>
           </div>
@@ -29,7 +29,7 @@
         <div class="form-group">
           <div class="col-lg-6">
             <%= f.label :work_day %>
-            <%= date_select('schedule', 'work_day', use_month_numbers: true, order: [:day, :month, :year], class: 'form-control') %>
+            <%= date_select('schedule', 'work_day', use_month_numbers: true, order: [:day, :month, :year], class: 'form-control', required: true ) %>
           </div>
 
           <div class="col-lg-6">

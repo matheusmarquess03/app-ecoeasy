@@ -12,26 +12,26 @@
       <div class="form-group">
         <div class="col-lg-6">
           <%= f.label :name %>
-          <%= f.text_field :name, class: 'form-control' %>
+          <%= f.text_field :name, class: 'form-control', required: true %>
         </div>
         <div class="col-lg-6">
           <%= f.label :email %>
-          <%= f.text_field :email, class: 'form-control' %><br>
+          <%= f.text_field :email, class: 'form-control', required: true %><br>
         </div>
       </div>
 
       <div class="form-group">
         <div class="col-lg-6">
           <%= f.label :phone_number %>
-          <%= f.text_field :phone_number, class: 'form-control' %>
+          <%= f.text_field :phone_number, class: 'form-control', required: true  %>
         </div>
         <div class="col-lg-3">
           <%= f.label :cpf %>
-          <%= f.number_field :cpf, class: 'form-control cpf-field' %>
+          <%= f.number_field :cpf, class: 'form-control cpf-field', required: true  %>
         </div>
         <div class="col-lg-3">
           <%= f.label :cnh %>
-          <%= f.text_field :cnh, class: 'form-control' %><br>
+          <%= f.text_field :cnh, class: 'form-control', required: true  %><br>
         </div>
       </div>
 
