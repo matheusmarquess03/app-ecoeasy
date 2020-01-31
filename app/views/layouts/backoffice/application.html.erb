@@ -29,6 +29,14 @@
   <%= javascript_include_tag 'bootstrap_sb_admin', 'data-turbolinks-track': 'reload' %>
   <%= javascript_include_tag 'https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js' %>
 
+  <div class="modals">
+    <!-- Propor data para coleta -->
+    <div id="free_schedule" class="modal fade"></div>
+
+    <!-- Alterar status -->
+    <div id="change_status" class="modal fade"></div>
+  </div>
+
   <div id="wrapper">
     <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
       <%= render 'layouts/backoffice/shared/header' %>
