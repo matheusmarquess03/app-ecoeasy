@@ -5,7 +5,7 @@
       <%= f.text_field :protocol_number_cont, { class: 'form-control' } %>
     </div>
 
-    <div class="col-lg-4">
+    <div class="col-lg-3">
       <strong>Situação: </strong>
       <%= f.select :status_eq,
         options_for_select(collects_statuses_i18n, selected: params[:q].present? ? params[:q][:status_eq] : nil),
@@ -13,9 +13,16 @@
       %>
     </div>
 
-    <div class="col-lg-4">
-      <strong>Data: </strong>
-      <%= date_field_tag 'q[created_at_gteq]', nil, { class: 'form-control' } %>
+    <div class="col-lg-5">
+      <strong>Intervalo de datas: </strong>
+      <div class="row">
+        <div class="col-lg-6">
+          <%= date_field_tag 'q[created_at_gteq]', params.dig(:q, :created_at_gteq), { class: 'form-control' } %>
+        </div>
+        <div class="col-lg-6">
+          <%= date_field_tag 'q[created_at_lteq]',  params.dig(:q, :created_at_lteq), { class: 'form-control' } %>
+        </div>
+      </div>
     </div>
 
     <div class="col-lg-8">
