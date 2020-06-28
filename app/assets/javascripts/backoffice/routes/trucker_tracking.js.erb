@@ -1,6 +1,25 @@
 function truckerTracking(firebase_reference_access) {
-  var elementId = 'truckerTracking'
-  var imagePath = "<%= image_path 'garbage_trucker_pointer.png' %>"
-
-  tracking(firebase_reference_access, elementId, imagePath)
+	var elementId = 'truckerTracking'
+	var imagePath = "<%= image_path 'garbage_trucker_pointer.png' %>"
+	
+	tracking(firebase_reference_access, elementId, imagePath, true, '', true, true);
+}
+function truckerTrackingAll(chkStatus, array_routes) {
+	var elementId = 'truckerTracking'
+	var imagePath = "<%= image_path 'garbage_trucker_pointer.png' %>"
+	
+	destroyGoogleMapsReference(array_routes);
+	
+	if(chkStatus)  {
+		document.getElementById('schedules').disabled = true;
+		
+		createGoogleMaps(elementId);
+		trackingAll(array_routes, elementId, imagePath, false, false);
+	}
+	else {
+		document.getElementById('schedules').disabled = false;
+		
+		firebase_reference_access = document.getElementById('schedules').value;
+		tracking(firebase_reference_access, elementId, imagePath, true, '', true, true);
+	}
 }

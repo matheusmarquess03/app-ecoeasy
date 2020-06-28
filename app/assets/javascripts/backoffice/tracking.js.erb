@@ -1,56 +1,154 @@
 // Update movimentation using firebase and Printing movimentation
-function tracking(firebase_reference_access, elementId, imagePath, callbackFunction) {
-  // var lat = '-22.5273041'
-  // var lng = '-41.9463158'
+var myTime;
 
-  var lat = '-2.501836'
-  var lng = '-44.165189'
+var googleMapsCenterStart = new google.maps.LatLng('-2.501836', '-44.165189');
+var googleMapLandfillPos = new google.maps.LatLng('-2.517521', '-44.190990');
 
-  var myCoords = new google.maps.LatLng(lat, lng);
+var googleMapsCenter = googleMapsCenterStart;
 
-  var mapOptions = {
-    center: myCoords,
-    zoom: 15
-  };
+var googleMapsZoom = 13;
 
-  var map = new google.maps.Map(document.getElementById(elementId), mapOptions);
+var googleMap = new google.maps.Map(document.getElementById('truckerTracking'), {
+	center: googleMapsCenter,
+	zoom: googleMapsZoom
+});
 
-  var icon = {
-    url: imagePath
-  };
-
-  var marker = new google.maps.Marker({
-    position: myCoords,
-    map: map,
-    icon: icon
-  });
-
-  var polyOptions = {
+var googleMapsPathOptions = {
     strokeColor: '#000000',
     strokeOpacity: 1.0,
-    strokeWeight: 3
-  };
+    strokeWeight: 3,
+};
 
-  var poly = new google.maps.Polyline(polyOptions);
-  poly.setMap(map);
+var googleMapsFirstTime = true;
 
-  firebase.database().ref(firebase_reference_access).once('value').then(function(snapshot) {
-    if (snapshot.val() == null) {
-      marker.setMap(null);
-      marker.setVisible(false);
-    }
-  });
+function destroyGoogleMapsReference(rotas)
+{
+	for(i=0; i<rotas.length; i++){
+		var tmp = rotas[i].split("@");
+		
+		refData = tmp[0];
+		
+		tmp = firebase.database().ref(refData);
+		
+		tmp.off('child_added');
+	}
+}
 
-  firebase.database().ref(firebase_reference_access).on('child_added', function(snapshot) {
-    var path = poly.getPath();
-    var latLng = new google.maps.LatLng(snapshot.val().latitude, snapshot.val().longitude)
+function createGoogleMaps(elementId)
+{
+	var myCoords = googleMapsCenterStart;
+	
+	var mapOptions = {
+		center: myCoords,
+		zoom: 15
+	};
+  
+	googleMap = new google.maps.Map(document.getElementById(elementId), mapOptions);
+	
+	googleMap.addListener('center_changed', function() {
+		googleMapsFirstTime = false;
+		googleMapsCenter = googleMap.getCenter();
+	});
+	
+	googleMap.addListener('zoom_changed', function() {
+		googleMapsFirstTime = false;
+		googleMapsZoom = googleMap.getZoom();
+	});
+	
+	var googleMapsShedIcon = {
+		url: "<%= image_path 'shed_marker.png' %>",
+		labelOrigin: new google.maps.Point(12, -10)
+	};
+	
+	var googleMapsShedMarker = new google.maps.Marker({
+		position: googleMapsCenterStart,
+		map: googleMap,
+		icon: googleMapsShedIcon,
+		label: "Base Sellix"
+	});
+	
+	var googleMapsLandfillIcon = {
+		url: "<%= image_path 'landfill_marker.png' %>",
+		labelOrigin: new google.maps.Point(12, -10)
+	};
+	
+	var googleMapsLandfillMarker = new google.maps.Marker({
+		position: googleMapLandfillPos,
+		map: googleMap,
+		icon: googleMapsLandfillIcon,
+		label: "Aterro"
+	});
+}
 
-    if (typeof callbackFunction === "function") {
-      callbackFunction(snapshot);
-    }
+function tracking(firebase_reference_access, elementId, imagePath, googleMapsFirstTime, markerLabel, clearMap, withPath, callbackFunction) {
+	
+	if(clearMap)
+		createGoogleMaps(elementId);
+  
+	var googleMapsTruckIcon = {
+		url: imagePath,
+		labelOrigin: new google.maps.Point(11, 40)
+	};
+	
+	var googleMapsMarker = new google.maps.Marker({
+		position: googleMapsCenterStart,
+		map: googleMap,
+		icon: googleMapsTruckIcon
+	});
+		
+	if(markerLabel != "") {
+		googleMapsMarker = new google.maps.Marker({
+			position: googleMapsCenterStart,
+			map: googleMap,
+			icon: googleMapsTruckIcon,
+			label: markerLabel
+		});
+	} 
+	
+	var googleMapsPath = new google.maps.Polyline(googleMapsPathOptions);
+	googleMapsPath.setMap(googleMap);
+	
+	if(firebase_reference_access == "") {
+		googleMapsMarker.setMap(null);
+		googleMapsMarker.setVisible(false);
+	}
+		
+	tmp = firebase.database().ref(firebase_reference_access);
+	tmp.once('value').then(function(snapshot) {
+		if (snapshot.val() == null) {
+		  googleMapsMarker.setMap(null);
+		  googleMapsMarker.setVisible(false);
+		}
+	});
 
-    path.push(latLng);
-    marker.setPosition(latLng);
-    map.setCenter(marker.getPosition());
-  });
+	tmp = firebase.database().ref(firebase_reference_access);
+	tmp.on('child_added', function(snapshot) {
+		var path = googleMapsPath.getPath();
+	
+		var latLng = new google.maps.LatLng(snapshot.val().latitude, snapshot.val().longitude)
+		
+		if(withPath)
+			path.push(latLng);
+		
+		googleMapsMarker.setPosition(latLng);
+		
+		if(googleMapsFirstTime) 
+			googleMap.setCenter(googleMapsMarker.getPosition());
+		else 
+			googleMap.setCenter(googleMapsCenter);
+		
+		googleMap.setZoom(googleMapsZoom);
+	});
+}
+
+// Update movimentation of all truckers using firebase and Printing movimentation
+function trackingAll(rotas, elementId, imagePath, clearMap, withPath, callbackFunction) {
+	
+	for(i=0; i<rotas.length; i++){
+		var tmp = rotas[i].split("@");
+		
+		refData = tmp[0];
+		
+		tracking(refData, elementId, imagePath, true, tmp[1], false, false);
+	}
 }

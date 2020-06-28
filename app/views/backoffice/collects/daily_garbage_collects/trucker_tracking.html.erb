@@ -8,17 +8,30 @@
 
 
     <div class="panel-body">
-      <div class="row">
-        <div class="col-lg-8">
-          <h5>Seleciona a agenda do camminhoneiro: </h5>
-          <%= select_tag 'schedules',
-              options_from_collection_for_select(@schedules_trackable, 'firebase_reference_access', 'trucker_schedule_label'),
-              include_blank: 'Selecione uma opção', class: "form-control", onchange: "truckerTracking(this.value);"
-          %>
-        </div>
-      </div>
+		<div class="row">
+			<div class="col-lg-6">
+				<%= select_tag 'schedules',
+					options_from_collection_for_select(@schedules_trackable, 'firebase_reference_access', 'trucker_schedule_label'),
+					include_blank: 'Selecione um motorista', class: "form-control", onchange: "truckerTracking(this.value);"
+				%>
+			</div>
+			<div class="col-lg-6">
+				<div class="form-check">
+					<label class="form-check-label" for="chkAll">
+						<input class="form-check-input" type="checkbox" name="chkAll" id="chkAll" onclick="truckerTrackingAll(this.checked, [<%= raw @all_routes %>]);">
+						Todos
+					</label>
+				</div>
+			</div>
+		</div>
       <br>
       <div class="maps" id="truckerTracking"></div>
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+	$(function() {
+		createGoogleMaps("truckerTracking");
+	});
+</script>

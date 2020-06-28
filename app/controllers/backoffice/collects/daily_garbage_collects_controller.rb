@@ -93,6 +93,17 @@ module Backoffice::Collects
 
     def trucker_tracking
       @schedules_trackable = Schedule.trackable(Collect.type_collects[:daily_garbage_collection])
+	  
+	  count = 1
+	  @schedules_trackable.each do |ss|
+		if (count == 1) 
+			@all_routes = "\'#{ss.work_day.strftime('%Y-%m-%d')}/#{ss.user_id}@#{ss.user.name}\'"
+		else 
+			@all_routes = "#{@all_routes},\'#{ss.work_day.strftime('%Y-%m-%d')}/#{ss.user_id}@#{ss.user.name}\'"
+		end
+		
+		count = count + 1
+	  end
     end
 
     def reports
