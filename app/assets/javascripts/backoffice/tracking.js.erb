@@ -138,6 +138,11 @@ function tracking(firebase_reference_access, elementId, imagePath, googleMapsFir
 			googleMap.setCenter(googleMapsCenter);
 		
 		googleMap.setZoom(googleMapsZoom);
+		
+		if (snapshot.val() == null) {
+		  googleMapsMarker.setMap(null);
+		  googleMapsMarker.setVisible(false);
+		}
 	});
 }
 
