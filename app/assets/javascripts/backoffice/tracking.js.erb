@@ -91,7 +91,6 @@ function tracking(firebase_reference_access, elementId, imagePath, googleMapsFir
 	};
 	
 	var googleMapsMarker = new google.maps.Marker({
-		position: googleMapsCenterStart,
 		map: googleMap,
 		icon: googleMapsTruckIcon
 	});
@@ -129,7 +128,7 @@ function tracking(firebase_reference_access, elementId, imagePath, googleMapsFir
 		
 		if(withPath)
 			path.push(latLng);
-		
+			
 		googleMapsMarker.setPosition(latLng);
 		
 		if(googleMapsFirstTime) 
