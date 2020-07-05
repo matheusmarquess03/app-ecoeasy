@@ -19,6 +19,14 @@ module Backoffice::CollectHelper
       return ''
     end
   end
+  
+  def history_params
+    if params[:q].present?
+      return { schedule_user_id_eq: params[:q][:schedule_user_id_eq], collect_date_gteq: params[:q][:collect_date_gteq] }
+    else
+      return ''
+    end
+  end
 
   def return_lat_lng_locations
     locations = []
