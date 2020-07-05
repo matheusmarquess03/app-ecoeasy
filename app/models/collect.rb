@@ -110,10 +110,16 @@ class Collect < ApplicationRecord
 		mes = FirebaseDatum.convertMonth(c.mes)
 		ano = "%d" % c.ano
 		
-		if count == 1
-			result_list = "{y:\'#{mes}/#{ano}\',x:#{c.peso}}"
+		if (c.peso == nil)
+			peso = 0
 		else 
-			result_list = "#{result_list},{y:\'#{mes}/#{ano}\',x:#{c.peso}}"
+			peso = "%.2f" % c.peso 
+		end
+		
+		if count == 1
+			result_list = "{y:\'#{mes}/#{ano}\',x:#{peso}}"
+		else 
+			result_list = "#{result_list},{y:\'#{mes}/#{ano}\',x:#{peso}}"
 		end
         
 		count = count + 1
