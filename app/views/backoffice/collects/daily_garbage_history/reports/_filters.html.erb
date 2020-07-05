@@ -1,0 +1,30 @@
+<%= search_form_for @q, url: backoffice_daily_garbage_history_reports_path do |f| %>
+  <div class="row">
+    <div class="col-lg-4">
+      <strong>Selecione um motorista: </strong>
+      <%= select_tag 'q[schedule_user_id_eq]',
+              options_from_collection_for_select(@tracking_truckers, 'id', 'name', selected: params[:q].present? ? params[:q][:schedule_user_id_eq] : nil),
+              include_blank: 'Selecione uma opção', class: "form-control"
+	  %>
+    </div>
+
+    <div class="col-lg-5">
+      <strong>Intervalo de datas: </strong>
+      <div class="row">
+        <div class="col-lg-6">
+          <%= date_field_tag 'q[collect_date_gteq]', params.dig(:q, :collect_date_gteq), { class: 'form-control' } %>
+        </div>
+        <div class="col-lg-6">
+          <%= date_field_tag 'q[collect_date_lteq]',  params.dig(:q, :collect_date_lteq), { class: 'form-control' } %>
+        </div>
+      </div>
+    </div>
+	
+	<div class="col-sm-12 col-lg-3">
+      <br>
+      <%= f.submit 'Aplicar Filtro', class: 'btn btn-info' %>
+    </div>
+
+  </div>
+
+<% end %>

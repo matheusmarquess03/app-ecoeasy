@@ -1,0 +1,54 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    Coleta de entulho
+
+    <%= link_to backoffice_daily_garbage_history_reports_path(format: :csv, q: history_params), class: 'pull-right' do %>
+      <i class="fa fa-download"></i> Exportar para planilha
+    <% end %>
+  </div>
+
+  <div class="panel-body">
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th><%= sort_link(@q, :protocol_number, 'Número de protocolo') %></th>
+			<th><%= sort_link(@q, :schedule_user_name, 'Motorista') %></th>
+            <th><%= sort_link(@q, :schedule_work_day, 'Coleta agendada para') %></th>
+            <th><%= sort_link(@q, :schedule_routes_title, 'Rota') %></th>
+            <th><%= sort_link(@q, :status, 'Situação') %></th>
+            <th><%= sort_link(@q, :landfill_name, 'Aterro') %></th>
+			<th><%= sort_link(@q, :weight, 'Peso') %></th>
+            <th colspan="2"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @collects.each do |collect| %>
+            <tr onclick="truckerTracking('<%= collect.schedule.work_day.strftime('%Y-%m-%d') %>/<%= collect.schedule.user_id %>');">
+              <td><%= collect.protocol_number %></td>
+			  <td><%= collect.schedule.user.name %></td>
+              <td><%= I18n.l collect.schedule.work_day, :format => :with_day_of_week, :locale => 'pt-BR' if collect.collect_date.present? %></td>
+              <td><%= collect.schedule&.routes.first.title %></td>
+              <td><%= t "enums.collects.status.#{collect.status}" %></td>
+              <td><%= collect.landfill.present? ? collect.landfill.name : 'Não foi despejado até o momento' %></td>
+			  <td><%= collect.weight %></td>
+			  <td>
+				<%= link_to change_status_form_backoffice_collects_daily_garbage_history_path(collect, q: {schedule_user_id_eq:@user_id, collect_date_gteq:@date_start, collect_date_lteq:@date_end}), remote: true, class: 'btn btn-outline btn-warning' do %>
+                <i class="fa fa-edit"></i> Alterar Dados
+				<% end %>
+			  </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <div class="apple_pagination">
+        <div class="page_info">
+          <%= page_entries_info @collects %>
+        </div>
+        <%= will_paginate @collects, :container => false %>
+      </div>
+    </div>
+  </div>
+</div>

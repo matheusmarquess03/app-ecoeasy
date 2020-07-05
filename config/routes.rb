@@ -72,7 +72,14 @@ Rails.application.routes.draw do
         get 'change_status_form', on: :member
         patch 'change_status', on: :member
       end
+	  
+	  resources :daily_garbage_history do
+		get 'change_status_form', on: :member
+        patch 'change_status', on: :member
+      end
     end
+	
+	get 'daily_garbage_history/reports', to: 'collects/daily_garbage_history#reports'
 
     get 'rubble_collects/trucker_tracking', to: 'collects/rubble_collects#trucker_tracking'
     get 'daily_garbage_collects/trucker_tracking', to: 'collects/daily_garbage_collects#trucker_tracking'

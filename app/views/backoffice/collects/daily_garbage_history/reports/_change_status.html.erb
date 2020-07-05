@@ -1,0 +1,46 @@
+<%= form_for @collect, url: change_status_backoffice_collects_daily_garbage_history_path do |f| %>
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="panel panel-yellow">
+      <div class="panel-heading">
+        <h4>Alterar informações da coleta (ALAN BARILE)
+          <button type="button" class="close pull-right" data-dismiss="modal" aria-hidden="true">×</button>
+        </h4>
+      </div>
+
+      <div class="panel-body">
+		<div class="row">
+			<div class="form-group">
+				<div class="col-lg-4">
+				  <strong>Selecione o caminhão: </strong>
+					<%= select_tag 'q[truck_id]',
+					options_from_collection_for_select(@history_trucks, 'id', 'plate_number', @collect.schedule.truck_id.present? ? @collect.schedule.truck_id : nil),
+					include_blank: 'Selecione uma opção', class: "form-control", required: true
+					%>
+				</div>
+				
+				<div class="col-lg-4">
+				  <strong>Selecione o aterro: </strong>
+					<%= select_tag 'q[landfill_id]',
+					options_from_collection_for_select(@history_landfills, 'id', 'name', @collect.landfill_id.present? ? @collect.landfill_id : nil),
+					include_blank: 'Selecione uma opção', class: "form-control", required: true
+					%>
+				</div>
+			
+				<div class="col-lg-4">
+				  <strong>Peso (Quilograma): </strong>
+				  <%= number_field_tag 'q[collect_weight]', @collect.weight.present? ? @collect.weight : nil , class: 'form-control', step: 0.01, required: true %>
+				</div>
+			</div>
+		</div>
+      </div>
+	  
+	  <%= hidden_field_tag 'q[schedule_user_id_eq]', @user_id %>
+	  <%= hidden_field_tag 'q[collect_date_gteq]', @date_start %>
+	  <%= hidden_field_tag 'q[collect_date_lteq]', @date_end %>
+
+      <div class="panel-footer">
+        <%= f.submit 'Enviar', class: 'btn btn-outline btn-warning' %>
+      </div>
+    </div>
+ </div>
+<% end %>

@@ -1,0 +1,24 @@
+<h1 class="page-header"><i class="fa fa-trash-o fa-fw"></i> MODULO COLETA DE LIXO DIÁRIA</h1>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4>Histórico de Coleta (ALAN BARILE)</h4>
+  </div>
+
+  <div class="panel-body">
+    <div class="form-group">
+
+      <div class="filters">
+        <%= render partial: 'backoffice/collects/daily_garbage_history/reports/filters' %>
+        <hr>
+      </div>
+	  
+	  <div class="table">
+        <%= render partial: 'backoffice/collects/daily_garbage_history/reports/table_results' %>
+      </div>
+	  
+	  <div class="maps" id="truckerTracking"></div>
+
+    </div>
+  </div>
+</div>

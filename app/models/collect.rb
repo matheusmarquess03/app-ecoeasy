@@ -68,7 +68,7 @@ class Collect < ApplicationRecord
   end
 
   def self.daily_collect_to_csv(collects)
-    headers = ['Número de protocolo', 'Motorista', 'Coleta agendada para', 'Rota', 'Situação', 'Aterro']
+    headers = ['Número de protocolo', 'Motorista', 'Coleta agendada para', 'Rota', 'Situação', 'Aterro', 'Peso']
 
     CSV.generate(headers: true, encoding: 'ISO-8859-1') do |csv|
       csv << headers
@@ -80,7 +80,8 @@ class Collect < ApplicationRecord
           I18n.l(collect.schedule.work_day, format: :with_day_of_week, locale: 'pt-BR'),
           collect.schedule&.routes.first.title,
           I18n.t("enums.collects.status.#{collect.status}"),
-          collect.landfill.present? ? collect.landfill.name : 'Não foi despejado até o momento'
+          collect.landfill.present? ? collect.landfill.name : 'Não foi despejado até o momento',
+		  collect.weight
         ]
       end
     end
