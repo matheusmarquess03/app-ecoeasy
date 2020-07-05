@@ -94,6 +94,36 @@ class Collect < ApplicationRecord
   def client
     user
   end
+  
+  def self.monthly_collect
+	
+	collect_list = Collect.select("date_part('month',collect_date) AS mes, date_part('year', collect_date) AS ano, sum(weight) AS peso").where("collect_date IS NOT NULL").group("date_part('month',collect_date),date_part('year', collect_date)").order("date_part('year',collect_date),date_part('month',collect_date)")
+	
+	count = 1
+	
+	puts "INICIO" 
+	
+	result_list = ""
+	
+	collect_list.each do |c|
+		
+		mes = FirebaseDatum.convertMonth(c.mes)
+		ano = "%d" % c.ano
+		
+		if count == 1
+			result_list = "{y:\'#{mes}/#{ano}\',x:#{c.peso}}"
+		else 
+			result_list = "#{result_list},{y:\'#{mes}/#{ano}\',x:#{c.peso}}"
+		end
+        
+		count = count + 1
+		
+	end
+	
+	puts "FIM" 
+	
+	return result_list
+  end
 
   private
 
@@ -109,4 +139,5 @@ class Collect < ApplicationRecord
   def not_daily_garbage_collection?
     type_collect != 'daily_garbage_collection'
   end
+  
 end
