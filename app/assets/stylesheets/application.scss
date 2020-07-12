@@ -28,6 +28,11 @@
 	overflow: visible; /* allow content to popup out (i.e tooltips) */
 }
 
+body.modal-open {
+  overflow: visible;
+  padding-right: 0 !important;
+}
+
 select {
   background-color: transparent;
   text-transform: uppercase;
