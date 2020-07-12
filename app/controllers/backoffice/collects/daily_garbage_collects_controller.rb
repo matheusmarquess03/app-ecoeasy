@@ -22,22 +22,76 @@ module Backoffice::Collects
     end
 
     def create
-      @collect = Collect.new(collect_params)
-      schedule = Schedule.find(collect_params[:schedule_id])
-      route    = Route.find(routes_params[:route_id])
-      @collect.transaction do
-        @collect.type_collect = 'daily_garbage_collection'
-        @collect.collect_date = @collect.schedule.work_day
-        @collect.confirmed!
-        schedule.routes << route
-        schedule.update!(full_schedule: true)
-      end
-      flash[:success] = 'Agendamento realizado com sucesso'
-      redirect_to backoffice_collects_daily_garbage_collects_path
-    rescue StandardError
-      flash[:alert] = 'Falha para realizar o agendamento. Tente novamente mais tarde'
-      render :new
-    end
+		puts "*************** Daily Garbage CREATE"
+		puts params.inspect
+		
+		checkSchedule = false
+		
+		if(params[:q][:chkSeg].present?)
+			createFastSchedule(1)
+			checkSchedule = true
+		end
+
+		if(params[:q][:chkTer].present?)
+			createFastSchedule(2)
+			checkSchedule = true
+		end		
+		
+		if(params[:q][:chkQua].present?)
+			createFastSchedule(3)
+			checkSchedule = true
+		end
+		
+		if(params[:q][:chkQui].present?)
+			createFastSchedule(4)
+			checkSchedule = true
+		end
+		
+		if(params[:q][:chkSex].present?)
+			createFastSchedule(5)
+			checkSchedule = true
+		end
+		
+		if(params[:q][:chkSab].present?)
+			createFastSchedule(6)
+			checkSchedule = true
+		end
+		
+		if(params[:q][:chkDom].present?)
+			createFastSchedule(7)
+			checkSchedule = true
+		end
+		
+		if(checkSchedule)
+			flash[:success] = 'Agendamento realizado com sucesso'
+		end
+		puts "*************** Daily Garbage CREATE END"
+		
+		redirect_to backoffice_collects_daily_garbage_collects_path
+	rescue StandardError => ex
+		puts "**********************ERRO!!!"
+		puts "An error of type #{ex.class} happened, message is #{ex.message}"
+		flash[:alert] = 'Falha ao criar agendamento'
+		redirect_to backoffice_collects_daily_garbage_collects_path
+	end
+
+#    def create
+#      @collect = Collect.new(collect_params)
+#      schedule = Schedule.find(collect_params[:schedule_id])
+#      route    = Route.find(routes_params[:route_id])
+#      @collect.transaction do
+#        @collect.type_collect = 'daily_garbage_collection'
+#        @collect.collect_date = @collect.schedule.work_day
+#        @collect.confirmed!
+#        schedule.routes << route
+#        schedule.update!(full_schedule: true)
+#      end
+#      flash[:success] = 'Agendamento realizado com sucesso'
+#      redirect_to backoffice_collects_daily_garbage_collects_path
+#    rescue StandardError
+#      flash[:alert] = 'Falha para realizar o agendamento. Tente novamente mais tarde'
+#      render :new
+#    end
 
     def edit
       @free_schedules << Schedule.find(@collect.schedule_id)
@@ -93,6 +147,7 @@ module Backoffice::Collects
 
     def trucker_tracking
       @schedules_trackable = Schedule.trackable(Collect.type_collects[:daily_garbage_collection])
+	  #@schedules_trackable = Schedule.trackable_history(Collect.type_collects[:daily_garbage_collection])
 	  
 	  count = 1
 	  @schedules_trackable.each do |ss|
@@ -104,6 +159,11 @@ module Backoffice::Collects
 		
 		count = count + 1
 	  end
+	end
+	
+	def tracking_history
+      @tracking_truckers = Trucker.all.order(name: :asc)
+	  @schedules_trackable = Schedule.trackable_history(Collect.type_collects[:daily_garbage_collection])
     end
 
     def reports
@@ -122,8 +182,56 @@ module Backoffice::Collects
         end
       end
     end
+	
+	
 
     private
+	
+	def createFastSchedule(weekDay)
+		newDateStart = Collect.verify_date(params[:q][:collect_date_gteq], weekDay, 0)
+		newDateEnd = Collect.verify_date(params[:q][:collect_date_lteq], weekDay, 1)
+		
+		tmpDate = newDateStart 
+		
+		puts "#{tmpDate} - #{newDateEnd}"
+		
+		if(tmpDate <= newDateEnd)
+			while tmpDate <= newDateEnd 
+				createOneFastSchedule(tmpDate)
+				tmpDate = tmpDate.next_day(7)
+			end
+		end
+	end
+	
+	def createOneFastSchedule(workDay)
+		user_id = params[:q][:trucker_id]
+		truck_id = params[:q][:truck_id]
+		route_id = params[:q][:route_id]
+		
+		route = Route.find(route_id)
+		
+		Schedule.transaction do
+			@fastSchedule = Schedule.new 
+			@fastSchedule.work_day = workDay
+			@fastSchedule.user_id = user_id
+			@fastSchedule.full_schedule = true
+			@fastSchedule.truck_id = truck_id
+			@fastSchedule.routes << route
+			
+			@fastSchedule.col
+			@fastSchedule.save!
+			
+			@fastCollect = Collect.new 
+			@fastCollect.status = 2
+			@fastCollect.type_collect = 1
+			@fastCollect.collect_date = @fastSchedule.work_day
+			@fastCollect.schedule_id = @fastSchedule.id
+			@fastCollect.save!
+		end
+	rescue StandardError => ex
+		puts "**********************ERRO!!!"
+		puts "An error of type #{ex.class} happened, message is #{ex.message}"
+	end
 
     def routes_params
       params.fetch(:collect, {}).fetch(:schedules_routes, {}).permit(:route_id)
@@ -134,7 +242,9 @@ module Backoffice::Collects
     end
 
     def set_routes_to_options
-      @routes = Route.all
+		@routes = Route.all
+		@trucks = Truck.all
+		@truckers = Trucker.all
     end
 
     def set_free_schedules_to_options
@@ -153,5 +263,7 @@ module Backoffice::Collects
         ]
       end
     end
+	
+
   end
 end

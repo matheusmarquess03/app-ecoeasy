@@ -48,6 +48,41 @@ class Collect < ApplicationRecord
   }
 
   # Methods
+	def self.verify_date(date, weekday, startEnd)
+		tmpDateToday = Date.today
+		tmpDate = Date.parse(date)
+		
+		if (tmpDate < tmpDateToday)
+			tmpDate = tmpDateToday
+		end
+		
+		tmpWeekDay = tmpDate.cwday
+		
+		puts "#{date} - #{tmpWeekDay} - #{weekday} - #{startEnd}"
+		
+		diff = weekday - tmpWeekDay
+		
+		if(startEnd == 0)
+			if(tmpWeekDay == 7)
+				diff = diff + 7
+			end 
+		
+			if (tmpWeekDay != weekday)
+				tmpDate = tmpDate.next_day(diff.abs())
+			end
+		else 
+			if(tmpWeekDay == 1)
+				diff = diff - 7
+			end
+			
+			if (tmpWeekDay != weekday)
+				tmpDate = tmpDate.next_day(-diff.abs())
+			end
+		end
+		
+		return tmpDate 
+	end
+	
   def self.to_csv(collects)
     headers = ['Número de protocolo', 'Nome', 'Data da solicitação', 'Data do recolhimento', 'Situação', 'Endereço']
 

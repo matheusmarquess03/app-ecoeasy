@@ -1,1 +1,101 @@
-<%= render partial: 'form' %>
+<%= form_for [:backoffice, :collects, :daily_garbage, @collect], html: { class: 'form' } do |f| %>
+
+  <h1 class="page-header"><i class="fa fa-recycle fa-fw"></i> MODULO COLETA DE LIXO DIÁRIA</h1>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h1>Coleta de lixo diária</h1>
+    </div>
+    <br/>
+
+    <div class="panel-body">
+		<div class="form-group">
+			<div class="col-lg-4">
+			  <strong>Selecione um motorista: </strong>
+			  <%= select_tag 'q[trucker_id]',
+					options_from_collection_for_select(@truckers, 'id', 'name'),
+					include_blank: 'Selecione um motorista', class: "form-control", required: true
+				%>
+			  <br>
+			</div>
+		
+			<div class="col-lg-4">
+				<strong>Selecione um caminhão: </strong>
+				<%= select_tag 'q[truck_id]',
+					options_from_collection_for_select(@trucks, 'id', 'plate_number'),
+					include_blank: 'Selecione um caminhão', class: "form-control", required: true
+				%>
+				<br>
+			</div>
+
+			<div class="col-lg-4">
+				<strong>Selecione uma rota: </strong>
+				<%= select_tag 'q[route_id]',
+					options_from_collection_for_select(@routes, 'id', 'title'),
+					include_blank: 'Selecione uma rota', class: "form-control", required: true
+				%>
+				<br>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			 <div class="col-lg-5">
+			  <strong>Intervalo de datas: </strong>
+			  <div class="row">
+				<div class="col-lg-6">
+				  <%= date_field_tag 'q[collect_date_gteq]', params.dig(:q, :collect_date_gteq), { class: 'form-control', required: true } %>
+				</div>
+				<div class="col-lg-6">
+				  <%= date_field_tag 'q[collect_date_lteq]',  params.dig(:q, :collect_date_lteq), { class: 'form-control' , required: true} %>
+				</div>
+			  </div>
+			</div>
+		
+			<div class="col-lg-7">
+				<strong>Selecione os dias da semana: </strong>
+				<div class="row">
+					<div class="col-lg-1">
+					  <label class="form-check-label">
+						<%= check_box_tag 'q[chkSeg]' %>Seg
+					  </label>
+					</div>
+					<div class="col-lg-1">
+					  <label class="form-check-label">
+						<%= check_box_tag 'q[chkTer]' %>Ter
+					  </label>
+					</div>
+					<div class="col-lg-1">
+					  <label class="form-check-label">
+						<%= check_box_tag 'q[chkQua]' %>Qua
+					  </label>
+					</div>
+					<div class="col-lg-1">
+					  <label class="form-check-label">
+						<%= check_box_tag 'q[chkQui]', checked = false %>Qui
+					  </label>
+					</div>
+					<div class="col-lg-1">
+					  <label class="form-check-label">
+						<%= check_box_tag 'q[chkSex]', checked = false %>Sex
+					  </label>
+					</div>
+					<div class="col-lg-1">
+					  <label class="form-check-label">
+						<%= check_box_tag 'q[chkSab]', checked = false %>Sáb
+					  </label>
+					</div>
+					<div class="col-lg-1">
+					  <label class="form-check-label">
+						<%= check_box_tag 'q[chkDom]', checked = false %>Dom
+					  </label>
+					</div>
+				</div>
+			</div>
+		</div>
+    </div>
+  </div>
+  <br />
+
+  <%= link_to 'Voltar', backoffice_collects_daily_garbage_collects_path, class: 'btn btn-secondary btn-lg' %>
+  <%= f.submit 'Salvar', class: 'btn btn-success btn-lg' %>
+<% end %>
