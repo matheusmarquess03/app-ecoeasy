@@ -217,8 +217,6 @@ module Backoffice::Collects
 			@fastSchedule.full_schedule = true
 			@fastSchedule.truck_id = truck_id
 			@fastSchedule.routes << route
-			
-			@fastSchedule.col
 			@fastSchedule.save!
 			
 			@fastCollect = Collect.new 
