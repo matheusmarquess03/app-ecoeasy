@@ -132,7 +132,7 @@ class Collect < ApplicationRecord
   
   def self.monthly_collect
 	
-	collect_list = Collect.select("date_part('month',collect_date) AS data_month, date_part('year', collect_date) AS data_year, sum(weight) AS data_tmp").where("collect_date IS NOT NULL").group("date_part('month',collect_date),date_part('year', collect_date)").order("date_part('year',collect_date),date_part('month',collect_date)")
+	collect_list = Collect.select("date_part('month',collect_date) AS data_month, date_part('year', collect_date) AS data_year, sum(COALESCE(weight,0)) AS data_tmp").where("collect_date IS NOT NULL").group("date_part('month',collect_date),date_part('year', collect_date)").order("date_part('year',collect_date),date_part('month',collect_date)")
 	
 	result_list = FirebaseDatum.returnData(collect_list)
 		
