@@ -26,6 +26,7 @@ Rails.application.routes.draw do
       devise_scope :user do
         resources :address,   only: %i[index create update destroy]
         resource  :schedules, only: %i[show update]
+		resources  :routes,	  only: %i[index]
         resources :collects,  only: %i[index create update]
         put 'dump_collects', to: 'collects#dump_collects'
 
@@ -35,7 +36,7 @@ Rails.application.routes.draw do
           get 'send_bill_to_email', on: :member
           resources :contestations, only: %i[create index]
         end
-        resource  :routes,        only: [:show]
+        resources :routes,		  only: [:show]
         resources :landfills,     only: [:index]
         resources :contracts
       end
@@ -52,7 +53,10 @@ Rails.application.routes.draw do
   # Routes to Backoffice portal (admin)
   namespace :backoffice do
     get '', to: 'dashboard#index'
+	#get '', to: 'dashboard_principal#index'
 
+	resources :firebase_data
+	
     resources :truckers
     resources :janitors
     resources :supervisors do
@@ -77,10 +81,15 @@ Rails.application.routes.draw do
 		get 'change_status_form', on: :member
         patch 'change_status', on: :member
       end
-    end
+	  
+	end
+
+	get 'dashboard/trucker_analysis', to: 'dashboard#trucker_analysis'
+	get 'dashboard/truck_analysis', to: 'dashboard#truck_analysis'
+	get 'dashboard/route_analysis', to: 'dashboard#route_analysis'
 	
 	get 'daily_garbage_history/reports', to: 'collects/daily_garbage_history#reports'
-
+	
     get 'rubble_collects/trucker_tracking', to: 'collects/rubble_collects#trucker_tracking'
     get 'daily_garbage_collects/trucker_tracking', to: 'collects/daily_garbage_collects#trucker_tracking'
 

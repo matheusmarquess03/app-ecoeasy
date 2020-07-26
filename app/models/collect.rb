@@ -132,39 +132,45 @@ class Collect < ApplicationRecord
   
   def self.monthly_collect
 	
-	collect_list = Collect.select("date_part('month',collect_date) AS mes, date_part('year', collect_date) AS ano, sum(weight) AS peso").where("collect_date IS NOT NULL").group("date_part('month',collect_date),date_part('year', collect_date)").order("date_part('year',collect_date),date_part('month',collect_date)")
+	collect_list = Collect.select("date_part('month',collect_date) AS data_month, date_part('year', collect_date) AS data_year, sum(weight) AS data_tmp").where("collect_date IS NOT NULL").group("date_part('month',collect_date),date_part('year', collect_date)").order("date_part('year',collect_date),date_part('month',collect_date)")
 	
-	count = 1
-	
-	puts "INICIO" 
-	
-	result_list = ""
-	
-	collect_list.each do |c|
+	result_list = FirebaseDatum.returnData(collect_list)
 		
-		mes = FirebaseDatum.convertMonth(c.mes)
-		ano = "%d" % c.ano
-		
-		if (c.peso == nil)
-			peso = 0
-		else 
-			peso = "%.2f" % c.peso 
-		end
-		
-		if count == 1
-			result_list = "{y:\'#{mes}/#{ano}\',x:#{peso}}"
-		else 
-			result_list = "#{result_list},{y:\'#{mes}/#{ano}\',x:#{peso}}"
-		end
-        
-		count = count + 1
-		
-	end
-	
-	puts "FIM" 
-	
 	return result_list
   end
+  
+  def self.user_monthly_collect(date_start, date_end, user_id)
+	
+		collect_list = Collect.select("EXTRACT(year FROM collect_date) as data_year, EXTRACT(month FROM collect_date) as data_month, sum(COALESCE(weight,0)) as data_tmp").joins("INNER JOIN schedules ON schedules.id = collects.schedule_id AND schedules.user_id = #{user_id}").where("collect_date BETWEEN ? AND ?",date_start, date_end).group("data_month, data_year")
+		
+		result_list = FirebaseDatum.returnData(collect_list)
+		
+		return result_list
+	end
+	
+	def self.truck_monthly_collect(date_start, date_end, truck_id)
+	
+		collect_list = Collect.select("EXTRACT(year FROM collect_date) as data_year, EXTRACT(month FROM collect_date) as data_month, sum(COALESCE(weight,0)) as data_tmp").joins("INNER JOIN schedules ON schedules.id = collects.schedule_id AND schedules.user_id = #{truck_id}").where("collect_date BETWEEN ? AND ?",date_start, date_end).group("data_month, data_year")
+		
+		result_list = FirebaseDatum.returnData(collect_list)
+		
+		return result_list
+	end
+	
+	def self.route_monthly_collect(date_start, date_end, route_id)
+	
+		schedule_old_list = SchedulesRoute.where("route_id = ?", route_id).map{|r| r.schedule_id}
+		
+		schedule_old_list = "(#{schedule_old_list})"
+		schedule_list = schedule_old_list.sub("[","")
+		schedule_list = schedule_list.sub!("]","")
+
+		collect_list = Collect.select("EXTRACT(year FROM collect_date) as data_year, EXTRACT(month FROM collect_date) as data_month, sum(COALESCE(weight,0)) as data_tmp").joins("INNER JOIN schedules ON schedules.id = collects.schedule_id AND schedules.id IN #{schedule_list}").where(:collect_date => date_start..date_end).group("data_month, data_year")
+
+		result_list = FirebaseDatum.returnData(collect_list)
+		
+		return result_list
+	end
 
   private
 

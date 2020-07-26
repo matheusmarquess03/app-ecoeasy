@@ -1,0 +1,22 @@
+<h3 class="page-header">Dashboard</h3>
+
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h4>Análise por Caminhão</h4>
+	</div>
+
+  <div class="panel-body">
+    <div class="form-group">
+
+      <div class="filters">
+        <%= render partial: 'backoffice/dashboard/analysis/truck_filters' %>
+        <hr>
+      </div>
+	  
+	  <div class="table">
+        <%= render partial: 'backoffice/dashboard/analysis/truck_results' %>
+      </div>
+	  
+	</div>
+  </div>
+</div>

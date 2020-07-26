@@ -1,0 +1,27 @@
+<%= form_tag backoffice_dashboard_route_analysis_path, method: "get" do %>
+	<div class="row">
+		<div class="col-lg-4">
+		  <strong>Selecione um caminhão: </strong>
+		  <%= select_tag 'q[route_id]',
+				  options_from_collection_for_select(@routes, 'id', 'title', selected: params[:q].present? ? params[:q][:route_id] : nil),
+				  include_blank: 'Selecione uma opção', class: "form-control", required: true
+		  %>
+		</div>
+		<div class="col-lg-5">
+			<strong>Intervalo de datas: </strong>
+			<div class="row">
+				<div class="col-lg-6">
+					<%= date_field_tag 'q[date_start]', params.dig(:q, :date_start), { class: 'form-control', required: true } %>
+				</div>
+				<div class="col-lg-6">
+					<%= date_field_tag 'q[date_end]',  params.dig(:q, :date_end), { class: 'form-control', required: true } %>
+				</div>
+			</div>
+		</div>
+		
+		<div class="col-sm-12 col-lg-3">
+			<br>
+			<%= submit_tag 'Aplicar Filtro', class: 'btn btn-info' %>
+		</div>
+	</div>
+<% end %>

@@ -1,0 +1,52 @@
+<div class="panel panel-default">
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="panel panel-default">
+				<div class"row">
+					<div class="panel-body" style="display: flex; align-items: center;">
+						<div class="col-sm-6 text-center">
+							<label class="label label-success">Coleta x Mês</label>
+							<div id="morris-bar-chart" ></div>
+						</div>
+						<div class="col-sm-6 text-center">
+							<label class="label label-success">Km x Mês</label>
+							<div id="morris-bar-chart2"></div>
+						</div>
+					</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	
+	$(function() {
+		Morris.Bar({
+			element: 'morris-bar-chart',
+			data: [ <%= raw @monthly_collect_weight %> ],
+			xkey: 'y',
+			ykeys: 'x',
+			labels: ['Peso'],
+			barColors: ['#1e88e5'],
+			lineWidth: '3px',
+			xLabelAngle: '70',
+			resize: true,
+			redraw: true
+		});
+	});
+	
+	$(function() {
+		Morris.Bar({
+			element: 'morris-bar-chart2',
+			data: [ <%= raw @monthly_collect_distance %> ],
+			xkey: 'y',
+			ykeys: 'x',
+			labels: ['Km'],
+			barColors: ['#00ff00'],
+			lineWidth: '3px',
+			xLabelAngle: '70',
+			resize: true,
+			redraw: true
+		});
+	});
+</script>
