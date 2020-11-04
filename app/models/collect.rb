@@ -52,9 +52,9 @@ class Collect < ApplicationRecord
 		tmpDateToday = Date.today
 		tmpDate = Date.parse(date)
 		
-		if (tmpDate < tmpDateToday)
-			tmpDate = tmpDateToday
-		end
+		#if (tmpDate < tmpDateToday)
+		#	tmpDate = tmpDateToday
+		#end
 		
 		tmpWeekDay = tmpDate.cwday
 		
