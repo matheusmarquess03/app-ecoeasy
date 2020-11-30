@@ -68,6 +68,10 @@ class Collect < ApplicationRecord
 			end 
 		
 			if (tmpWeekDay != weekday)
+				if(weekday < tmpWeekDay)
+					diff = 7 + diff
+				end 
+				
 				tmpDate = tmpDate.next_day(diff.abs())
 			end
 		else 
