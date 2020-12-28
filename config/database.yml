@@ -15,25 +15,46 @@
 # gem 'pg'
 #
 default: &default
-  adapter: postgresql
+  adapter: postgresql  
   encoding: unicode
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  pool: 5
+  host: ec2-34-202-7-83.compute-1.amazonaws.com # HOST 
+  port: 5432                                    # Port  
+  database: d1ru77t5su7e77                      # Database Name  
+  username: xydcckcpztkxas                      # User Name  
+  password: 82e9fe74f3ff47d894f2bea5afe99612f6b4b6952dc7d74e8019c48a64beefed #Password
 
 development:
   <<: *default
-  database: limpeza-app-ro_development
-  username: postgres
-  password:  postgres
+  adapter: postgresql  
+  encoding: unicode
+  pool: 5
+  host: ec2-34-202-7-83.compute-1.amazonaws.com # HOST 
+  port: 5432                                    # Port  
+  database: d1ru77t5su7e77                      # Database Name  
+  username: xydcckcpztkxas                      # User Name  
+  password: 82e9fe74f3ff47d894f2bea5afe99612f6b4b6952dc7d74e8019c48a64beefed #Password
 
 test:
   <<: *default
-  database: limpeza-app-ro_test
-  username: postgres
-  password:  postgres
+  adapter: postgresql  
+  encoding: unicode
+  pool: 5
+  host: ec2-34-202-7-83.compute-1.amazonaws.com # HOST 
+  port: 5432                                    # Port  
+  database: d1ru77t5su7e77                      # Database Name  
+  username: xydcckcpztkxas                      # User Name  
+  password: 82e9fe74f3ff47d894f2bea5afe99612f6b4b6952dc7d74e8019c48a64beefed #Password
 
 production:
-  database: limpeza-app-ro_production
-  url: <%= ENV['HEROKU_POSTGRESQL_GRAY_URL'] %>
+  adapter: postgresql  
+  encoding: unicode
+  pool: 5
+  host: ec2-34-202-7-83.compute-1.amazonaws.com # HOST 
+  port: 5432                                    # Port  
+  database: d1ru77t5su7e77                      # Database Name  
+  username: xydcckcpztkxas                      # User Name  
+  password: 82e9fe74f3ff47d894f2bea5afe99612f6b4b6952dc7d74e8019c48a64beefed #Password
 
 
   # For details on connection pooling, see Rails configuration guide
