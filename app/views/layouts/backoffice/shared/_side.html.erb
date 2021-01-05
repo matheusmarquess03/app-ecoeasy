@@ -1,31 +1,10 @@
-<div class="navbar-default sidebar" role="navigation">
+<div class="navbar-default sidebar side-custom" role="navigation">
   <div class="sidebar-nav navbar-collapse">
     <ul class="nav" id="side-menu">
-
-	  <li class>
-        <a href="#"><i class="fa fa-folder-open fa-fw"></i> Dashboard<span class="fa arrow"></span></a>
-        <ul class="nav nav-second-level">
-          <li>
-            <%= link_to backoffice_path do %>
-              <i class="fa fa-bar-chart fa-fw"></i> Resumo
-            <% end %>
-          </li>
-          <li>
-            <%= link_to backoffice_dashboard_trucker_analysis_path do %>
-              <i class="fa fa-user fa-fw"></i> Motoristas
-            <% end %>
-          </li>
-		   <li>
-            <%= link_to backoffice_dashboard_truck_analysis_path do %>
-              <i class="fa fa-truck fa-fw"></i> Caminhões
-            <% end %>
-          </li>
-		  <li>
-            <%= link_to backoffice_dashboard_route_analysis_path do %>
-              <i class="fa fa-map-marker fa-fw"></i> Rotas
-            <% end %>
-          </li>
-        </ul>
+      <li>
+        <%= link_to backoffice_path do %>
+          <i class="fa fa-dashboard fa-fw"></i> Dashboard
+        <% end %>
       </li>
 
       <li class>
@@ -57,7 +36,7 @@
               </li>
               <li>
                 <%= link_to backoffice_schedules_path do %>
-                  <i class="fa fa-calendar fa-fw"></i> Agenda do Motorista
+                   <i class="fa fa-calendar fa-fw"></i>Agenda do Motorista
                 <% end %>
               </li>
             </ul>
@@ -129,19 +108,14 @@
           </li>
           <li>
             <%= link_to backoffice_daily_garbage_collects_trucker_tracking_path do %>
-              <i class="fa fa-globe fa-fw"></i> Acompanhe em tempo real
+             <i class="fa fa-globe fa-fw"></i> Acompanhe em tempo real
             <% end %>
           </li>
-		  <li>
+      <li>
             <%= link_to backoffice_daily_garbage_history_reports_path do %>
-              <i class="fa fa-history fa-fw"></i> Histórico de Coleta
+               <i class="fa fa-history fa-fw"></i> Histórico de Coleta
             <% end %>
           </li>
-		  <!--<li>
-            <%= link_to backoffice_firebase_data_path do %>
-              <i class="fa fa-calendar fa-fw"></i> Firebase Data
-            <% end %>
-          </li>-->
           <li>
             <%= link_to reports_backoffice_collects_daily_garbage_collects_path do %>
               <i class="fa fa-bar-chart-o fa-fw"></i> Relatório
@@ -155,7 +129,7 @@
         <ul class="nav nav-second-level">
           <li>
             <%= link_to backoffice_evidences_simple_evidences_path do %>
-              <i class="fa fa-photo fa-fw"></i> Evidências
+               <i class="fa fa-photo fa-fw"></i> Evidências
             <% end %>
           </li>
           <li>

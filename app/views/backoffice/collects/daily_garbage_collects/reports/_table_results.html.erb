@@ -18,6 +18,7 @@
             <th><%= sort_link(@q, :schedule_routes_title, 'Rota') %></th>
             <th><%= sort_link(@q, :status, 'Situação') %></th>
             <th><%= sort_link(@q, :landfill_name, 'Aterro') %></th>
+            <th><%= sort_link(@q, :weight, 'Peso') %></th>
             <th colspan="2"></th>
           </tr>
         </thead>
@@ -31,6 +32,7 @@
               <td><%= collect.schedule&.routes.first.title %></td>
               <td><%= t "enums.collects.status.#{collect.status}" %></td>
               <td><%= collect.landfill.present? ? collect.landfill.name : 'Não foi despejado até o momento' %></td>
+              <td><%= collect.weight %></td>
             </tr>
           <% end %>
         </tbody>

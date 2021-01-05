@@ -1,11 +1,11 @@
 <div class="col-lg-12">
-  <h1 class="page-header">MODULO ATENDENTE</h1>
-
-  <div class="panel panel-default">
+  <h1 class="page-header"></h1>
+<div class="panel panel-default panel-table-custom">
     <div class="panel-heading">
-      <h4>Atendentes
-        <%= link_to new_backoffice_clerk_path, class: 'btn btn-outline btn-success pull-right', style:"margin-top: -5px" do %>
-          <i class="fa fa-plus-square fa-fw"></i> Cadastrar
+      <p class="title-page">Atendentes</p>
+      <h4>
+        <%= link_to new_backoffice_clerk_path, class: 'btn btn-success pull-right', style:"margin-top: -5px" do %>
+          <i class="fa fa-plus-circle fa-fw"></i> Cadastrar
         <% end %>
       </h4>
     </div>
@@ -32,14 +32,22 @@
                 <td><%= clerk.phone_number %></td>
                 <td><%= clerk.cpf %></td>
                 <td>
-                  <div class="pull-right">
-                    <%= link_to edit_backoffice_clerk_path(clerk), class: 'btn btn-outline btn-warning' do %>
-                      <i class="fa fa-edit"></i> Editar
-                    <% end %>
-
-                    <%= link_to backoffice_clerk_path(clerk), class: 'btn btn-outline btn-danger', method: :delete, data: { confirm: 'Ao confirmar esta operação será perdido definitivamente os dados deste atendente. Tem certeza que deseja fazer isto?' } do %>
-                        <i class="fa fa-times"></i> Deletar
-                    <% end %>
+                  <div class="btn-group">
+                    <a class="dropdown-toggle dropdown-toggle-custom" data-toggle="dropdown">
+                      ...
+                    </a>
+                    <ul class="dropdown-menu dropdown-black">
+                      <div>
+                        <%= link_to edit_backoffice_clerk_path(clerk) do %>
+                          <i class="fa fa-edit"></i> Editar
+                        <% end %>
+                      </div>
+                      <div>
+                        <%= link_to backoffice_clerk_path(clerk), method: :delete, data: { confirm: 'Ao confirmar esta operação será perdido definitivamente os dados deste atendente. Tem certeza que deseja fazer isto?' } do %>
+                          <i class="fa fa-trash-o"></i> Deletar
+                        <% end %>
+                      </div>
+                    </ul>
                   </div>
                 </td>
               </tr>

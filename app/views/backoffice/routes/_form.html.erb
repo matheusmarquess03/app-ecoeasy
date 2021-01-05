@@ -1,10 +1,10 @@
 <%= form_for [:backoffice, @route] do |f| %>
 
-  <h1 class="page-header"><i class="fa fa-recycle fa-fw"></i> MODULO COLETA DE LIXO DIÁRIA</h1>
+  <h1 class="title-page"></h1>
 
   <div class="panel panel-default">
     <div class="panel-heading">
-      <h4><i class="fa fa-map-marker fa-fw"></i> Gerenciar rotas</h4>
+      <h4>Gerenciar rotas</h4>
     </div>
 
 
@@ -44,8 +44,8 @@
     </div>
   </div>
 
-  <%= link_to 'Voltar', backoffice_routes_path, class: 'btn btn-secondary btn-lg' %>
   <%= button_tag 'Salvar', class: 'btn btn-success btn-lg' %>
+  <%= link_to 'Voltar', backoffice_routes_path, class: 'btn btn-default btn-lg' %>
 <% end %>
 
 <% if @route.persisted? %>

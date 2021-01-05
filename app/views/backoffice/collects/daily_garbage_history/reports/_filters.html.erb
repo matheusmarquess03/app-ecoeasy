@@ -5,7 +5,7 @@
       <%= select_tag 'q[schedule_user_id_eq]',
               options_from_collection_for_select(@tracking_truckers, 'id', 'name', selected: params[:q].present? ? params[:q][:schedule_user_id_eq] : nil),
               include_blank: 'Selecione uma opção', class: "form-control"
-	  %>
+    %>
     </div>
 
     <div class="col-lg-5">
@@ -19,8 +19,8 @@
         </div>
       </div>
     </div>
-	
-	<div class="col-sm-12 col-lg-3">
+  
+  <div class="col-sm-12 col-lg-3">
       <br>
       <%= f.submit 'Aplicar Filtro', class: 'btn btn-info' %>
     </div>

@@ -5,7 +5,7 @@ class BackofficeController < ActionController::Base
   around_action :handle_exception
   after_action :clear_flash
 
-  layout 'backoffice/application'
+  layout "backoffice/application"
 
   add_flash_types :info
 

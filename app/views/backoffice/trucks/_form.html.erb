@@ -11,7 +11,7 @@
 
       <div class="panel-body">
         <div class="row">
-          <div class="form-group">
+          <div class="input-group">
             <div class="col-lg-4">
               <%= f.label :truck_type %>
               <%= f.select :truck_type,
@@ -24,7 +24,7 @@
         </div>
 
         <div class="row">
-          <div class="form-group">
+          <div class="input-group">
             <div class="col-lg-4"><br>
               <%= f.label :brand %>
               <%= f.text_field :brand, class: 'form-control', required: true %>
@@ -39,7 +39,7 @@
             </div>
           </div>
 
-          <div class="form-group">
+          <div class="input-group">
             <div class="col-lg-4">
               <%= f.label :color %>
               <%= f.text_field :color, class: 'form-control', required: true %>
@@ -54,7 +54,7 @@
             </div>
           </div>
 
-          <div class="form-group">
+          <div class="input-group">
             <div class="col-lg-4">
               <%= f.label :renavam_number %>
               <%= f.text_field :renavam_number, class: 'form-control', required: true %>
@@ -69,7 +69,7 @@
             </div>
           </div>
 
-          <div class="form-group">
+          <div class="input-group">
             <div class="col-lg-4">
               <%= f.label :m_3 %>
               <%= f.text_field :m_3, class: 'form-control', required: true %>
@@ -84,7 +84,7 @@
     </div>
     <br />
 
-    <%= link_to 'Voltar', backoffice_trucks_path, class: 'btn btn-secondary btn-lg' %>
+    <%= link_to 'Voltar', backoffice_trucks_path, class: 'btn btn-default btn-lg' %>
     <%= button_tag 'Salvar', class: 'btn btn-success btn-lg' %>
   </div>
 <% end %>

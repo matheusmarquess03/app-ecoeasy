@@ -1,4 +1,4 @@
-<div class="panel-body">
+<div class="panel-body panel-table-custom">
   <div class="table-responsive">
     <table class="table table-hover">
       <thead>
@@ -19,14 +19,23 @@
             <td><%= I18n.l collect.created_at.localtime, :format => :with_day_of_week, :locale => 'pt-BR' %></td>
             <td><%= t("enums.collects.status.#{collect.status}") %></td>
             <td>
-              <%= link_to edit_backoffice_collects_rubble_collect_path(collect), remote: true, class: 'btn btn-outline btn-warning' do %>
-                <i class="fa fa-edit"></i> Propor data para coleta
-              <% end %>
-            </td>
-            <td>
-              <%= link_to change_status_backoffice_collects_rubble_collect_path(collect), remote: true, class: 'btn btn-outline btn-warning' do %>
-                <i class="fa fa-edit"></i> Alterar status
-              <% end %>
+              <div class="btn-group">
+                <a class="dropdown-toggle dropdown-toggle-custom" data-toggle="dropdown">
+                  ...
+                </a>
+                <ul class="dropdown-menu dropdown-black">
+                  <div>
+                    <%= link_to edit_backoffice_collects_rubble_collect_path(collect), remote: true do %>
+                      <i class="fa fa-edit"></i> Propor data para coleta
+                    <% end %>
+                  </div>
+                  <div>
+                    <%= link_to change_status_backoffice_collects_rubble_collect_path(collect), remote: true do %>
+                      <i class="fa fa-edit"></i> Alterar status
+                    <% end %>
+                  </div>
+                </ul>
+              </div>
             </td>
           </tr>
         <% end %>

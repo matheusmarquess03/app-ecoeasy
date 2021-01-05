@@ -1,26 +1,52 @@
 <div class="login-panel panel panel-default">
-  <div class="panel-heading">
-    <h3 class="panel-title">Acesso ao Backoffice</h3>
-  </div>
   <div class="panel-body">
+    <div class="login-image" style="margin-bottom: 35px">
+      <%= link_to image_tag('logo.png', size: "151x43"), backoffice_path, class: '' %>
+    </div>
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-    <fieldset>
-      <div class="form-group">
-        <%= f.email_field :email, class: 'form-control', placeholder: 'E-mail', autofocus: true, autocomplete: "email" %>
-      </div>
-      <div class="form-group">
-        <%= f.password_field :password, class: 'form-control', placeholder: 'Senha', autocomplete: "off" %>
-      </div>
-      <% if devise_mapping.rememberable? -%>
-      <div class="checkbox">
-        <label>
-          <%= f.check_box :remember_me %> Lembrar senha
-        </label>
-      </div>
-      <% end -%>
-      <%= f.submit "Log in", class: 'btn btn-lg btn-success btn-block' %>
-    </fieldset>
+      <fieldset>
+        <div class="input-group">
+          <%= f.email_field :email, class: 'form-control', placeholder: 'E-mail', autofocus: true, autocomplete: "email" %>
+        </div>
+        <div class="input-group" id="show_hide_password">
+          <%= f.password_field :password, class: 'form-control', placeholder: 'Senha', autocomplete: "off" %>
+          
+          <div class="input-group-addon">
+            <a href=""><i class="glyphicon glyphicon-eye-close" aria-hidden="true"></i></a>
+          </div>
+
+        </div>
+        <% if devise_mapping.rememberable? -%>
+        <div class="aling-end">
+          <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+            <%= link_to "Esqueci minha senha", new_password_path(resource_name) %><br />
+          <% end -%>
+        </div>
+        <% end -%>
+        <%= f.submit "Entrar", class: 'btn btn-lg btn-success btn-block' %>
+      </fieldset>
     <% end %><br/>
-    <%= render "admins/shared/links" %>
+    <div class="link-bottom" style="left: 20%;">
+      <p>Ainda não possui conta ?</p> <%= render "admins/shared/links" %>
+    </div>
   </div>
 </div>
+
+<%= link_to image_tag('background_login.png', size: "151x43"), backoffice_path, class: 'img-backgroung' %>
+
+<script>
+  $(document).ready(function() {
+      $("#show_hide_password a").on('click', function(event) {
+          event.preventDefault();
+          if($('#show_hide_password input').attr("type") == "text"){
+              $('#show_hide_password input').attr('type', 'password');
+              $('#show_hide_password i').addClass( "glyphicon-eye-close" );
+              $('#show_hide_password i').removeClass( "glyphicon-eye-open" );
+          }else if($('#show_hide_password input').attr("type") == "password"){
+              $('#show_hide_password input').attr('type', 'text');
+              $('#show_hide_password i').removeClass( "glyphicon-eye-close" );
+              $('#show_hide_password i').addClass( "glyphicon-eye-open" );
+          }
+      });
+  });
+</script>

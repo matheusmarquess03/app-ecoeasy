@@ -1,13 +1,13 @@
 <div class="col-lg-12">
-  <h1 class="page-header">MODULO MOTORISTA</h1>
+  <h1 class="page-header"></h1>
 
-  <div class="panel panel-default">
+  <div class="panel panel-default panel-table-custom">
     <div class="panel-heading">
+     <p class="title-page">Agenda do Motorista</p>
       <h4>
-        Agenda do Motorista
-        <!--<%= link_to new_backoffice_schedule_path, class: 'btn btn-outline btn-success pull-right', style:"margin-top: -5px" do %>
-          <i class="fa fa-plus-square fa-fw"></i> Cadastrar
-        <% end %>-->
+        <%= link_to new_backoffice_schedule_path, class: 'btn btn-success pull-right', style:"margin-top: -5px" do %>
+          <i class="fa fa-plus-circle fa-fw"></i> Cadastrar
+        <% end %>
       </h4>
     </div>
     <br/>
@@ -35,30 +35,39 @@
 
                 <td><%= schedule.collects.count %> coletas agendadas até o momento</td>
                 <td>
-                  <div class="pull-right">
-                    <% if schedule.collects.blank? || schedule.collects&.first&.rubble_collect? %>
-                      <%= link_to backoffice_schedule_path(schedule), class: 'btn btn-outline btn-info' do %>
-                        <i class="fa fa-search-plus"></i> Detalhes
-                      <% end %>
-                    <% else %>
-                      <%= link_to '', class: 'btn btn-outline btn-info', disabled: true do %>
-                        <i class="fa fa-search-plus"></i> Detalhes
-                      <% end %>
-                    <% end %>
-                    <%= link_to edit_backoffice_schedule_path(schedule), class: 'btn btn-outline btn-warning' do %>
-                      <i class="fa fa-edit"></i> Editar
-                    <% end %>
-
-                    <%= link_to backoffice_schedule_path(schedule), class: 'btn btn-outline btn-danger', method: :delete, data: { confirm: 'Tem certeza que deseja deletar a agenda deste motorista?' } do %>
-                        <i class="fa fa-times"></i> Deletar
-                    <% end %>
+                  <div class="btn-group">
+                    <a class="dropdown-toggle dropdown-toggle-custom" data-toggle="dropdown">
+                      ...
+                    </a>
+                    <ul class="dropdown-menu dropdown-black">
+                      <div>
+                        <% if schedule.collects.blank? || schedule.collects&.first&.rubble_collect? %>
+                          <%= link_to backoffice_schedule_path(schedule) do %>
+                            <i class="fa fa-search-plus"></i> Detalhes
+                          <% end %>
+                        <% else %>
+                          <%= link_to '', disabled: true do %>
+                            <i class="fa fa-search-plus"></i> Detalhes
+                          <% end %>
+                        <% end %>
+                      </div>
+                      <div>
+                        <%= link_to edit_backoffice_schedule_path(schedule) do %>
+                          <i class="fa fa-edit"></i> Editar
+                        <% end %>
+                      </div>
+                      <div>
+                        <%= link_to backoffice_schedule_path(schedule), method: :delete, data: { confirm: 'Tem certeza que deseja deletar a agenda deste motorista?' } do %>
+                          <i class="fa fa-trash-o"></i> Deletar
+                        <% end %>
+                      </div>
+                    </ul>
                   </div>
                 </td>
               </tr>
             <% end %>
           </tbody>
         </table>
-
         <div class="apple_pagination">
           <div class="page_info">
             <%= page_entries_info @schedules %>
@@ -67,6 +76,5 @@
         </div>
       </div>
     </div>
-
   </div>
 </div>

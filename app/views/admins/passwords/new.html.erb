@@ -1,16 +1,35 @@
-<h2>Forgot your password?</h2>
+<div class="login-panel panel panel-default">
+  <div class="panel-body">
+    <div class="login-image" style="margin-bottom: 17px">
+      <%= link_to image_tag('logo.png', size: "151x43"), backoffice_path, class: '' %>
+    </div>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= devise_error_messages! %>
+    <div class="form-title">
+      <b>Esqueceu sua senha?</b>
+      <p>Não tem problema! Informe seu e-mail que enviaremos um link para você criar uma nova</p>
+    </div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+      
+      <%= devise_error_messages! %>
+      <fieldset>
+        <div class="input-group">
+          <%= f.email_field :email, class: 'form-control', placeholder: 'Seu e-mail cadastrado', autofocus: true, autocomplete: "email" %>
+        </div>
+
+        <div class="actions">
+          <%= f.submit "Enviar", class: 'btn btn-lg btn-success btn-block'  %>
+        </div>
+      </fieldset>
+    <% end %>
+
+    <div class="link-bottom" style="left: 43%;">
+      <%- if controller_name != 'sessions' %>
+        <%= link_to "Voltar", new_session_path(resource_name) %><br />
+      <% end -%>
+    </div>
+
   </div>
+</div>
 
-  <div class="actions">
-    <%= f.submit "Send me reset password instructions" %>
-  </div>
-<% end %>
-
-<%= render "admins/shared/links" %>
+<%= link_to image_tag('background_login.png', size: "151x43"), backoffice_path, class: 'img-backgroung' %>

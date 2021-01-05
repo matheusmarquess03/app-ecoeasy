@@ -1,43 +1,64 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<div class="login-panel panel panel-default">
+  <div class="panel-body">
+    <div class="login-image" style="margin-bottom: 35px">
+      <%= link_to image_tag('logo.png', size: "151x43"), backoffice_path, class: '' %>
+    </div>
+   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+      <fieldset>
+        <div class="input-group">
+          <%= f.email_field :email, class: 'form-control', placeholder: 'E-mail', autofocus: true, autocomplete: "email" %>
+        </div>
+        <div class="input-group" id="show_hide_password">
+          <%= f.password_field :password, class: 'form-control', placeholder: 'Senha', autocomplete: "off" %>
+          
+          <div class="input-group-addon">
+            <a href=""><i class="glyphicon glyphicon-eye-close" aria-hidden="true"></i></a>
+          </div>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= devise_error_messages! %>
+        </div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        <div class="input-group" id="show_hide_password">
+          <%= f.password_field :password_confirmation, class: 'form-control', placeholder: 'Confirme a Senha', autocomplete: "off" %>
+          
+          <div class="input-group-addon">
+            <a href=""><i class="glyphicon glyphicon-eye-close" aria-hidden="true"></i></a>
+          </div>
+
+        </div>
+
+        <div class="input-group" id="show_hide_password">
+          <%= f.password_field :current_password, class: 'form-control', placeholder: 'Senha Atual', autocomplete: "off" %>
+          
+          <div class="input-group-addon">
+            <a href=""><i class="glyphicon glyphicon-eye-close" aria-hidden="true"></i></a>
+          </div>
+
+        </div>
+
+        <%= f.submit "Confirmar", class: 'btn btn-lg btn-success btn-block' %>
+        <br>
+        <%= link_to "Cancelar minha conta", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+        <%= link_to "Voltar", :back %>
+      </fieldset>
+    <% end %><br/>
   </div>
+</div>
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
+<%= link_to image_tag('background_login.png', size: "151x43"), backoffice_path, class: 'img-backgroung' %>
 
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
-    <% end %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "off" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
-
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-<%= link_to "Back", :back %>
+<script>
+  $(document).ready(function() {
+      $("#show_hide_password a").on('click', function(event) {
+          event.preventDefault();
+          if($('#show_hide_password input').attr("type") == "text"){
+              $('#show_hide_password input').attr('type', 'password');
+              $('#show_hide_password i').addClass( "glyphicon-eye-close" );
+              $('#show_hide_password i').removeClass( "glyphicon-eye-open" );
+          }else if($('#show_hide_password input').attr("type") == "password"){
+              $('#show_hide_password input').attr('type', 'text');
+              $('#show_hide_password i').removeClass( "glyphicon-eye-close" );
+              $('#show_hide_password i').addClass( "glyphicon-eye-open" );
+          }
+      });
+  });
+</script>

@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,23 +10,19 @@
 
     <title>EcoEasy</title>
     <%= favicon_link_tag asset_path('ilustracao_2.png'), :rel => 'icon', :type =>  'image/png' %>
-    
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css', media: "all", "data-turbolinks-track" => true %>
+
+    <%= javascript_include_tag 'https://www.gstatic.com/firebasejs/5.5.7/firebase.js' %>
+    <%= javascript_include_tag 'https://maps.googleapis.com/maps/api/js?key=AIzaSyAqkUuePekVW4v7QCa208jKDAEhG15YgE0&libraries=places,visualization' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
+    <%= yield(:head_tags) %>
 </head>
 
-<body>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-4">
-        <%= yield %>
-      </div>
-    </div>
-  </div>
-</body>
 
-</html>
+<%= yield %>
