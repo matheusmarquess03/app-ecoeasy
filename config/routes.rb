@@ -117,9 +117,9 @@ Rails.application.routes.draw do
     resources :template_contestations, except: [:show]
   end
 
-  
-  get 'home/index'
-  root 'backoffice/dashboard#index'
+
+  #get 'home/index'
+  #root 'backoffice/dashboard#index'
 end
 
 
