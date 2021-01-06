@@ -79,7 +79,7 @@ Rails.application.configure do
   # }
   # config.action_mailer.delivery_method = :smtp
 
-  config.action_mailer.default_url_options = { host: 'ecoeasyapp.com.br', port: 80 }
+  config.action_mailer.default_url_options = { host: 'http://ecoeasyapp.com.br/backoffice', port: 80 }
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true

@@ -1,27 +1,40 @@
-<h2>Change your password</h2>
+<div class="login-panel panel panel-default">
+  <div class="panel-body">
+    <div class="login-image" style="margin-bottom: 17px">
+      <%= link_to image_tag('logo.png', size: "151x43"), backoffice_path, class: '' %>
+    </div>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-  <%= devise_error_messages! %>
-  <%= f.hidden_field :reset_password_token %>
+    <div class="form-title">
+      
+    </div>
 
-  <div class="field">
-    <%= f.label :password, "New password" %><br />
-    <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em><br />
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+      <%= devise_error_messages! %>
+      <%= f.hidden_field :reset_password_token %>
+      <fieldset>
+        <div class="input-group">
+          <%=  f.password_field :password, class: 'form-control', placeholder: 'Nova senha', autofocus: true, autocomplete: "off" %>
+        </div>
+
+        <div class="input-group">
+          <%=  f.password_field :password_confirmation, class: 'form-control', placeholder: 'Confirme a senha', autofocus: true, autocomplete: "off" %>
+        </div>
+
+        <div class="actions">
+          <%= f.submit "Enviar", class: 'btn btn-lg btn-success btn-block'  %>
+        </div>
+      </fieldset>
     <% end %>
-    <%= f.password_field :password, autofocus: true, autocomplete: "off" %>
-  </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation, "Confirm new password" %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
+    <div class="link-bottom" style="left: 43%;">
+      <%- if controller_name != 'sessions' %>
+        <%= link_to "Voltar", new_session_path(resource_name) %><br />
+      <% end -%>
+    </div>
 
-  <div class="actions">
-    <%= f.submit "Change my password" %>
   </div>
-<% end %>
+</div>
 
-<%= render "admins/shared/links" %>
+<%= link_to image_tag('background_login.png', size: "151x43"), backoffice_path, class: 'img-backgroung' %>
 
 
