@@ -53,7 +53,7 @@ Rails.application.routes.draw do
   # Routes to Backoffice portal (admin)
   namespace :backoffice do
     get '', to: 'dashboard#index'
-    
+
 	#get '', to: 'dashboard_principal#index'
 
 	resources :firebase_data
@@ -116,4 +116,12 @@ Rails.application.routes.draw do
     resources :configurations, only: [:index]
     resources :template_contestations, except: [:show]
   end
+
+  
+  get 'home/index'
+  root 'backoffice/dashboard#index'
 end
+
+
+
+
